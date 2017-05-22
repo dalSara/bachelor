@@ -142,7 +142,7 @@ nav ul {
   margin: 0; }
   nav ul li {
     border: 4px solid #0066FF;
-    font-family: Volte-Semibold;
+    /*font-family: Volte-Semibold;*/
     font-size: .8rem;
     color: #0066FF;
     text-transform: none;
@@ -168,35 +168,66 @@ nav .Active a {
   display: flex;
   justify-content: space-between;
   padding-top: 0.5rem; }
-  #navWeek #nextBtn {
-    color: red; }
 
 .nav-up {
   top: -100px; }
 
+#previous, #prevDate {
+  display: block; }
+
+#arrow-previous {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  height: 15px;
+  width: 15px; }
+
+#thisWeekBtn {
+  text-decoration: none;
+  margin-bottom: 40px;
+  /*text-align: center;*/ }
+
+#next {
+  float: right; }
+
+#next, #nextDate {
+  display: block; }
+
+#arrow-next {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  height: 15px;
+  width: 15px; }
+
 /********************************************
 inputs
 ********************************************/
-button {
-  font-family: "Volte Semibold";
-  font-size: inherit;
-  line-height: inherit;
-  background-color: white;
-  color: #06f;
-  border: 3px solid #06f;
-  border-radius: 0;
-  padding: 10px 20px;
-  margin: 0;
-  -webkit-appearance: none;
-  cursor: pointer; }
-  button.subtle {
-    padding: 5px 10px;
-    border: none;
-    border: 1px solid #ccc;
-    font-family: inherit;
-    color: inherit;
-    font-size: .778rem; }
-
+/*button {
+    font-family: "Volte Semibold";
+    font-size: inherit;
+    line-height: inherit;
+    background-color: white;
+    color: #06f;
+    border: 3px solid #06f;
+    border-radius: 0;
+    padding: 10px 20px;
+    margin: 0;
+    -webkit-appearance: none;
+    cursor: pointer;
+    &.subtle {
+        padding: 5px 10px;
+        border: none;
+        border: 1px solid #ccc;
+        font-family: inherit;
+        color: inherit;
+        font-size: .778rem;
+    }
+}*/
 .buttonsAddTrack {
   display: table;
   table-layout: fixed;
@@ -208,7 +239,7 @@ button {
   padding: .6em;
   text-align: center;
   cursor: pointer;
-  font-family: Volte-Semibold;
+  /*font-family: Volte-Semibold;*/
   font-size: 1rem; }
 
 /* Submit: */
@@ -227,7 +258,7 @@ button {
 .selectTime {
   display: inline-block;
   border: 3px solid #CCCCCC;
-  font-family: Volte-Regular;
+  /*font-family: Volte-Regular;*/
   font-size: .8rem;
   text-align: center;
   color: #3D3D3D;
@@ -237,7 +268,7 @@ button {
 .selectDate {
   display: inline-block;
   border: 3px solid #CCCCCC;
-  font-family: Volte-Regular;
+  /*font-family: Volte-Regular;*/
   font-size: .8rem;
   text-align: center;
   color: #3D3D3D;
@@ -273,7 +304,7 @@ textarea,
   font-size: 1em; }
 
 input[type=submit] {
-  font-family: "Volte Semibold";
+  /*font-family: "Volte Semibold";*/
   background: #0066FF;
   color: #fff;
   font-size: 1em;
@@ -352,7 +383,7 @@ pageHeader
 mainMenu
 ********************************************/
 .mainMenu {
-  font-family: 'Volte Semibold';
+  /*font-family: 'Volte Semibold';*/
   transition: all .5s; }
   .mainMenu a {
     padding: 10px; }
@@ -479,13 +510,13 @@ show/hide desktop cal & mobile cal
 /********************************************
 index
 ********************************************/
-#thisWeekBtn {
-  text-decoration: none; }
-
 /*-------------- CALENDAR --------------*/
 #calendarWrapper {
   width: 100%;
   margin-top: -20px; }
+
+#arrowWrapper {
+  text-align: center; }
 
 .JSeventTitleCal, .JSlocationCal {
   color: white; }
@@ -691,6 +722,13 @@ index
 
 .JSlocationWrapperList, .JSgoingWrapperList, .JStitleEditWrapper {
   clear: left; }
+
+#arrowScrollToTop {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg); }
 
 /*---------TESTING RESPONSIVE -------*/
 @media (max-width: 1200px) {

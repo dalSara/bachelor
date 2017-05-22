@@ -184,7 +184,7 @@ nav {
         margin: 0;
         li {
             border: 4px solid #0066FF;
-            /*font-family: Volte-Semibold;*/
+            font-family: Volte-Semibold;
             font-size: .8rem;
             color: #0066FF;
             text-transform: none;
@@ -215,48 +215,20 @@ nav {
     display: flex;
     justify-content: space-between;
     padding-top: 0.5rem;
+
+    #nextBtn {
+        color: red;
+    }
 }
 .nav-up {
     top: -100px;
 }
-#previous, #prevDate{
-     display: block;
- }
- #arrow-previous{
-     -webkit-transform: rotate(90deg);
-     -moz-transform: rotate(90deg);
-     -o-transform: rotate(90deg);
-     -ms-transform: rotate(90deg);
-     transform: rotate(90deg);
-     height: 15px;
-     width: 15px;
- }
- #thisWeekBtn{
-     text-decoration: none;
-     margin-bottom: 40px;
-     /*text-align: center;*/
- }
- #next{
-     float: right;
- }
- #next, #nextDate{
-     display: block;
- }
- #arrow-next{
-     -webkit-transform: rotate(-90deg);
-     -moz-transform: rotate(-90deg);
-     -o-transform: rotate(-90deg);
-     -ms-transform: rotate(-90deg);
-     transform: rotate(-90deg);
-     height: 15px;
-     width: 15px;
- }
 
 /********************************************
 inputs
 ********************************************/
 
-/*button {
+button {
     font-family: "Volte Semibold";
     font-size: inherit;
     line-height: inherit;
@@ -276,7 +248,7 @@ inputs
         color: inherit;
         font-size: .778rem;
     }
-}*/
+}
 
 .buttonsAddTrack {
     display: table;
@@ -290,7 +262,7 @@ inputs
     padding: .6em;
     text-align: center;
     cursor: pointer;
-    /*font-family: Volte-Semibold;*/
+    font-family: Volte-Semibold;
     font-size: 1rem;
 }
 
@@ -312,7 +284,7 @@ inputs
 .selectTime {
     display: inline-block;
     border: 3px solid #CCCCCC;
-    /*font-family: Volte-Regular;*/
+    font-family: Volte-Regular;
     font-size: .8rem;
     text-align: center;
     color: #3D3D3D;
@@ -322,7 +294,7 @@ inputs
 .selectDate {
     display: inline-block;
     border: 3px solid #CCCCCC;
-    /*font-family: Volte-Regular;*/
+    font-family: Volte-Regular;
     font-size: .8rem;
     text-align: center;
     color: #3D3D3D;
@@ -361,7 +333,7 @@ textarea,
 }
 
 input[type=submit] {
-    /*font-family: "Volte Semibold";*/
+    font-family: "Volte Semibold";
     background: #0066FF;
     color: #fff;
     font-size: 1em;
@@ -464,7 +436,7 @@ mainMenu
 ********************************************/
 
 .mainMenu {
-    /*font-family: 'Volte Semibold';*/
+    font-family: 'Volte Semibold';
     transition: all .5s;
     a {
         padding: 10px;
@@ -610,17 +582,14 @@ show/hide desktop cal & mobile cal
 /********************************************
 index
 ********************************************/
-
+#thisWeekBtn{
+    text-decoration: none;
+}
 /*-------------- CALENDAR --------------*/
 #calendarWrapper {
     width: 100%;
     margin-top: -20px;
 }
-
-#arrowWrapper{
-     text-align: center;
- }
-
 .JSeventTitleCal, .JSlocationCal{
     color: white;
 }
@@ -843,14 +812,6 @@ index
 }
 .JSlocationWrapperList, .JSgoingWrapperList, .JStitleEditWrapper{
     clear: left;
-}
-
-#arrowScrollToTop{
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    transform: rotate(180deg);
 }
 
 /*---------TESTING RESPONSIVE -------*/
