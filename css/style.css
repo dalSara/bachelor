@@ -50,11 +50,13 @@ h6 {
   font-weight: bold;
   font-size: 1em; }
 
+/* CHECK IF IN USE, IF NOT DELETE
 .lead {
-  font-family: 'Volte Medium';
-  font-size: 1.5em;
-  margin-bottom: 80px; }
-
+    font-family: 'Volte Medium';
+    font-size: 1.5em;
+    margin-bottom: 80px;
+}
+*/
 @media (max-width: 900px) {
   html {
     font-size: 1em; }
@@ -66,60 +68,74 @@ h6 {
     font-size: 1.4em; }
   h3 {
     font-size: 1.2em; }
-  .lead {
-    font-size: 1.2em;
-    margin-bottom: 40px; } }
+  /*.lead {
+        font-size: 1.2em;
+        margin-bottom: 40px;
+    }*/ }
 
 a {
   color: inherit;
-  cursor: pointer; }
+  cursor: pointer;
+  text-decoration: none; }
   a:hover {
     text-decoration: none; }
 
+/* CHECK IF IN USE, IF NOT DELETE
 ul,
 ol,
 p {
-  margin: 0 0 40px 0; }
+    margin: 0 0 40px 0;
+}
 
 ul {
-  list-style: none;
-  padding: 0; }
-  ul ul {
-    margin: 0; }
+    list-style: none;
+    padding: 0;
+    ul {
+        margin: 0;
+    }
+}
 
 p {
-  max-width: 700px; }
+    max-width: 700px;
+}
 
 figure {
-  margin: 0; }
+    margin: 0;
+}
 
 figcaption {
-  margin-top: 10px; }
+    margin-top: 10px;
+}
 
 img {
-  max-width: 100%; }
+    max-width: 100%;
+}
 
 a img {
-  border: none; }
+    border: none;
+}
 
 iframe {
-  max-width: 100%;
-  border: none; }
-
+    max-width: 100%;
+    border: none;
+}
+*/
 /********************************************
 wrappers
 ********************************************/
 .wrapper {
   box-sizing: content-box;
   padding: 0 5%;
-  margin: 0 auto; }
-  .wrapper.full {
-    padding-right: 0;
-    padding-left: 0; }
+  margin: 0 auto;
+  /*&.full {
+        padding-right: 0;
+        padding-left: 0;
+    }*/
+  /*&.narrow {
+        max-width: 750px;
+    }*/ }
   .wrapper.basic {
     max-width: 1200px; }
-  .wrapper.narrow {
-    max-width: 750px; }
 
 /********************************************
 nav general
@@ -156,13 +172,8 @@ nav .Active a {
   display: flex;
   justify-content: space-between;
   padding-top: 0.5rem; }
-
-.navItem {
-  -webkit-flex: 1;
-  /* Safari 6.1+ */
-  -ms-flex: 1;
-  /* IE 10 */
-  flex: 1; }
+  #navWeek #nextBtn {
+    color: red; }
 
 /********************************************
 inputs
@@ -197,7 +208,7 @@ pageHeader
   padding-top: 35px;
   margin-bottom: 30px; }
   .pageHeader .logo {
-    background: url("../assets/images/logo-sd.svg") no-repeat center, url("../assets/images/logo-sd-col1.svg") no-repeat -10000px center;
+    background: url("../assets/images/logo-sd.svg") no-repeat center;
     /* preload */
     display: inline-block;
     vertical-align: top; }
@@ -207,44 +218,6 @@ pageHeader
       display: block;
       height: 27px;
       opacity: 0; }
-  .pageHeader .logoText {
-    margin-left: 1.5em;
-    font-weight: 600; }
-
-.nav-up {
-  top: -100px; }
-
-/* button (menu) */
-.pageHeader button {
-  border-style: solid;
-  border-color: #3d3d3d;
-  float: right;
-  font-size: 0;
-  background: none;
-  border-width: 0;
-  position: relative;
-  top: -10px;
-  right: -10px;
-  width: 40px;
-  height: 40px; }
-  .pageHeader button:before, .pageHeader button:after {
-    border-style: solid;
-    border-color: #3d3d3d; }
-  .pageHeader button:before, .pageHeader button:after {
-    content: "";
-    position: absolute;
-    width: 25px;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto; }
-  .pageHeader button:before {
-    border-width: 1px 0;
-    height: 15px; }
-  .pageHeader button:after {
-    border-width: 1px 0 0 0;
-    height: 0; }
 
 @media (min-width: 1201px) {
   .pageHeader {
@@ -255,9 +228,7 @@ pageHeader
     transition: top 0.2s ease-in-out; }
     .pageHeader .logo {
       float: left;
-      margin-right: 120px; }
-    .pageHeader button {
-      display: none; } }
+      margin-right: 120px; } }
 
 @media (max-width: 1200px) {
   .pageHeader {
@@ -277,8 +248,6 @@ mainMenu
   transition: all .5s; }
   .mainMenu a {
     padding: 10px; }
-    .mainMenu a[href=""] {
-      opacity: .2; }
   .mainMenu li {
     display: inline-block;
     margin-top: 0px;
@@ -302,8 +271,6 @@ main {
   main img,
   main svg {
     display: block; }
-  main figure {
-    margin-bottom: 80px; }
 
 @media (min-width: 1201px) {
   main {
@@ -311,19 +278,6 @@ main {
     /* space for sticky header */ }
   .frontpage main {
     padding-top: 100px; } }
-
-@media (max-width: 900px) {
-  main .hero {
-    margin-bottom: 40px; } }
-
-.prefix:after {
-  content: "";
-  width: 70px;
-  height: 3px;
-  background: #3d3d3d;
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0 20px; }
 
 /********************************************
 frontpage
