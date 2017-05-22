@@ -1,10 +1,4 @@
-//var moment = require('moment'); treng ikkje??
-
 //Eksempel fra: https://jsfiddle.net/contentful/kefaj4s8/
-//NB: Klasser er foreløpig ikke i bruk!
-//js-className
-
-
 
 /*-------------- CLIENT --------------*/
 var client = contentful.createClient({
@@ -14,21 +8,26 @@ var client = contentful.createClient({
     accessToken: '3f3d80d1c57594b635592e67231ad92c8bdebffca1a647ae5bca719251fbf059'
 })
 /*-------------- END CLIENT --------------*/
-var globalTargetDateIndex = null;
-var allDates = null;
-var selectedDate = null;
-
-var thisShowDoEvents = null;
 
 var EVENT_CONTENT_TYPE_ID = 'datesForShowDo';
 
+var selectedDate = null;
+var globalTargetDateIndex = null;
+var allDates = null;
+
+var thisShowDoEvents = null;
+
+/*-------------- DATE LABELS --------------*/
 var prevDate = document.getElementById("prevDate");
 var thisDate = document.getElementById("thisDate");
 var nextDate = document.getElementById("nextDate");
+/*-------------- END DATE LABELS --------------*/
 
+/*-------------- DATE BUTTONS --------------*/
 var nextBtn = document.getElementById("nextBtn");
 var thisWeekBtn = document.getElementById("thisWeekBtn");
 var prevBtn = document.getElementById("prevBtn");
+/*-------------- END DATE BUTTONS --------------*/
 
 var calendar = document.getElementById('calendar');
 var list = document.getElementById('list');
@@ -77,15 +76,12 @@ client.getEntries({
     }
     /*-------------- END GET THIS DATE --------------*/
 
-    getEventArray(thisShowDoEvents);
-    updateDateLabels();
+    getEventArray(thisShowDoEvents); //Display events
+    updateDateLabels(); //Add date labels
     addId(); //Add id to events (in calendar and list)
 
-    //initSmoothScrolling();
-
-    /*Display events*/
-    nextBtn.onclick = nextShowDo;
-    prevBtn.onclick = previousShowDo;
+    nextBtn.onclick = nextShowDo; //Display next events
+    prevBtn.onclick = previousShowDo; //Display previous events
 
     /*-------------- SMOOTH SCROLL TO MORE INFO --------------*/
     $(function(){
@@ -127,7 +123,7 @@ client.getEntries({
             lastScrollTop = st;
         }
 
-        $(".scroll").click(function(event) {
+        $(".JSscroll").click(function(event) {
             event.preventDefault();
             //calculate destination place
             var dest = 0;
@@ -143,10 +139,8 @@ client.getEntries({
         });
     });
     /*-------------- END SMOOTH SCROLL TO MORE INFO --------------*/
-
 })
 /*-------------- END GET ENTRIES --------------*/
-
 
 /*-------------- GET INDEX OF THE DATE --------------*/
 function getDateIndex(index){
@@ -265,42 +259,42 @@ function renderSingleEventCal(event){
     }
 
     if(startTime == "13:00" && event.size == "Large"){
-        return '<a class="scroll cal largeTrackCal">' +
+        return '<a class="JSscroll JScal JSlargeTrackCal">' +
 
             '<div class="eventInfoCal">' +
             renderEventInfoCal(event) +
             '</div>' +
             '</a>';
     }else if(startTime == "13:00" && event.size == "Medium"){
-        return '<a class="scroll cal mediumTrackCal-13">' +
+        return '<a class="JSscroll JScal JSmediumTrackCal-13">' +
 
             '<div class="eventInfoCal">' +
             renderEventInfoCal(event) +
             '</div>' +
             '</a>';
     }else if(startTime == "13:00" && event.size == "Small"){
-        return '<a class="scroll cal smallTrackCal-13">' +
+        return '<a class="JSscroll JScal JSsmallTrackCal-13">' +
 
             '<div class="eventInfoCal">' +
             renderEventInfoCal(event) +
             '</div>' +
             '</a>';
     }else if(startTime == "14:00" && event.size == "Medium"){
-        return '<a class="scroll cal mediumTrackCal-14">' +
+        return '<a class="JSscroll JScal JSmediumTrackCal-14">' +
 
             '<div class="eventInfoCal">' +
             renderEventInfoCal(event) +
             '</div>' +
             '</a>';
     }else if(startTime == "14:00" && event.size == "Small"){
-        return '<a class="scroll cal smallTrackCal-14">' +
+        return '<a class="JSscroll JScal JSsmallTrackCal-14">' +
 
             '<div class="eventInfoCal">' +
             renderEventInfoCal(event) +
             '</div>' +
             '</a>';
     }else if(startTime == "15:00" && event.size == "Small"){
-        return '<a class="scroll cal smallTrackCal-15">' +
+        return '<a class="JSscroll JScal JSsmallTrackCal-15">' +
 
             '<div class="eventInfoCal">' +
             renderEventInfoCal(event) +
@@ -315,9 +309,9 @@ function renderEventInfoCal(event){
     var date = event.time;
     var startTime = date.substring(date.length - 5);
 
-    return  '<h4 class="eventTitleCal">' + event.title + '</h4>' +
-        '<div class="locationWrapperCal"><i class="icon-room-filled-cal"></i>' +
-        '<p class="locationCal">' + event.location + '</p></div>';
+    return  '<h4 class="JSeventTitleCal">' + event.title + '</h4>' +
+        '<div class="locationWrapperCal"><i class="JSicon-room-filled-cal"></i>' +
+        '<p class="JSlocationCal">' + event.location + '</p></div>';
 }
 /*-------------- END GET DATA FROM ONE EVENT: CALENDAR --------------*/
 
@@ -340,12 +334,12 @@ function renderSingleEventList(event){
         }
     }
 
-    return '<div class="eventList">' +
-        '<div class="eventImage">' +
+    return '<div class="JSeventList">' +
+        '<div class="JSeventImage">' +
         renderImage(event.image) +
         '</div>' +
 
-        '<div class="eventInfoList">' +
+        '<div class="JSeventInfoList">' +
         renderEventInfoList(event) +
         '</div>' +
         '</div>';
@@ -354,10 +348,10 @@ function renderSingleEventList(event){
 
 /*-------------- GOINGbtn --------------*/
 function goingBtn(){
-    document.getElementById('going').className += ' going-clicked ';
+    document.getElementById('going').className += ' JSgoing-clicked '; //Add class
     document.getElementById('going').innerHTML = "You're going!";
     //document.getElementById('goingInput').slideToggle(500);//.className.remove = 'hidden';
-    //document.getElementsById('goingDropdown').className.toggle('show');
+    //document.getElementsById('goingDropdown').className.toggle('JSshow');
     /*var className = ' ' + going.className + ' ';
 
     if ( ~className.indexOf(' active ') ) {
@@ -370,8 +364,8 @@ function goingBtn(){
 
 
 function addId(){
-    var cal = document.getElementsByClassName("cal");
-    var eventList = document.getElementsByClassName("eventList");
+    var cal = document.getElementsByClassName("JScal");
+    var eventList = document.getElementsByClassName("JSeventList");
 
     for (i = 0, length = eventList.length; i < length; i++) { //eventList or cal.lenght
         cal[i].href= "#eventID_" + (i + 1); //Add link to calendar
@@ -390,35 +384,35 @@ function renderEventInfoList(event){
 
     //var count = event.peopleGoing.split(' ').length;
 
-    return  '<div class="leftListInfo">' +
-        '<div class="titleEditWrapper">' +
-        '<h3 class="eventTitleList">' + event.title + '</h3><i class="icon-edit"></i>' +
+    return  '<div class="JSleftListInfo">' +
+        '<div class="JStitleEditWrapper">' +
+        '<h3 class="JSeventTitleList">' + event.title + '</h3><i class="JSicon-edit"></i>' +
         '</div>' +
-        '<h4 class="eventsHost">HOST</h4><p>' + event.host + '</p>' +
+        '<h4 class="JSeventHost">HOST</h4><p>' + event.host + '</p>' +
         '<h4>WHAT TO EXPECT</h4><p>' + event.whatToExpect + '</p>' +
         '<h4>PREREQUISITES</h4><p>' + event.prerequisites + '</p>' +
         '<h4>BEST SUITED FOR</h4><p>' + event.whoShouldJoin + '</p>' +
         '</div>' +
 
-        '<div class="rightListInfo">' +
+        '<div class="JSrightListInfo">' +
         '<div class="timeWrapperList">' +
-        '<i class="icon-clock"></i><p class="startTimeList">' + startTime + ' - 15:45</p>' +
+        '<i class="JSicon-clock"></i><p class="JSstartTimeList">' + startTime + ' - 15:45</p>' +
         '</div>' +
-        '<div class="locationWrapperList">' +
-        '<i class="icon-room"></i><p class="locationList">' + event.location + '</p>' +
+        '<div class="JSlocationWrapperList">' +
+        '<i class="JSicon-room"></i><p class="JSlocationList">' + event.location + '</p>' +
         '</div>' +
 
-        '<div  class="goingBtnWrapper">' +
-            '<button onclick="goingBtn()" type="button" id="going" class="goingBtn">Going?</button>' +
-            '<div id="goingDropdown" class="goingDropdownContent">' +
+        '<div  class="JSgoingBtnWrapper">' +
+            '<button onclick="goingBtn()" type="button" id="going" class="JSgoingBtn">Going?</button>' +
+            '<div id="goingDropdown" class="JSgoingDropdownContent">' +
             '<div class="inputName">' +
                 'Name: <input type="text" value="" id="name" name="name">' +
-                '<div tabindex="0" role="button" id="registerBtn" type="submit">Register</div>' +
+                '<div tabindex="0" role="button" id="JSregisterBtn" type="submit">Register</div>' +
             '</div>' +
         '</div>' +
         '</div>' +
 
-        '<div class="goingWrapperList">' +
+        '<div class="JSgoingWrapperList">' +
         /*'<h4>' + count + ' ?PEOPLE GOING</h4>*/'<p>' + event.peopleGoing + '</p>' +
         '</div>' +
         '</div>';
