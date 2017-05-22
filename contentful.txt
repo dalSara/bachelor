@@ -1,0 +1,61 @@
+en txt fil vi kan lägga nycklar och liknande i
+
+
+førsta nyckeln 10 mars:
+
+space id: 59mi8sr8zemv
+Content Delivery API - access token: 
+3f3d80d1c57594b635592e67231ad92c8bdebffca1a647ae5bca719251fbf059
+
+husk installere:
+
+npm i
+
+((----dette trengs ikke, hämtas fra package.json
+npm install contentful-data --save
+
+npm install contentful --save
+
+npm install gulp-cli gulp-sass --save-dev
+ 
+npm install browser-sync gulp --save-dev
+-------))
+
+dokumentasjon på kodestruktur:
+http://learn.jquery.com/code-organization/concepts/
+
+dokumentasjonen på browserify
+https://github.com/substack/browserify-handbook
+https://github.com/substack/node-browserify#usage
+
+Contentful managment module
+https://github.com/contentful/contentful-management.js
+
+------------ kode standard
+
+
+//javascript-klasse og id skrives slik: 
+
+.JS for klass
+#JS for id 
+
+//andre klasser og id-er skal skrives slik:
+
+.addTrackBtn 
+#addTrackBtn
+
+//kommentarer på funksjoner skal svare på hva det er og hvorfor gjør den det
+//sett heller inn en kommentar for mye
+
+/*-------------- START-TAGGER OG END PÅ FUNKSJONER I CSS/JAVASCRIPT -------------*/
+
+<!-- START OG END PÅ FUNKSJONER I HTML -->
+
+//rydd opp og ta bort ting/funksjoner som ikke blir brukt. OK å kommentere ut mens du rydder, men rydd opp når det ikke blir brukt lengre.
+
+//hver person har sin egen "søppel-fil". trash-sigrun.html, trash-natalie.html & trash-sara.html
+
+
+
+Huske lista:
+- ta bort dependencys vi ikke bruker
