@@ -173,6 +173,9 @@ nav .Active a {
   #navWeek #nextBtn {
     color: red; }
 
+.nav-up {
+  top: -100px; }
+
 /********************************************
 inputs
 ********************************************/
@@ -475,3 +478,180 @@ show/hide desktop cal & mobile cal
     }
 }
 */
+/********************************************
+index
+********************************************/
+#thisWeekBtn {
+  text-decoration: none; }
+
+/*-------------- CALENDAR --------------*/
+#calendarWrapper {
+  width: 100%;
+  margin-top: -20px; }
+
+.JSeventTitleCal, .JSlocationCal {
+  color: white; }
+
+.JSeventTitleCal {
+  margin-bottom: 5px; }
+
+#startTimes {
+  display: grid;
+  grid-template-columns: 120px;
+  grid-gap: 10px;
+  float: left; }
+
+.times {
+  height: 200px;
+  /*border: 1px solid gray;*/ }
+
+.JScal {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #06f;
+  border: 5px solid #f6f6f6; }
+
+.JScal:hover {
+  border: 5px solid #06f; }
+
+#calendar {
+  display: grid;
+  height: auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  /*20% 20% 20% 20% 20%;*/
+  grid-template-rows: 200px 200px 200px;
+  /*33.33% 33.33% 33.33%;*/
+  /*border: 1px solid black;*/
+  grid-gap: 10px; }
+
+/*LARGE EVENTS*/
+.JSlargeTrackCal {
+  grid-row: 1/4; }
+
+/*END LARGE EVENTS*/
+/*MEDIUM EVENTS*/
+.JSmediumTrackCal-13 {
+  grid-row: 1/3; }
+
+.JSmediumTrackCal-14 {
+  grid-row: 2/4; }
+
+/*END MEDIUM EVENTS*/
+/*SMALL EVENTS*/
+.JSsmallTrackCal-13 {
+  grid-row: 1/2; }
+
+.JSsmallTrackCal-14 {
+  grid-row: 2/3; }
+
+.JSsmallTrackCal-15 {
+  grid-row: 3/4; }
+
+/*END SMALL EVENTS*/
+.JSlocationWrapperCal {
+  float: right; }
+
+.JSicon-room-filled-cal, .JSlocationCal {
+  float: left; }
+
+.JSicon-room-filled-cal {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  -webkit-mask: url("../assets/images/location-pin-2-filled.svg") no-repeat 50% 50%;
+  mask: url("../images/assets/location-pin-2-filled.svg") no-repeat 50% 50%;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  background-color: #fff; }
+
+/*-------------- END CALENDAR --------------*/
+.filled-arrow-down {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  -webkit-mask: url("../assets/images/arrow-down-12.svg") no-repeat 50% 50%;
+  mask: url("../assets/images/arrow-down-12.svg") no-repeat 50% 50%;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  background-color: #000;
+  margin-top: 20px; }
+
+/*-------------- LIST --------------*/
+.JSeventList {
+  width: 1200px;
+  height: auto;
+  background-color: white;
+  margin-bottom: 40px;
+  float: left; }
+
+.JSeventInfoList {
+  padding: 40px; }
+
+.JSleftListInfo {
+  width: 700px;
+  float: left;
+  padding-right: 50px; }
+
+.JSrightListInfo {
+  width: 400px;
+  float: left; }
+
+.JSeventTitleList {
+  text-decoration: underline;
+  -moz-text-decoration-color: #06f;
+  /* Code for Firefox */
+  text-decoration-color: #06f;
+  margin-right: 10px; }
+
+.JSeventTitleList, .JSicon-edit {
+  float: left; }
+
+.JSicon-edit {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  -webkit-mask: url("../assets/images/pencil-write-2.svg") no-repeat 50% 50%;
+  mask: url("../assets/images/notepad-edit.svg") no-repeat 50% 50%;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  background-color: #000;
+  margin-bottom: 20px; }
+
+.JSeventHost {
+  clear: left; }
+
+.JSeventImage {
+  width: 1200px;
+  height: 300px;
+  overflow: hidden;
+  background-color: lightgray; }
+
+.JSicon-clock {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  -webkit-mask: url("../assets/images/clock.svg") no-repeat 50% 50%;
+  mask: url("../assets/images/clock.svg") no-repeat 50% 50%;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  background-color: #000;
+  margin-right: 10px; }
+
+.JSicon-clock, .JSstartTimeList {
+  float: left; }
+
+.JSicon-room {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  -webkit-mask: url("../assets/images/location-pin-2.svg") no-repeat 50% 50%;
+  mask: url("../assets/images/location-pin-2.svg") no-repeat 50% 50%;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  background-color: #000; }
+
+.JSicon-room, .JSlocationList {
+  float: left; }
+
+.JSlocationWrapperList, .JSgoingWrapperList, .JStitleEditWrapper {
+  clear: left; }
