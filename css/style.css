@@ -80,12 +80,10 @@ a {
   a:hover {
     text-decoration: none; }
 
-/* CHECK IF IN USE, IF NOT DELETE
-ul,
-ol,
 p {
-    margin: 0 0 40px 0;
-}
+  margin: 0 0 40px 0; }
+
+/*
 
 ul {
     list-style: none;
