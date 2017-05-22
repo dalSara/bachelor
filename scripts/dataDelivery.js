@@ -310,7 +310,7 @@ function renderEventInfoCal(event){
     var startTime = date.substring(date.length - 5);
 
     return  '<h4 class="JSeventTitleCal">' + event.title + '</h4>' +
-        '<div class="locationWrapperCal"><i class="JSicon-room-filled-cal"></i>' +
+        '<div class="JSlocationWrapperCal"><i class="JSicon-room-filled-cal"></i>' +
         '<p class="JSlocationCal">' + event.location + '</p></div>';
 }
 /*-------------- END GET DATA FROM ONE EVENT: CALENDAR --------------*/

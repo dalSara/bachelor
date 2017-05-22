@@ -112,12 +112,11 @@ a {
     }
 }
 
-/* CHECK IF IN USE, IF NOT DELETE
-ul,
-ol,
+// CHECK IF IN USE, IF NOT DELETE
+
 p {
     margin: 0 0 40px 0;
-}
+}/*
 
 ul {
     list-style: none;
