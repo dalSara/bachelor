@@ -168,11 +168,41 @@ nav .Active a {
   display: flex;
   justify-content: space-between;
   padding-top: 0.5rem; }
-  #navWeek #nextBtn {
-    color: red; }
 
 .nav-up {
   top: -100px; }
+
+#previous, #prevDate {
+  display: block; }
+
+#arrow-previous {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  height: 15px;
+  width: 15px; }
+
+#thisWeekBtn {
+  text-decoration: none;
+  margin-bottom: 40px;
+  /*text-align: center;*/ }
+
+#next {
+  float: right; }
+
+#next, #nextDate {
+  display: block; }
+
+#arrow-next {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  height: 15px;
+  width: 15px; }
 
 /********************************************
 inputs
@@ -480,9 +510,6 @@ show/hide desktop cal & mobile cal
 /********************************************
 index
 ********************************************/
-#thisWeekBtn {
-  text-decoration: none; }
-
 /*-------------- CALENDAR --------------*/
 #calendarWrapper {
   width: 100%;
@@ -575,6 +602,9 @@ index
   background-color: #000;
   margin-top: 20px; }
 
+#arrowWrapper {
+  text-align: center; }
+
 /*-------------- LIST --------------*/
 .JSeventList {
   width: 1200px;
@@ -654,6 +684,13 @@ index
 
 .JSlocationWrapperList, .JSgoingWrapperList, .JStitleEditWrapper {
   clear: left; }
+
+#arrowScrollToTop {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg); }
 
 /*---------TESTING RESPONSIVE -------*/
 @media (max-width: 1200px) {
