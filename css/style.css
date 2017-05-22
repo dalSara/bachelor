@@ -653,3 +653,27 @@ index
 
 .JSlocationWrapperList, .JSgoingWrapperList, .JStitleEditWrapper {
   clear: left; }
+
+/*---------TESTING RESPONSIVE -------*/
+@media (max-width: 1200px) {
+  wrapper {
+    padding: 0 2%; }
+  .JSeventList {
+    width: 100%;
+    transition: top 0.2s ease-in-out;
+    margin-left: 0; }
+  .JSeventInfoList {
+    width: 100%;
+    padding: 10%; }
+  .JSeventImage {
+    width: 100%;
+    height: auto; }
+  .JSleftListInfo {
+    width: 100%;
+    padding: 0; }
+  .JSrightListInfo {
+    width: 100%;
+    padding: 0; }
+  .JSicon-clock, .JSicon-room, .JSicon-edit {
+    width: 20px;
+    height: 20px; } }
