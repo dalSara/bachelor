@@ -562,7 +562,45 @@ index
   mask-size: cover;
   background-color: #fff; }
 
+/*---------TESTING RESPONSIVE CALENDAR-------*/
+@media (max-width: 1200px) {
+  #calendar {
+    margin: 2em;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: auto;
+    grid-template-rows: auto; }
+  .JSicon-room-filled-cal {
+    width: 20px;
+    height: 20px; }
+  #startTimes {
+    display: none; }
+  .JSlargeTrackCal,
+  .JSmediumTrackCal-13,
+  .JSmediumTrackCal-14,
+  .JSsmallTrackCal-13,
+  .JSsmallTrackCal-14,
+  .JSsmallTrackCal-15 {
+    grid-column: 2;
+    width: auto;
+    align-self: center;
+    justify-self: stretch;
+    grid-row: auto; } }
+
 /*-------------- END CALENDAR --------------*/
+.bounce {
+  -moz-animation: bounce 2s infinite;
+  -webkit-animation: bounce 2s infinite;
+  animation: bounce 2s infinite; }
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0); }
+  40% {
+    transform: translateY(-30px); }
+  60% {
+    transform: translateY(-15px); } }
+
 .filled-arrow-down {
   display: inline-block;
   width: 30px;
@@ -658,6 +696,8 @@ index
 @media (max-width: 1200px) {
   wrapper {
     padding: 0 2%; }
+    wrapper .basic {
+      max-width: 100%; }
   .JSeventList {
     width: 100%;
     transition: top 0.2s ease-in-out;
@@ -667,7 +707,7 @@ index
     padding: 10%; }
   .JSeventImage {
     width: 100%;
-    height: auto; }
+    height: 200px; }
   .JSleftListInfo {
     width: 100%;
     padding: 0; }
