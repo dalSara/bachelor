@@ -113,20 +113,19 @@
 
                 <!-------------------------------- NAVIGATION -------------------------------->
                 <div id="navWeek">
-                    <div><a id="prevBtn"><i class="fa fa-angle-left" aria-hidden="true"></i> Previous<br>
+                    <a id="prevBtn">
+                        <div id="previous"><i id="arrow-previous" class="filled-arrow-down"></i> Previous</div>
                         <strong id="prevDate"></strong>
-                        </a>
-                    </div>
+                    </a>
 
-                    <div style="text-align: center"><a id="thisWeekBtn" href="index.html"><br>
-                        <h2 id="thisDate"></h2><br>
-                        </a>
-                    </div>
+                    <a id="thisWeekBtn" href="index.html"><br>
+                        <h2 id="thisDate"></h2>
+                    </a>
 
-                    <div><a id="nextBtn">Next  <i class="fa fa-angle-right" aria-hidden="true"></i><br>
+                    <a id="nextBtn">
+                        <div id="next">Next  <i id="arrow-next" class="filled-arrow-down"></i></div>
                         <strong id="nextDate"></strong>
-                        </a>
-                    </div>
+                    </a>
                 </div>
                 <!-------------------------------- end NAVIGATION -------------------------------->
 
@@ -146,16 +145,18 @@
                 <!-------------------------------- END CALENDAR -------------------------------->
 
                 <br>
-                <div style="text-align: center">
-                    <!--<a href="#eventID_1" class="scroll fa fa-angle-down fa-3x" style="opacity: 0.5" aria-hidden="true"></a>-->
+                <div id="arrowWrapper">
                     <a href="#eventID_1" class="JSscroll filled-arrow-down"></a>
-
                 </div>
                 <br><br>
 
                 <!-------------------------------- LIST -------------------------------->
                 <div id="list"></div><!--FROM CONTENTFUL-->
                 <!-------------------------------- END LIST -------------------------------->
+
+                <div id="arrowWrapper">
+                    <a id="arrowScrollToTop" href="#eventID_1" class="JSscroll filled-arrow-down"></a>
+                </div>
 
             </div><!-- END WRAPPER BASIC -->
         </main><!-- END MAIN CONTENT -->
