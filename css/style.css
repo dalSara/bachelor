@@ -105,16 +105,14 @@ figure {
 
 figcaption {
     margin-top: 10px;
-}
-
+}*/
 img {
-    max-width: 100%;
-}
+  max-width: 100%; }
 
 a img {
-    border: none;
-}
+  border: none; }
 
+/*
 iframe {
     max-width: 100%;
     border: none;
@@ -197,382 +195,6 @@ button {
     font-family: inherit;
     color: inherit;
     font-size: .778rem; }
-
-/********************************************
-pageHeader
-********************************************/
-.pageHeader {
-  background: white;
-  overflow: hidden;
-  min-height: 100px;
-  padding-top: 35px;
-  margin-bottom: 30px; }
-  .pageHeader .logo {
-    background: url("../assets/images/logo-sd.svg") no-repeat center;
-    /* preload */
-    display: inline-block;
-    vertical-align: top; }
-    .pageHeader .logo:hover {
-      background: url("../assets/images/logo_col1.svg") no-repeat center; }
-    .pageHeader .logo img {
-      display: block;
-      height: 27px;
-      opacity: 0; }
-
-@media (min-width: 1201px) {
-  .pageHeader {
-    position: fixed;
-    width: 100%;
-    z-index: 10;
-    height: 100px;
-    transition: top 0.2s ease-in-out; }
-    .pageHeader .logo {
-      float: left;
-      margin-right: 120px; } }
-
-@media (max-width: 1200px) {
-  .pageHeader {
-    position: relative;
-    width: 100%;
-    z-index: 10; }
-    .pageHeader .logo {
-      float: left; }
-    .pageHeader .logo img {
-      height: 20px; } }
-
-/********************************************
-mainMenu
-********************************************/
-.mainMenu {
-  font-family: 'Volte Semibold';
-  transition: all .5s; }
-  .mainMenu a {
-    padding: 10px; }
-  .mainMenu li {
-    display: inline-block;
-    margin-top: 0px;
-    float: right; }
-
-@media (max-width: 1200px) {
-  .mainMenu {
-    display: inline; }
-    .mainMenu li {
-      float: right; } }
-
-/********************************************
-main
-********************************************/
-main {
-  display: block; }
-  main .wrapper {
-    margin-bottom: 120px; }
-    main .wrapper.top {
-      margin-bottom: 0; }
-  main img,
-  main svg {
-    display: block; }
-
-@media (min-width: 1201px) {
-  main {
-    padding-top: 130px;
-    /* space for sticky header */ }
-  .frontpage main {
-    padding-top: 100px; } }
-
-/********************************************
-frontpage
-********************************************/
-.frontpage .pageHeader {
-  margin-bottom: 0px; }
-
-.frontpage h1 {
-  position: relative;
-  margin-right: 0;
-  color: inherit; }
-
-.frontpage .lead {
-  margin-bottom: 40px; }
-
-@media (min-width: 901px) {
-  .frontpage .wrapper.top {
-    padding-left: 15%; } }
-
-@media (min-width: 1201px) {
-  .frontpage h1 {
-    font-size: 7em; } }
-
-@media (min-width: 901px) {
-  .frontpage h1:before {
-    content: "";
-    background: #fc0;
-    display: inline-block;
-    vertical-align: top;
-    position: absolute;
-    width: 150px;
-    height: 12px;
-    left: -170px;
-    top: 19%; } }
-
-@media (max-width: 900px) {
-  .frontpage h1 {
-    margin: 0 0 20px 0; } }
-
-/********************************************
-Flex for rows in calendar
-********************************************/
-#main {
-  width: auto;
-  height: auto;
-  display: -webkit-flex;
-  /* Safari */
-  display: flex;
-  margin-right: 1em;
-  margin-top: 0.5em; }
-  #main div {
-    -webkit-flex-grow: 0;
-    /* Safari 6.1+ */
-    -webkit-flex-shrink: 0;
-    /* Safari 6.1+ */
-    -webkit-flex-basis: 40px;
-    /* Safari 6.1+ */
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 60px; }
-    #main div:nth-of-type(2) {
-      -webkit-flex-basis: 92%;
-      /* Safari 6.1+ */
-      flex-basis: 92%; }
-
-.track-mob {
-  background: #06f;
-  border: 1px solid white;
-  color: white;
-  padding: 1em;
-  margin: 0.5em;
-  border-radius: 10px;
-  font-size: 1.1em; }
-
-.track-time-mob {
-  font-size: 1.2em;
-  font-weight: 600;
-  padding-bottom: 1em; }
-
-/********************************************
-List
-********************************************/
-.scrollToTopBtn {
-  /*text-align: center;*/
-  /*position: relative;*/
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  display: none;
-  color: black;
-  background-color: #fff;
-  padding: 5px; }
-
-.cut-image {
-  width: auto;
-  height: 150px;
-  overflow: hidden;
-  position: relative;
-  margin: 0 auto;
-  display: block;
-  opacity: 0.5; }
-
-@media (min-width: 900px) {
-  .cut-image {
-    height: 200px; } }
-
-.image-to-cut {
-  position: absolute;
-  top: 0;
-  left: 0; }
-
-.flex-list {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  width: auto;
-  height: auto;
-  margin: 10px; }
-
-.flex-list-item {
-  width: auto;
-  height: auto;
-  align-items: baseline; }
-
-/********************************************
-show/hide desktop cal & mobile cal
-********************************************/
-@media screen and (min-width: 768px) {
-  #cal-mobile {
-    display: none; }
-  .duration {
-    display: none; }
-  .rooms {
-    padding-top: 1em;
-    float: right; } }
-
-@media screen and (max-width: 768px) {
-  #cal-desktop {
-    display: none; }
-  .duration {
-    margin-top: 5px;
-    font-size: 1em;
-    text-align: right;
-    opacity: 0.8; }
-  .flex-list {
-    -webkit-flex-direction: column;
-    flex-direction: column; }
-  .going-size {
-    width: auto; }
-  .event-wrap {
-    overflow: visible; }
-  .info {
-    float: none;
-    margin-right: 0;
-    width: 100% !important; }
-  .info-right {
-    border-bottom: 1px solid #ccc;
-    margin: 0px; }
-  .listStyle {
-    margin: 200px 0 80px; }
-    .listStyle * {
-      transition: all .5s; }
-    .listStyle h2,
-    .listStyle li > * {
-      box-sizing: content-box;
-      max-width: 1200px;
-      margin-right: auto;
-      margin-left: auto;
-      padding-right: 0;
-      padding-left: 0; }
-    .listStyle h2 {
-      margin-bottom: 20px; }
-    .listStyle li {
-      background: #fff;
-      margin-bottom: 2em; }
-      .listStyle li > a {
-        display: block;
-        text-decoration: none;
-        position: relative;
-        padding-top: 30px;
-        padding-bottom: 15px; } }
-
-/********************************************
-table
-********************************************/
-table,
-td,
-th {
-  text-align: left;
-  vertical-align: baseline; }
-
-table {
-  width: 100%; }
-
-th {
-  padding: 15px;
-  background: none; }
-
-td {
-  border-radius: 10px;
-  border: 5px solid #f6f6f6;
-  padding: 15px;
-  background-color: #06f;
-  color: #ffffff; }
-  td:hover {
-    border: 5px solid #06f;
-    color: #fff; }
-
-/********************************************
-going toggle yes/no button
-********************************************/
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 140px;
-  height: 50px;
-  display: flex;
-  justify-content: center; }
-
-.switch input {
-  display: none; }
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border: 4px solid #06f;
-  -webkit-transition: .4s;
-  transition: .4s;
-  text-align: center;
-  line-height: 45px;
-  font-size: 20px; }
-
-.slider:before {
-  position: absolute;
-  content: "NO";
-  height: 42px;
-  width: 62px;
-  left: 0px;
-  bottom: 0px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s; }
-
-input:checked + .slider {
-  background-color: #06f;
-  border: 4px solid #06f; }
-
-.going-feedback {
-  margin-top: 55px;
-  color: #fff;
-  font-size: 14px; }
-
-input:checked + .slider ~ .going-feedback {
-  color: #06f; }
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3; }
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(68px);
-  -ms-transform: translateX(68px);
-  transform: translateX(68px);
-  content: "YES"; }
-
-/********************************************
-inputs
-********************************************/
-button {
-  font-family: "Volte Semibold";
-  font-size: inherit;
-  line-height: inherit;
-  background-color: white;
-  color: #06f;
-  border: 3px solid #06f;
-  border-radius: 0;
-  padding: 10px 20px;
-  margin: 0;
-  -webkit-appearance: none;
-  cursor: pointer; }
-  button.subtle {
-    padding: 5px 10px;
-    border: none;
-    border: 1px solid #ccc;
-    font-family: inherit;
-    color: inherit;
-    font-size: .778rem; }
-
-#test {
-  width: 20px; }
 
 .buttonsAddTrack {
   display: table;
@@ -684,59 +306,177 @@ textarea {
 
 /*-------------- END INPUT --------------*/
 /********************************************
+pageHeader
+********************************************/
+.pageHeader {
+  background: white;
+  overflow: hidden;
+  min-height: 100px;
+  padding-top: 35px;
+  margin-bottom: 30px; }
+  .pageHeader .logo {
+    background: url("../assets/images/logo-sd.svg") no-repeat center;
+    /* preload */
+    display: inline-block;
+    vertical-align: top; }
+    .pageHeader .logo:hover {
+      background: url("../assets/images/logo_col1.svg") no-repeat center; }
+    .pageHeader .logo img {
+      display: block;
+      height: 27px;
+      opacity: 0; }
+
+@media (min-width: 1201px) {
+  .pageHeader {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    height: 100px;
+    transition: top 0.2s ease-in-out; }
+    .pageHeader .logo {
+      float: left;
+      margin-right: 120px; } }
+
+@media (max-width: 1200px) {
+  .pageHeader {
+    position: relative;
+    width: 100%;
+    z-index: 10; }
+    .pageHeader .logo {
+      float: left; }
+    .pageHeader .logo img {
+      height: 20px; } }
+
+/********************************************
+mainMenu
+********************************************/
+.mainMenu {
+  font-family: 'Volte Semibold';
+  transition: all .5s; }
+  .mainMenu a {
+    padding: 10px; }
+  .mainMenu li {
+    display: inline-block;
+    margin-top: 0px;
+    float: right; }
+
+@media (max-width: 1200px) {
+  .mainMenu {
+    display: inline; }
+    .mainMenu li {
+      float: right; } }
+
+/********************************************
+main
+********************************************/
+main {
+  display: block; }
+  main .wrapper {
+    margin-bottom: 120px; }
+    main .wrapper.top {
+      margin-bottom: 0; }
+  main img,
+  main svg {
+    display: block; }
+
+@media (min-width: 1201px) {
+  main {
+    padding-top: 130px;
+    /* space for sticky header */ }
+  .frontpage main {
+    padding-top: 100px; } }
+
+/*DO WE WANT TO HAVE A SCROLL-UP BUTTON STILL?
+.scrollToTopBtn {
+    /*text-align: center;*/
+/*position: relative;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: none;
+    color: rgb(0, 0, 0);
+    background-color: #fff;
+    padding: 5px;
+}*/
+/********************************************
+show/hide desktop cal & mobile cal
+********************************************/
+/*
+@media screen and (min-width: 768px) {
+    #cal-mobile {
+        display: none;
+    }
+    .duration {
+        display: none;
+    }
+    .rooms {
+        padding-top: 1em;
+        float: right;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #cal-desktop {
+        display: none;
+    }
+    .duration {
+        margin-top: 5px;
+        font-size: 1em;
+        text-align: right;
+        opacity: 0.8;
+    }
+    .flex-list {
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+    .going-size {
+        width: auto;
+    }
+    .event-wrap {
+        overflow: visible;
+    }
+    .info {
+        float: none;
+        margin-right: 0;
+        width: 100% !important;
+    }
+    .info-right {
+        border-bottom: 1px solid #ccc;
+        margin: 0px;
+    }
+    .listStyle {
+        margin: 200px 0 80px;
+        * {
+            transition: all .5s;
+        }
+        h2,
+        li>* {
+            box-sizing: content-box;
+            max-width: 1200px;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 0;
+            padding-left: 0;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        li {
+            background: #fff;
+            margin-bottom: 2em;
+            >a {
+                display: block;
+                text-decoration: none;
+                position: relative;
+                padding-top: 30px;
+                padding-bottom: 15px;
+            }
+        }
+    }
+}
+*/
+/********************************************
 ScrollToStyle no underline
 ********************************************/
 .scrollToStyle {
   text-decoration: none; }
-
-/********************************************
-event list divs
-********************************************/
-.event-wrap {
-  overflow: hidden; }
-
-.event-wrap div {
-  padding: 0px; }
-
-.info {
-  float: left;
-  margin-right: 20px;
-  width: 60%;
-  overflow: hidden; }
-
-.info-right {
-  margin: 0px; }
-
-.listStyle {
-  margin: 200px 0 80px; }
-  .listStyle * {
-    transition: all .5s; }
-  .listStyle h2,
-  .listStyle li > * {
-    box-sizing: content-box;
-    max-width: 1200px;
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 5%;
-    padding-left: 5%; }
-  .listStyle h2 {
-    margin-bottom: 20px; }
-  .listStyle li {
-    background: #fff;
-    margin-bottom: 2em; }
-    .listStyle li > a {
-      display: block;
-      text-decoration: none;
-      position: relative;
-      padding-top: 30px;
-      padding-bottom: 15px; }
-
-/********************************************
-room-div style
-********************************************/
-.editLink {
-  float: right;
-  padding-top: 10px;
-  color: #000; }
-  .editLink:hover {
-    color: #06f; }
