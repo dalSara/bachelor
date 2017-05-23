@@ -142,7 +142,7 @@ nav ul {
   margin: 0; }
   nav ul li {
     border: 4px solid #0066FF;
-    /*font-family: Volte-Semibold;*/
+    font-family: "Volte-Semibold", sans-serif;
     font-size: .8rem;
     color: #0066FF;
     text-transform: none;
@@ -239,7 +239,7 @@ inputs
   padding: .6em;
   text-align: center;
   cursor: pointer;
-  /*font-family: Volte-Semibold;*/
+  font-family: Volte, sans-serif;
   font-size: 1rem; }
 
 /* Submit: */
@@ -588,10 +588,16 @@ index
   width: 30px;
   height: 30px;
   -webkit-mask: url("../assets/images/location-pin-2-filled.svg") no-repeat 50% 50%;
-  mask: url("../images/assets/location-pin-2-filled.svg") no-repeat 50% 50%;
+  mask: url("../assets/images/location-pin-2-filled.svg") no-repeat 50% 50%;
   -webkit-mask-size: cover;
+  -moz-mask: url("../assets/images/location-pin-2-filled.svg") no-repeat 50% 50%;
+  mask: url("../assets/images/location-pin-2-filled.svg") no-repeat 50% 50%;
+  -moz-mask-size: cover;
   mask-size: cover;
-  background-color: #fff; }
+  background-color: #ffffff; }
+
+.JSlargeTime {
+  display: none; }
 
 /*---------TESTING RESPONSIVE CALENDAR-------*/
 @media (max-width: 1200px) {
@@ -613,10 +619,34 @@ index
   .JSsmallTrackCal-14,
   .JSsmallTrackCal-15 {
     grid-column: 2;
-    width: auto;
+    width: 100%;
     align-self: center;
     justify-self: stretch;
-    grid-row: auto; } }
+    grid-row: auto; }
+  .JSlargeTrackCal:before,
+  .JSmediumTrackCal-13:before,
+  .JSmediumTrackCal-14:before,
+  .JSsmallTrackCal-13:before,
+  .JSsmallTrackCal-14:before,
+  .JSsmallTrackCal-15:before {
+    font-size: 1em;
+    font-weight: 700;
+    white-space: pre;
+    margin-left: -6em;
+    padding-left: 20px;
+    float: left; }
+  .JSlargeTrackCal:before {
+    content: "1300- \A 1545"; }
+  .JSmediumTrackCal-13:before {
+    content: "1300- \A 1445"; }
+  .JSmediumTrackCal-14:before {
+    content: "1400- \A 1445"; }
+  .JSsmallTrackCal-13:before {
+    content: "1300- \A 1345"; }
+  .JSsmallTrackCal-14:before {
+    content: "1400- \A 1445"; }
+  .JSsmallTrackCal-15:before {
+    content: "1500- \A 1545"; } }
 
 /*-------------- END CALENDAR --------------*/
 .bounce {

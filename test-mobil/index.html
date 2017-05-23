@@ -13,7 +13,6 @@
 
         <title>Show & Do</title>
         <style>
-
             /*----GOING-BTN----*/
             .JSgoingBtnWrapper{
                 clear: left;
@@ -41,15 +40,12 @@
                 background-color: #06f;
                 color: #fff;
             }
-
             .going-registered:after {
                 background-color: white;
                 transition: .2s;
                 color: #0066FF;
                 content: "You're going!";
             }
-
-
             .JSgoingDropdownContent{
                 display: none;
                 overflow: hidden;
@@ -73,8 +69,6 @@
             }
             /*----END GOING-BTN----*/
             /*-------------- END LIST --------------*/
-
-
         </style>
 
     </head>
@@ -99,20 +93,19 @@
 
                 <!-------------------------------- NAVIGATION -------------------------------->
                 <div id="navWeek">
-                    <div><a id="prevBtn"><i class="fa fa-angle-left" aria-hidden="true"></i> Previous<br>
+                    <a id="prevBtn">
+                        <div id="previous"><i id="arrow-previous" class="filled-arrow-down"></i> Previous</div>
                         <strong id="prevDate"></strong>
-                        </a>
-                    </div>
+                    </a>
 
-                    <div style="text-align: center"><a id="thisWeekBtn" href="index.html"><br>
-                        <h2 id="thisDate"></h2><br>
-                        </a>
-                    </div>
+                    <a id="thisWeekBtn" href="index.html"><br>
+                        <h2 id="thisDate"></h2>
+                    </a>
 
-                    <div><a id="nextBtn">Next  <i class="fa fa-angle-right" aria-hidden="true"></i><br>
+                    <a id="nextBtn">
+                        <div id="next">Next  <i id="arrow-next" class="filled-arrow-down"></i></div>
                         <strong id="nextDate"></strong>
-                        </a>
-                    </div>
+                    </a>
                 </div>
                 <!-------------------------------- end NAVIGATION -------------------------------->
 
@@ -124,6 +117,8 @@
                         <div class="times"><strong>1400-1445</strong></div>
 
                         <div class="times"><strong>1500-1545</strong></div>
+
+                        <div class="JSlargeTime"></div>
                     </div>
 
                     <div id="calendar" class="rows"></div><!--FROM CONTENTFUL-->
@@ -132,16 +127,18 @@
                 <!-------------------------------- END CALENDAR -------------------------------->
 
                 <br>
-                <div style="text-align: center">
-                    <!--<a href="#eventID_1" class="scroll fa fa-angle-down fa-3x" style="opacity: 0.5" aria-hidden="true"></a>-->
+                <div id="arrowWrapper">
                     <a href="#eventID_1" class="JSscroll filled-arrow-down bounce"></a>
-
                 </div>
                 <br><br>
 
                 <!-------------------------------- LIST -------------------------------->
                 <div id="list"></div><!--FROM CONTENTFUL-->
                 <!-------------------------------- END LIST -------------------------------->
+
+                <div id="arrowWrapper">
+                    <a id="arrowScrollToTop" href="#eventID_1" class="JSscroll filled-arrow-down"></a>
+                </div>
 
             </div><!-- END WRAPPER BASIC -->
         </main><!-- END MAIN CONTENT -->
@@ -152,15 +149,11 @@
         <script src="../scripts/dataDelivery.js"></script>
 
         <script>
-
             /*var increment2 = 10;
             $(document).on("change", ".checkbox", function() {
                 $('.number').html('' + (increment2 += this.checked ? 1 : -1) + '');
             })*/
-
-
             //initDates(function(){})
-
             //$("#going").click(function() {
                 //$("#going").addClass('going-clicked');
                 //$("#goingInput").stop().slideToggle(500).removeClass('hidden');
