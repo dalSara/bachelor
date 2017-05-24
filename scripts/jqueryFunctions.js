@@ -1,9 +1,7 @@
-
-
 /*-------------- JQUERY FUNCTIONS --------------*/
-$(function(){
-    /*-------------- SMOOTH SCROLL FROM CALENDAR TO LIST --------------*/
-    $.smoothScrollDown = function(){
+/*-------------- SMOOTH SCROLL FROM CALENDAR TO LIST --------------*/
+function smoothScrollDownFunction(){
+    $(function(){
         var didScroll;
         var lastScrollTop = 0;
         var delta = 5;
@@ -56,27 +54,23 @@ $(function(){
                 scrollTop: dest
             }, 800, 'swing');
         });
-    }
+    });
+}
+/*-------------- END SMOOTH SCROLL FROM CAlENDAR TO LIST --------------*/
 
-    /*-------------- END SMOOTH SCROLL FROM CAlENDAR TO LIST --------------*/
-
-    /*-------------- GOING BTN --------------*/
-    $.goingBtn = function(){
-        //$('button[id^=JSgoing]').click(function() {
+/*-------------- GOING BTN --------------*/
+function goingBtnFunction(){
+    $(function(){
         $('.JSgoing').click(function() {
-
-            //$('#JSgoing').click(function() {
             $(this).addClass('JSgoing-clicked');
-            $(this).next('.JSgoingDropdownContent').stop().slideToggle(500); //.removeClass('JShidden');
-        })
+            $(this).next('.JSgoingDropdownContent').stop().slideToggle(500);
 
-        //$('div[id^=JSregisterBtn]').click(function() {
-        $('.JSregisterBtn').click(function() {
-            $('.JSgoingDropdownContent').stop().slideUp(500); //.removeClass('JShidden');
-            $(this).next('.JSgoing').val("You're going!"); //.removeClass('JSgoing-clicked');
-            //$('#JSgoingDropdownContent').attr('id', 'clicked'); //.removeClass('JShidden');
+            $('.JSregisterBtn').click(function() {
+                $('.JSgoingDropdownContent').stop().slideUp(500);
+                $(this).parent().siblings('.JSgoing').addClass('JSgoing-registered');
+            })
         })
-    }
-    /*-------------- END GOING BTN --------------*/
-});
+    });
+}
+/*-------------- END GOING BTN --------------*/
 /*-------------- END JQUERY FUNCTIONS --------------*/

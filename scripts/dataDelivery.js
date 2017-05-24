@@ -56,14 +56,10 @@ client.getEntries({
     allDates = entries.items;
     console.log('Entry Client: All dates (sorted):', allDates); //all dates
 
-
     selectedDate = getSelectedDate();
     /*-------------- GET THIS DATE --------------*/
     //loop through dates in datesForShowDo
     for(var i = 0; i < allDates.length; i++){
-        //var dates = allDates[i];
-        //var oneDate = dates.fields.date;
-
         if(allDates[i].fields.date <= selectedDate && allDates[i+1].fields.date >= selectedDate){
             globalTargetDateIndex = i + 1;
 
@@ -80,14 +76,13 @@ client.getEntries({
     updateDateLabels(); //Add date labels
     addId(); //Add id to events (in calendar and list)
 
-    /*jQuery functions*/
-    //$.smoothScrollDown(); //Onclick from calendar to list
-    //$.goingBtn();
-    /*end jQuery functions*/
-
     nextBtn.onclick = nextShowDo; //Display next events
     prevBtn.onclick = previousShowDo; //Display previous events
 
+    /*jQuery functions*/
+    smoothScrollDownFunction();
+    goingBtnFunction();
+    /*end jQuery functions*/
 })
 /*-------------- END GET ENTRIES --------------*/
 
@@ -120,7 +115,6 @@ function updateDateLabels(){
     } else {
         nextDate.innerHTML = "TBA";
     }
-
     thisDate.innerHTML = getDateIndex(globalTargetDateIndex - 1);
 }
 /*-------------- END ADD DATE TO NAVIGATION --------------*/
@@ -140,10 +134,11 @@ function nextShowDo(){
         addId();//Add id to events (in calendar and list)
 
         /*jQuery functions*/
-        $.smoothScrollDown(); //Onclick from calendar to list
-        $.goingBtn();
+        smoothScrollDownFunction(); //Onclick from calendar to list
+        goingBtnFunction();
+        /*end jQuery functions*/
     }else{
-        alert('No more Show & Dos are added.'); //NEEDS A BETTER ERROR MESSAGE
+        alert('No more Show & Dos are added.');
         return globalTargetDateIndex--; //To stop adding index
     }
 }
@@ -163,8 +158,9 @@ function previousShowDo(){
         addId();//Add id to events (in calendar and list)
 
         /*jQuery functions*/
-        $.smoothScrollDown(); //Onclick from calendar to list
-        $.goingBtn();
+        smoothScrollDownFunction(); //Onclick from calendar to list
+        goingBtnFunction();
+        /*end jQuery functions*/
     }else{
         alert('No more Show & Dos to display from the past.');
         return globalTargetDateIndex; //To stop adding index
@@ -191,7 +187,7 @@ function sortEvents(thisShowDoEvents) {
         }
         return 0;
     });
-    return eventArray;
+    return eventArray; //Sorted array
 }
 /*-------------- END SORTING EVENTS BY SIZE --------------*/
 
@@ -200,8 +196,8 @@ function getEventArray(thisShowDoEvents){
         var eventArray = sortEvents(thisShowDoEvents);
         console.log('Sortert LARGE -> SMALL ', eventArray);
     }
-    calendar.innerHTML = renderEventsCal(eventArray);
-    list.innerHTML = renderEventsList(eventArray);
+    calendar.innerHTML = renderEventsCal(eventArray); //Add events to camendar
+    list.innerHTML = renderEventsList(eventArray); //Add events to list
 }
 
 /*-------------- ADD ID: CALENDAR AND LIST --------------*/
@@ -210,18 +206,18 @@ function addId(){ //Add ID to events, calendar and list
     var eventList = document.getElementsByClassName("JSeventList");
 
     for (i = 0, length = eventList.length; i < length; i++) { //eventList or cal.lenght
-        cal[i].href= "#eventID_" + (i + 1); //Add link to calendar
-        eventList[i].id= "eventID_" + (i + 1); //Add id to list
+        cal[i].href= "#JSeventID_" + (i + 1); //Add link to calendar
+        eventList[i].id= "JSeventID_" + (i + 1); //Add id to list
     }
 }
 /*-------------- END ADD ID CALENDAR AND LIST --------------*/
 
 
-/*-------------- GET ALL EVENTS TO CALENDAR --------------*/
+/*-------------- GET ALL EVENTS: CALENDAR --------------*/
 function renderEventsCal(events){
     return events.map(renderSingleEventCal).join('\n');
 }
-/*-------------- END GET ALL EVENTS CALENDAR --------------*/
+/*-------------- END GET ALL EVENTS: CALENDAR --------------*/
 
 /*-------------- PUT ELEMENTS TOGETHER: CALENDAR --------------*/
 function renderSingleEventCal(event){
@@ -292,11 +288,11 @@ function renderEventInfoCal(event){
 }
 /*-------------- END GET DATA FROM ONE EVENT: CALENDAR --------------*/
 
-/*-------------- GET ALL EVENTS TO LIST --------------*/
+/*-------------- GET ALL EVENTS: LIST --------------*/
 function renderEventsList(events){
     return events.map(renderSingleEventList).join('\n');
 }
-/*-------------- END GET ALL EVENTS LIST --------------*/
+/*-------------- END GET ALL EVENTS: LIST --------------*/
 
 /*-------------- PUT ELEMENTS TOGETHER: LIST --------------*/
 function renderSingleEventList(event){
@@ -307,6 +303,7 @@ function renderSingleEventList(event){
         //if time exists in time
         if(event.time != null || event.time == true){
             var time = event.fields.time;
+            var startTime = time.substring(time.length - 5);
             var startTime = time.substring(time.length - 5);
         }
     }
@@ -356,13 +353,13 @@ function renderEventInfoList(event){
 
         /*-------------- GOING BTN --------------*/
         '<div class="JSgoingBtnWrapper">' +
-        '<button type="button" class="JSgoing JSgoingBtn"></button>' +
-        '<div class="JSgoingDropdownContent JShidden">' +
-        //'<div id="JSnameInputWrapper">' +
-        'Name: <input type="text" class="JSnameInput" name="name">' +
-        '<div tabindex="0" role="button" class="JSregisterBtn" type="submit">Register</div>' +
-        //'</div>' +
-        '</div>' +
+            '<button type="button" class="JSgoing JSgoingBtn"></button>' +
+            '<div class="JSgoingDropdownContent JShidden">' +
+                //'<div id="JSnameInputWrapper">' +
+                'Name: <input type="text" class="JSnameInput" name="name">' +
+                '<div tabindex="0" role="button" class="JSregisterBtn" type="submit">Register</div>' +
+                //'</div>' +
+            '</div>' +
         '</div>' +
         /*-------------- END GOING BTN --------------*/
 
