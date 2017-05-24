@@ -33,30 +33,30 @@ function addTrack (){
 
     var addTrackBtn;
 
-    var choosenTime = '2017-06-02T13:00:31Z';
+   // var choosenTime = '2017-06-02T13:00:31Z';
     var choosenTrack;
     var choosenImage;
 
-    var startOne = '2017-06-02T13:00:31Z';
+    //var startOne = '2017-06-02T13:00:31Z';
 
-            var imageOne = {sys: {
-            id: '4KahBhVQTCykgOYsKS66Ws',
-            linkType: "Asset",
-            type:"Link"
-        }}
+    var imageOne = {sys: {
+        id: '4KahBhVQTCykgOYsKS66Ws',
+        linkType: "Asset",
+        type:"Link"
+    }}
 
-        var imageTwo = {sys: {
-            id: '2dmGUtiw7uwugWQcsiGcUk',
-            linkType: "Asset",
-            type:"Link"
-        }}
-        var imageThree = {sys: {
-            id: '5u6CWGgkmcwiIUEIsiQMGE',
-            linkType: "Asset",
-            type:"Link"
-        }}
+    var imageTwo = {sys: {
+        id: '2dmGUtiw7uwugWQcsiGcUk',
+        linkType: "Asset",
+        type:"Link"
+    }}
+    var imageThree = {sys: {
+        id: '5u6CWGgkmcwiIUEIsiQMGE',
+        linkType: "Asset",
+        type:"Link"
+    }}
 
-//temporary code for the usertest
+    //temporary code for the usertest
 
     function timeOne (){
         choosenTime = startOne
@@ -68,7 +68,7 @@ function addTrack (){
 
 
     function timeTwo (){
-        var choosenTime = '2017-06-02T14:00:31Z'
+        var choosenTime = '2017-06-02T14:00'
         document.getElementById("JSaddStartTwo").classList.add('selectedTime');
         document.getElementById("JSaddStartOne").classList.remove('selectedTime');
         document.getElementById("JSaddStartThree").classList.remove('selectedTime');
@@ -76,7 +76,7 @@ function addTrack (){
     }
 
     function timeThree (){
-        var choosenTime = '2017-06-02T15:00:31Z'
+        var choosenTime = '2017-06-02T15:00'
         document.getElementById("JSaddStartThree").classList.add('selectedTime');
         document.getElementById("JSaddStartOne").classList.remove('selectedTime');
         document.getElementById("JSaddStartTwo").classList.remove('selectedTime');
@@ -193,7 +193,7 @@ function addTrack (){
         var JSaddStatus
 
 
-        var choosenTime = "2017-06-02T13:00:31Z";
+        var choosenTime = "2017-06-02T13:00";
         var choosenTrack = "Small";
 
 
@@ -235,13 +235,38 @@ function addTrack (){
                 },
                 anythingElse: {
                     'en-US': JSaddNewElse
+                },
 
-                }
             }//end field
         }
 
+        var newGoing = {
+            fields: {
+                title: {
+                    'en-US': JSaddNewTitle
+                },
+                name: {
+                    'en-US': ""
+                }
+            }
+        }//end newGoing
 
+  /*      client.getSpace('59mi8sr8zemv')
+            .then((space) => {
+            space.createEntry('peopleGoing', newGoing)
+                .then( event => {
 
+                var attendeesId = attendees.sys.id
+
+                })
+            //Gets the ID from the newly created event
+            var newAttendeesId = {sys: {
+                id: attendeesId,
+                linkType: "Entry",
+                type:"Link"
+            }}
+
+            })*/
         client.getSpace('59mi8sr8zemv')
             .then((space) => {
             space.createEntry('events', newTrack)
@@ -249,8 +274,11 @@ function addTrack (){
 
                 var eventID = event.sys.id
 
-                //This function is gets the entry of 2 june
-                space.getEntry('169oorh3aSIc0saG2GW8c4')
+                entry.fields.link["en-US"].push(newAttendeesId)
+
+
+                //This function is gets the entry of 16 june
+                space.getEntry('2Bxpz2RgA4AQImQOssey8w')
                     .then((entry) => {
 
                     //Gets the ID from the newly created event
@@ -263,20 +291,23 @@ function addTrack (){
                     //Creates a reference field in dates for show & do
                     entry.fields.link["en-US"].push(newId)
 
+
                     //update the event
                     return entry.update()
 
                 })
+
+
                 //publish event
-               space.getEntry(eventID)
-                   .then ((entry) => entry.publish())
+                space.getEntry(eventID)
+                    .then ((entry) => entry.publish())
 
             })
 
 
         })//end getspace
 
-    }
+    }//end create new event
 
 }//end add track
 exports.addTrack = addTrack

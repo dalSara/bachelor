@@ -3,8 +3,8 @@
 //var edit = require('./editTrack.js')
 //edit.editTrack();
 
-/*var add = require('./addTrack.js')
-add.addTrack();*/
+var add = require('./addTrack.js')
+add.addTrack();
 
 
 //require('./dataManagement.js')
