@@ -80,65 +80,14 @@ client.getEntries({
     updateDateLabels(); //Add date labels
     addId(); //Add id to events (in calendar and list)
 
+    /*jQuery functions*/
+    $.smoothScrollDown(); //Onclick from calendar to list
+    $.goingBtn();
+    /*end jQuery functions*/
+
     nextBtn.onclick = nextShowDo; //Display next events
     prevBtn.onclick = previousShowDo; //Display previous events
 
-    /*-------------- SMOOTH SCROLL TO MORE INFO --------------*/
-    $(function(){
-        var didScroll;
-        var lastScrollTop = 0;
-        var delta = 5;
-        var navbarHeight = $('header').outerHeight();
-
-        $(window).scroll(function(event) {
-            didScroll = true;
-        });
-
-        setInterval(function() {
-            if (didScroll) {
-                hasScrolled();
-                didScroll = false;
-            }
-        }, 250);
-
-        function hasScrolled() {
-            var st = $(this).scrollTop();
-
-            // Make sure they scroll more than delta
-            if (Math.abs(lastScrollTop - st) <= delta)
-                return;
-
-            // If they scrolled down and are past the navbar, add class .nav-up.
-            // This is necessary so you never see what is "behind" the navbar.
-            if (st > lastScrollTop && st > navbarHeight) {
-                // Scroll Down
-                $('header').removeClass('nav-down').addClass('nav-up');
-            } else {
-                // Scroll Up
-                if (st + $(window).height() < $(document).height()) {
-                    $('header').removeClass('nav-up').addClass('nav-down');
-                }
-            }
-
-            lastScrollTop = st;
-        }
-
-        $(".JSscroll").click(function(event) {
-            event.preventDefault();
-            //calculate destination place
-            var dest = 0;
-            if ($(this.hash).offset().top > $(document).height() - $(window).height()) {
-                dest = $(document).height() - $(window).height();
-            } else {
-                dest = $(this.hash).offset().top;
-            }
-            //go to destination
-            $('html,body').animate({
-                scrollTop: dest
-            }, 800, 'swing');
-        });
-    });
-    /*-------------- END SMOOTH SCROLL TO MORE INFO --------------*/
 })
 /*-------------- END GET ENTRIES --------------*/
 
@@ -147,13 +96,19 @@ function getDateIndex(index){
     var dateIndex = allDates[index + 1]; //[index+1]
     var date = dateIndex.fields.date;
 
-    return date;
-    console.log(date);
+    //Display date correctly in navigation
+    var day = date.substring(date.length - 2);
+    var month = date.substring(5, 7);
+    var year = date.substring(2, 4);
+
+    var dateFormat = day + '.' + month + '.' + year;
+
+    return dateFormat;
 }
 /*-------------- END GET INDEX OF THE  DATE --------------*/
 
+/*-------------- ADD DATE TO NAVIGATION --------------*/
 function updateDateLabels(){
-
     if(globalTargetDateIndex > 0){
         prevDate.innerHTML = getDateIndex(globalTargetDateIndex - 2);
     } else {
@@ -168,6 +123,7 @@ function updateDateLabels(){
 
     thisDate.innerHTML = getDateIndex(globalTargetDateIndex - 1);
 }
+/*-------------- END ADD DATE TO NAVIGATION --------------*/
 
 function nextShowDo(){
     if(globalTargetDateIndex < allDates.length -1){
@@ -182,6 +138,10 @@ function nextShowDo(){
 
         getEventArray(nextShowDoEvents); //DISPLAY NEXT WEEK
         addId();//Add id to events (in calendar and list)
+
+        /*jQuery functions*/
+        $.smoothScrollDown(); //Onclick from calendar to list
+        $.goingBtn();
     }else{
         alert('No more Show & Dos are added.'); //NEEDS A BETTER ERROR MESSAGE
         return globalTargetDateIndex--; //To stop adding index
@@ -201,19 +161,24 @@ function previousShowDo(){
 
         getEventArray(previousShowDoEvents); //DISPLAY NEXT WEEK
         addId();//Add id to events (in calendar and list)
+
+        /*jQuery functions*/
+        $.smoothScrollDown(); //Onclick from calendar to list
+        $.goingBtn();
     }else{
         alert('No more Show & Dos to display from the past.');
         return globalTargetDateIndex--; //To stop adding index
     }
 }
 
+/*-------------- SORTING EVENTS BY SIZE --------------*/
 function sortEvents(thisShowDoEvents) {
     var eventArray = [];
     for(var i = 0; i < thisShowDoEvents.length; i++){
         var oneEvent = thisShowDoEvents[i].fields;
         eventArray.push(oneEvent);
+        //console.log(thisShowDoEvents[i]); // WITH ID
     }
-
     eventArray.sort(function (a, b){
         var sizeA = a.size;
         var sizeB = b.size;
@@ -228,17 +193,29 @@ function sortEvents(thisShowDoEvents) {
     });
     return eventArray;
 }
+/*-------------- END SORTING EVENTS BY SIZE --------------*/
 
 function getEventArray(thisShowDoEvents){
-    /*-------------- SORTING EVENTS BY SIZE --------------*/
     if(thisShowDoEvents != null || thisShowDoEvents == true){ //if event exists in date
         var eventArray = sortEvents(thisShowDoEvents);
         console.log('Sortert LARGE -> SMALL ', eventArray);
     }
-    /*-------------- END SORTING EVENTS BY SIZE --------------*/
     calendar.innerHTML = renderEventsCal(eventArray);
     list.innerHTML = renderEventsList(eventArray);
 }
+
+/*-------------- ADD ID: CALENDAR AND LIST --------------*/
+function addId(){ //Add ID to events, calendar and list
+    var cal = document.getElementsByClassName("JScal");
+    var eventList = document.getElementsByClassName("JSeventList");
+
+    for (i = 0, length = eventList.length; i < length; i++) { //eventList or cal.lenght
+        cal[i].href= "#eventID_" + (i + 1); //Add link to calendar
+        eventList[i].id= "eventID_" + (i + 1); //Add id to list
+    }
+}
+/*-------------- END ADD ID CALENDAR AND LIST --------------*/
+
 
 /*-------------- GET ALL EVENTS TO CALENDAR --------------*/
 function renderEventsCal(events){
@@ -346,33 +323,6 @@ function renderSingleEventList(event){
 }
 /*-------------- END PUT ELEMENTS TOGETHER: LIST --------------*/
 
-/*-------------- GOINGbtn --------------*/
-function goingBtn(){
-    document.getElementById('going').className += ' JSgoing-clicked '; //Add class
-    document.getElementById('going').innerHTML = "You're going!";
-    //document.getElementById('goingInput').slideToggle(500);//.className.remove = 'hidden';
-    //document.getElementsById('goingDropdown').className.toggle('JSshow');
-    /*var className = ' ' + going.className + ' ';
-
-    if ( ~className.indexOf(' active ') ) {
-        this.className = className.replace(' active ', ' ');
-    } else {
-        this.className += ' active';
-    }  */
-}
-/*-------------- END GOINGbtn --------------*/
-
-
-function addId(){
-    var cal = document.getElementsByClassName("JScal");
-    var eventList = document.getElementsByClassName("JSeventList");
-
-    for (i = 0, length = eventList.length; i < length; i++) { //eventList or cal.lenght
-        cal[i].href= "#eventID_" + (i + 1); //Add link to calendar
-        eventList[i].id= "eventID_" + (i + 1); //Add id to list
-    }
-}
-
 /*-------------- GET DATA FROM ONE EVENT: LIST --------------*/
 function renderEventInfoList(event){
     var date = event.time;
@@ -392,25 +342,29 @@ function renderEventInfoList(event){
         '<h4>WHAT TO EXPECT</h4><p>' + event.whatToExpect + '</p>' +
         '<h4>PREREQUISITES</h4><p>' + event.prerequisites + '</p>' +
         '<h4>BEST SUITED FOR</h4><p>' + event.whoShouldJoin + '</p>' +
+        '<h4>OTHER INFORMATION</h4><p>' + event.anythingElse + '</p>' +
         '</div>' +
 
         '<div class="JSrightListInfo">' +
-        '<div class="timeWrapperList">' +
+        //'<div class="JStimeWrapperList">' +
         '<i class="JSicon-clock"></i><p class="JSstartTimeList">' + startTime + ' - 15:45</p>' +
-        '</div>' +
+        //'</div>' +
         '<div class="JSlocationWrapperList">' +
         '<i class="JSicon-room"></i><p class="JSlocationList">' + event.location + '</p>' +
         '</div>' +
+        '<div class="JSnumberOfPWrapperList"><h4>NUMBER OF PARTICIPANTS</h4><p>' + event.numberOfParticipants + '</p></div>' +
 
-        '<div  class="JSgoingBtnWrapper">' +
-            '<button onclick="goingBtn()" type="button" id="going" class="JSgoingBtn">Going?</button>' +
-            '<div id="goingDropdown" class="JSgoingDropdownContent">' +
-            '<div class="inputName">' +
-                'Name: <input type="text" value="" id="name" name="name">' +
-                '<div tabindex="0" role="button" id="JSregisterBtn" type="submit">Register</div>' +
-            '</div>' +
+        /*-------------- GOING BTN --------------*/
+        '<div class="JSgoingBtnWrapper">' +
+        '<button type="button" class="JSgoing JSgoingBtn"></button>' +
+        '<div class="JSgoingDropdownContent JShidden">' +
+        //'<div id="JSnameInputWrapper">' +
+        'Name: <input type="text" class="JSnameInput" name="name">' +
+        '<div tabindex="0" role="button" class="JSregisterBtn" type="submit">Register</div>' +
+        //'</div>' +
         '</div>' +
         '</div>' +
+        /*-------------- END GOING BTN --------------*/
 
         '<div class="JSgoingWrapperList">' +
         /*'<h4>' + count + ' ?PEOPLE GOING</h4>*/'<p>' + event.peopleGoing + '</p>' +
@@ -420,13 +374,13 @@ function renderEventInfoList(event){
 }
 /*-------------- END GET DATA FROM ONE EVENT: LIST --------------*/
 
-/*-------------- GET IMAGE --------------*/
+/*-------------- GET IMAGE: LIST --------------*/
 function renderImage(image){
     if(image && image.fields.file){
         return '<img src="' + image.fields.file.url + '"/>';
-    /*}else if(image.fields.file == null || image.fields != true || image.fields.file == 'undefined'){
+        /*}else if(image.fields.file == null || image.fields != true || image.fields.file == 'undefined'){
         return '<p>Image is missing</p>';*/
         //NEEDS ERROR MESSAGE
     }
 }
-/*-------------- END GET IMAGE --------------*/
+/*-------------- END GET IMAGE: LIST --------------*/
