@@ -882,8 +882,11 @@ index
 .JSicon-room, .JSlocationList{
     float: left;
 }
-.JSlocationWrapperList, .JSgoingWrapperList, .JStitleEditWrapper{
+.JSlocationWrapperList, .JSgoingWrapperList, .JStitleEditWrapper, .JSnumberOfPWrapperList{
     clear: left;
+}
+.JSgoingWrapperList{
+    margin-top: 40px;
 }
 
 #arrowScrollToTop{
