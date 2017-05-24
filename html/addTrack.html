@@ -41,9 +41,10 @@
             <div class="wrapper basic">
 
                 <h2>Add track</h2>
+                Pick the date for your track<br><br>
 
-                Pick the date for your track
                 <!-------------- NAVIGATION -------------->
+                <!--
                 <div id="navWeek">
                     <div><a id="prevBtn"><i class="fa fa-angle-left" aria-hidden="true"></i> Previous<br>
                         <strong id="prevDate"></strong>
@@ -57,8 +58,19 @@
                         <strong id="nextDate"></strong>
                         </a>
                     </div>
-                </div>
+                </div>-->
                 <!-------------- END NAVIGATION -------------->
+
+                <!-------------- PICK DATE -------------->
+                <div class="pickDateTrack">
+                    <i id="arrow-previous" class="filled-arrow-down" style="float: left"></i>
+                    <div class="selectDate dateSelected" id="JSdatePick1">00.00.17</div>
+                    <div class="selectDate" id="JSdatePick2">00.00.17</div>
+                    <div class="selectDate" id="JSdatePick3">00.00.17</div>
+                    <i id="arrow-next" class="filled-arrow-down" style="float: right"></i>
+                </div>
+
+                <!-------------- END PICK DATE -------------->
 
                 *  Title <br>
                 <input id="JSaddTitle" type="text" value=""><br><br>* Host(s) (who’s going to hold the track? Fill in your name and co-hosts names)<br>
@@ -83,16 +95,15 @@
                 * Who should join? (Who is this track best suited for?)<br>
                 <input id="JSaddJoin" type="text" value=""><br><br>  <!--Do you have an image to add attention to your track? (you can edit this later)<br>
 <input id="JSaddImage" type="text" value=""><br><br> -->You can choose a stock photo (click to select)<br>
-                <div id="JSaddStockOne" class="stockImgAddTrack"><img src="//images.contentful.com/59mi8sr8zemv/4KahBhVQTCykgOYsKS66Ws/a8f2880ff4971097c530667f14defffd/Oslo-0068.jpg">
+                <div id="JSaddStockOne" class="stockImg"><img src="//images.contentful.com/59mi8sr8zemv/4KahBhVQTCykgOYsKS66Ws/a8f2880ff4971097c530667f14defffd/Oslo-0068.jpg" class="stockImgAddTrack">
                 </div>
-                <div id="JSaddStockTwo" class="stockImgAddTrack"><img src="//images.contentful.com/59mi8sr8zemv/2dmGUtiw7uwugWQcsiGcUk/00ef2bcad9d4a74e17f1e52c46801ffb/Oslo-0036.jpg?">
+                <div id="JSaddStockTwo" class="stockImg"><img src="//images.contentful.com/59mi8sr8zemv/2dmGUtiw7uwugWQcsiGcUk/00ef2bcad9d4a74e17f1e52c46801ffb/Oslo-0036.jpg?" class="stockImgAddTrack">
                 </div>
-                <div id="JSaddStockThree" class="stockImgAddTrack"><img src="https://images.contentful.com/59mi8sr8zemv/5u6CWGgkmcwiIUEIsiQMGE/8eee432604d7e9695507b9f9907175d4/Chicago-0021__1_.jpg"></div><br>
+                <div id="JSaddStockThree" class="stockImg"><img src="https://images.contentful.com/59mi8sr8zemv/5u6CWGgkmcwiIUEIsiQMGE/8eee432604d7e9695507b9f9907175d4/Chicago-0021__1_.jpg" class="stockImgAddTrack"></div><br>
 
                 Anything else to add? (links, videos for preparation, other tracks, co-host, equipment etc)<br>
                 <input id="JSaddElse" type="text" value="">
                 <div class="buttonsAddTrack">
-                <div tabindex="0" role="button" id="previewTrackBtn" type="submit" value="Add track">Preview</div>
                     <!--<a href="index.html" id="addTrackBtn"></a>-->
                     <div id="test"></div>
 

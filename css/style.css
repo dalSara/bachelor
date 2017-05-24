@@ -229,31 +229,25 @@ inputs
     }
 }*/
 .buttonsAddTrack {
-  display: table;
+  display: inline-block;
   table-layout: fixed;
   width: 100%;
-  margin-top: 20px; }
+  margin-top: 10px; }
 
 .buttonsAddTrack div {
-  display: table-cell;
+  width: 50%;
   padding: .6em;
   text-align: center;
   cursor: pointer;
-  font-family: Volte, sans-serif;
+  font-family: "Volte", sans-serif;
+  font-weight: 500;
   font-size: 1rem; }
 
 /* Submit: */
 #addTrackBtn {
   background: #0066FF;
   border: 5px solid transparent;
-  color: #FFFFFF;
-  margin-left: .2rem; }
-
-/* preview: */
-#previewTrackBtn {
-  background: #C6C6C6;
-  border: 5px solid transparent;
-  color: #3D3D3D; }
+  color: #FFFFFF; }
 
 .selectTime {
   display: inline-block;
@@ -265,24 +259,35 @@ inputs
   padding: .5rem;
   width: 32%; }
 
+.pickDateTrack {
+  width: 100%;
+  text-align: center; }
+
 .selectDate {
   display: inline-block;
   border: 3px solid #CCCCCC;
-  /*font-family: Volte-Regular;*/
+  font-family: "Volte", sans-serif;
   font-size: .8rem;
-  text-align: center;
   color: #3D3D3D;
   padding: .5rem;
-  width: 7%; }
+  width: 28%;
+  margin-bottom: 20px; }
+
+.dateSelected {
+  border: 5px solid #0066FF;
+  color: #0066FF;
+  font-weight: 600; }
+
+.stockImg {
+  display: inline-block;
+  padding: 0;
+  border: 5px solid transparent; }
 
 .stockImgAddTrack {
-  display: inline-block;
   -webkit-filter: grayscale(100%);
   /* Safari 6.0 - 9.0 */
   filter: grayscale(100%);
-  width: 300px;
-  height: 200px;
-  padding: 1em; }
+  width: 300px; }
 
 .selectedTime {
   border: 5px solid #0066FF;
@@ -720,7 +725,7 @@ index
 
 .JSeventImage {
   width: 1200px;
-  max-height: 400px;
+  max-height: 350px;
   overflow: hidden;
   background-color: #fff; }
 
