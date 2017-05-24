@@ -81,8 +81,8 @@ client.getEntries({
     addId(); //Add id to events (in calendar and list)
 
     /*jQuery functions*/
-    $.smoothScrollDown(); //Onclick from calendar to list
-    $.goingBtn();
+    //$.smoothScrollDown(); //Onclick from calendar to list
+    //$.goingBtn();
     /*end jQuery functions*/
 
     nextBtn.onclick = nextShowDo; //Display next events
@@ -112,7 +112,7 @@ function updateDateLabels(){
     if(globalTargetDateIndex > 0){
         prevDate.innerHTML = getDateIndex(globalTargetDateIndex - 2);
     } else {
-        prevDate.innerHTML = "";
+        prevDate.innerHTML = "--";
     }
 
     if(globalTargetDateIndex < allDates.length - 1){
@@ -167,7 +167,7 @@ function previousShowDo(){
         $.goingBtn();
     }else{
         alert('No more Show & Dos to display from the past.');
-        return globalTargetDateIndex--; //To stop adding index
+        return globalTargetDateIndex; //To stop adding index
     }
 }
 
@@ -175,13 +175,13 @@ function previousShowDo(){
 function sortEvents(thisShowDoEvents) {
     var eventArray = [];
     for(var i = 0; i < thisShowDoEvents.length; i++){
-        var oneEvent = thisShowDoEvents[i].fields;
+        var oneEvent = thisShowDoEvents[i];
+
         eventArray.push(oneEvent);
-        //console.log(thisShowDoEvents[i]); // WITH ID
     }
     eventArray.sort(function (a, b){
-        var sizeA = a.size;
-        var sizeB = b.size;
+        var sizeA = a.fields.size;
+        var sizeB = b.fields.size;
 
         if(sizeA < sizeB){
             return -1;
@@ -226,51 +226,51 @@ function renderEventsCal(events){
 /*-------------- PUT ELEMENTS TOGETHER: CALENDAR --------------*/
 function renderSingleEventCal(event){
     //if event exists in date
-    if(event != null || event == true){
+    if(event.fields != null || event.fields == true){
 
         //if time exists in time
-        if(event.time != null || event.time == true){
-            var time = event.time;
+        if(event.fields.time != null || event.fields.time == true){
+            var time = event.fields.time;
             var startTime = time.substring(time.length - 5);
         }
     }
 
-    if(startTime == "13:00" && event.size == "Large"){
+    if(startTime == "13:00" && event.fields.size == "Large"){
         return '<a class="JSscroll JScal JSlargeTrackCal">' +
 
             '<div class="eventInfoCal">' +
             renderEventInfoCal(event) +
             '</div>' +
             '</a>';
-    }else if(startTime == "13:00" && event.size == "Medium"){
+    }else if(startTime == "13:00" && event.fields.size == "Medium"){
         return '<a class="JSscroll JScal JSmediumTrackCal-13">' +
 
             '<div class="eventInfoCal">' +
             renderEventInfoCal(event) +
             '</div>' +
             '</a>';
-    }else if(startTime == "13:00" && event.size == "Small"){
+    }else if(startTime == "13:00" && event.fields.size == "Small"){
         return '<a class="JSscroll JScal JSsmallTrackCal-13">' +
 
             '<div class="eventInfoCal">' +
             renderEventInfoCal(event) +
             '</div>' +
             '</a>';
-    }else if(startTime == "14:00" && event.size == "Medium"){
+    }else if(startTime == "14:00" && event.fields.size == "Medium"){
         return '<a class="JSscroll JScal JSmediumTrackCal-14">' +
 
             '<div class="eventInfoCal">' +
             renderEventInfoCal(event) +
             '</div>' +
             '</a>';
-    }else if(startTime == "14:00" && event.size == "Small"){
+    }else if(startTime == "14:00" && event.fields.size == "Small"){
         return '<a class="JSscroll JScal JSsmallTrackCal-14">' +
 
             '<div class="eventInfoCal">' +
             renderEventInfoCal(event) +
             '</div>' +
             '</a>';
-    }else if(startTime == "15:00" && event.size == "Small"){
+    }else if(startTime == "15:00" && event.fields.size == "Small"){
         return '<a class="JSscroll JScal JSsmallTrackCal-15">' +
 
             '<div class="eventInfoCal">' +
@@ -283,12 +283,12 @@ function renderSingleEventCal(event){
 
 /*-------------- GET DATA FROM ONE EVENT: CALENDAR --------------*/
 function renderEventInfoCal(event){
-    var date = event.time;
+    var date = event.fields.time;
     var startTime = date.substring(date.length - 5);
 
-    return  '<h4 class="JSeventTitleCal">' + event.title + '</h4>' +
+    return  '<h4 class="JSeventTitleCal">' + event.fields.title + '</h4>' +
         '<div class="JSlocationWrapperCal"><i class="JSicon-room-filled-cal"></i>' +
-        '<p class="JSlocationCal">' + event.location + '</p></div>';
+        '<p class="JSlocationCal">' + event.fields.location + '</p></div>';
 }
 /*-------------- END GET DATA FROM ONE EVENT: CALENDAR --------------*/
 
@@ -306,14 +306,14 @@ function renderSingleEventList(event){
 
         //if time exists in time
         if(event.time != null || event.time == true){
-            var time = event.time;
+            var time = event.fields.time;
             var startTime = time.substring(time.length - 5);
         }
     }
 
     return '<div class="JSeventList">' +
         '<div class="JSeventImage">' +
-        renderImage(event.image) +
+        renderImage(event.fields.image) +
         '</div>' +
 
         '<div class="JSeventInfoList">' +
@@ -325,7 +325,7 @@ function renderSingleEventList(event){
 
 /*-------------- GET DATA FROM ONE EVENT: LIST --------------*/
 function renderEventInfoList(event){
-    var date = event.time;
+    var date = event.fields.time;
     var startTime = date.substring(date.length - 5);
 
     /*if(event.this == 'undefined'){
@@ -336,13 +336,13 @@ function renderEventInfoList(event){
 
     return  '<div class="JSleftListInfo">' +
         '<div class="JStitleEditWrapper">' +
-        '<h3 class="JSeventTitleList">' + event.title + '</h3><i class="JSicon-edit"></i>' +
+        '<h3 class="JSeventTitleList">' + event.fields.title + '</h3><i class="JSicon-edit"></i>' +
         '</div>' +
-        '<h4 class="JSeventHost">HOST</h4><p>' + event.host + '</p>' +
-        '<h4>WHAT TO EXPECT</h4><p>' + event.whatToExpect + '</p>' +
-        '<h4>PREREQUISITES</h4><p>' + event.prerequisites + '</p>' +
-        '<h4>BEST SUITED FOR</h4><p>' + event.whoShouldJoin + '</p>' +
-        '<h4>OTHER INFORMATION</h4><p>' + event.anythingElse + '</p>' +
+        '<h4 class="JSeventHost">HOST</h4><p>' + event.fields.host + '</p>' +
+        '<h4>WHAT TO EXPECT</h4><p>' + event.fields.whatToExpect + '</p>' +
+        '<h4>PREREQUISITES</h4><p>' + event.fields.prerequisites + '</p>' +
+        '<h4>BEST SUITED FOR</h4><p>' + event.fields.whoShouldJoin + '</p>' +
+        '<h4>OTHER INFORMATION</h4><p>' + event.fields.anythingElse + '</p>' +
         '</div>' +
 
         '<div class="JSrightListInfo">' +
@@ -350,9 +350,9 @@ function renderEventInfoList(event){
         '<i class="JSicon-clock"></i><p class="JSstartTimeList">' + startTime + ' - 15:45</p>' +
         //'</div>' +
         '<div class="JSlocationWrapperList">' +
-        '<i class="JSicon-room"></i><p class="JSlocationList">' + event.location + '</p>' +
+        '<i class="JSicon-room"></i><p class="JSlocationList">' + event.fields.location + '</p>' +
         '</div>' +
-        '<div class="JSnumberOfPWrapperList"><h4>NUMBER OF PARTICIPANTS</h4><p>' + event.numberOfParticipants + '</p></div>' +
+        '<div class="JSnumberOfPWrapperList"><h4>NUMBER OF PARTICIPANTS</h4><p>' + event.fields.numberOfParticipants + '</p></div>' +
 
         /*-------------- GOING BTN --------------*/
         '<div class="JSgoingBtnWrapper">' +
@@ -367,7 +367,7 @@ function renderEventInfoList(event){
         /*-------------- END GOING BTN --------------*/
 
         '<div class="JSgoingWrapperList">' +
-        /*'<h4>' + count + ' ?PEOPLE GOING</h4>*/'<p>' + event.peopleGoing + '</p>' +
+        /*'<h4>' + count + ' ?PEOPLE GOING</h4>*/'<p>' + event.fields.peopleGoing + '</p>' +
         '</div>' +
         '</div>';
 
