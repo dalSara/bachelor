@@ -80,12 +80,14 @@ client.getEntries({
     updateDateLabels(); //Add date labels
     addId(); //Add id to events (in calendar and list)
 
-    nextBtn.onclick = nextShowDo; //Display next events
-    prevBtn.onclick = previousShowDo; //Display previous events
-
     /*jQuery functions*/
     $.smoothScrollDown(); //Onclick from calendar to list
     $.goingBtn();
+    /*end jQuery functions*/
+
+    nextBtn.onclick = nextShowDo; //Display next events
+    prevBtn.onclick = previousShowDo; //Display previous events
+
 })
 /*-------------- END GET ENTRIES --------------*/
 
@@ -94,8 +96,14 @@ function getDateIndex(index){
     var dateIndex = allDates[index + 1]; //[index+1]
     var date = dateIndex.fields.date;
 
-    return date;
-    console.log(date);
+    //Display date correctly in navigation
+    var day = date.substring(date.length - 2);
+    var month = date.substring(5, 7);
+    var year = date.substring(2, 4);
+
+    var dateFormat = day + '.' + month + '.' + year;
+
+    return dateFormat;
 }
 /*-------------- END GET INDEX OF THE  DATE --------------*/
 
