@@ -703,7 +703,7 @@ index
     display: none;
 }
 
-/*---------TESTING RESPONSIVE CALENDAR-------*/
+/*---------RESPONSIVE CALENDAR-------*/
 
 
 @media (max-width: 1200px) {
@@ -730,9 +730,10 @@ index
     .JSsmallTrackCal-13,
     .JSsmallTrackCal-14,
     .JSsmallTrackCal-15 {
-        grid-column: 2;
+        grid-column-start: 2;
+        grid-column-end: 5;
         width: 100%;
-        align-self: center;
+        align-self: left;
         justify-self: stretch;
         grid-row: auto;
     }
@@ -746,7 +747,7 @@ index
         font-size: 1em;
         font-weight: 700;
         white-space: pre;
-        margin-left: -6em;
+        margin-left: -5.5em;
         padding-left: 20px;
         float: left;
     }
@@ -851,9 +852,9 @@ index
 }
 .JSeventImage{
     width: 1200px;
-    height: 300px;
+    max-height: 400px;
     overflow: hidden;
-    background-color: lightgray;
+    background-color: #fff;
 }
 .JSicon-clock{
     display: inline-block;
