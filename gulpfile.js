@@ -2,15 +2,15 @@
 var gulp        = require('gulp');
 var browserSync = require('browser-sync').create();
 var sass        = require('gulp-sass');
-var browserify  = require('browserify');
+var browserify  = require('browserify')
 //var watchify    = require('watchify');
 var rename      = require('gulp-rename');
 var source      = require('vinyl-source-stream');
-//var sourceFile  = './scripts/main.js';
-var sourceFileE  = './scripts/mainE.js';
+var sourceFile  = './scripts/main.js';
+//var sourceFileE  = './scripts/mainE.js';
 var destFolder  = './scripts/';
-//var destFile    = 'bundle.js';
-var destFileE    = 'bundleE.js';
+var destFile    = 'bundle.js';
+//var destFileE    = 'bundleE.js';
 
 
 // Static Server + watching scss/html files
@@ -32,6 +32,8 @@ gulp.task('sass', function() {
         .pipe(browserSync.stream());
 });
 
+
+
 /*
 // Basic usage
 gulp.task('scripts', function() {
@@ -41,24 +43,25 @@ gulp.task('scripts', function() {
         .pipe(rename('bundle.js'))
         .pipe(gulp.dest('./'))
 });
-
+*/
 gulp.task('browserify', function() {
     return browserify(sourceFile)
         .bundle()
         .pipe(source(destFile))
         .pipe(gulp.dest(destFolder));
 });
- */
 
+/*
 gulp.task('browserify', function() {
     return browserify(sourceFileE)
+        standalone: 'cM'
         .bundle()
         .pipe(source(destFileE))
-        .pipe(gulp.dest(destFolder));
-});
+        .pipe(gulp.dest(destFolder))
+});*/
 
 
-gulp.task('default', ['serve','browserify'], function(){ //['serve', 'data' 'watch' , ],
+gulp.task('default', ['serve' ,'browserify'], function(){ //['serve', 'data' 'watch' , ],
 
 });
 //https://semaphoreci.com/community/tutorials/setting-up-an-end-to-end-testing-workflow-with-gulp-mocha-and-webdriverio
