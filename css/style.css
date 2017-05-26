@@ -175,7 +175,7 @@ nav .Active a {
 #previous, #prevDate {
   display: block; }
 
-#arrow-previous {
+.arrow-previous {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -o-transform: rotate(90deg);
@@ -195,7 +195,7 @@ nav .Active a {
 #next, #nextDate {
   display: block; }
 
-#arrow-next {
+.arrow-next {
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
   -o-transform: rotate(-90deg);

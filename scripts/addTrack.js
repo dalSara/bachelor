@@ -79,12 +79,12 @@ function addTrack (){
     addTrackBtn.onclick = createNewEvent;
 
     //Unlimited if no value on nrOfPart
-
+initDates();
 
     function initDates(callbackAction){
         client.getSpace('59mi8sr8zemv')
             .then((space) =>
-                  space.getEntries(datesForShowDo)
+                  space.getEntries('datesForShowDo')
                   ).then(function(entries){
 
             globalAllDatesArray = entries.items;
