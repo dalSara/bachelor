@@ -174,11 +174,11 @@ nav {
 .nav-up {
     top: -100px;
 }
-<<<<<<< HEAD
+
 #previous, #prevDate{
      display: block;
  }
- .arrow-previous{
+ #arrowPrevious{
      -webkit-transform: rotate(90deg);
      -moz-transform: rotate(90deg);
      -o-transform: rotate(90deg);
@@ -198,7 +198,7 @@ nav {
  #next, #nextDate{
      display: block;
  }
- .arrow-next{
+ #arrowNext{
      -webkit-transform: rotate(-90deg);
      -moz-transform: rotate(-90deg);
      -o-transform: rotate(-90deg);
@@ -207,48 +207,6 @@ nav {
      height: 15px;
      width: 15px;
  }
-=======
-
-#previous,
-#prevDate {
-    display: block;
-}
-
-#arrow-previous {
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-    height: 15px;
-    width: 15px;
-}
-
-#thisWeekBtn {
-    text-decoration: none;
-    margin-bottom: 40px;
-}
-
-#next {
-    float: right;
-}
-
-#next,
-#nextDate {
-    display: block;
-}
-
-#arrow-next {
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    transform: rotate(-90deg);
-    height: 15px;
-    width: 15px;
-}
-
->>>>>>> origin/master
 
 /********************************************
 inputs
@@ -494,23 +452,6 @@ main {
         padding-top: 100px;
     }
 }
-
-
-/*DO WE WANT TO HAVE A SCROLL-UP BUTTON STILL?
-.scrollToTopBtn {
-    /*text-align: center;*/
-
-
-/*position: relative;
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    display: none;
-    color: rgb(0, 0, 0);
-    background-color: #fff;
-    padding: 5px;
-}*/
-
 
 /********************************************
 index
