@@ -57,9 +57,15 @@ gulp.task('browserify', function() {
         standalone: 'cM'
         .bundle()
         .pipe(source(destFileE))
+<<<<<<< HEAD
         .pipe(gulp.dest(destFolder))
 });*/
 
+=======
+        .pipe(gulp.dest(destFolder));
+});
+*/
+>>>>>>> origin/master
 
 gulp.task('default', ['serve' ,'browserify'], function(){ //['serve', 'data' 'watch' , ],
 

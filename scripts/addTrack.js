@@ -239,7 +239,6 @@ function addTrack (){
 
     //the function that creates a new event, and post it to contentful
     function createNewEvent (){
-        alert("Your track has been added");
         var JSaddNewTitle = JSaddTitle.value;
         var JSaddNewHosts = JSaddHosts.value;
         var JSaddNewPrereq = JSaddPrereq.value;
@@ -316,6 +315,12 @@ function addTrack (){
 
                 var eventID = event.sys.id
 
+<<<<<<< HEAD
+=======
+                //entry.fields.link["en-US"].push(newAttendeesId)
+
+
+>>>>>>> origin/master
                 //This function is gets the entry of 16 june
                 space.getEntry(dateId)
                     .then((entry) => {

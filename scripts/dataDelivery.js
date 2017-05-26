@@ -1,5 +1,8 @@
-//Eksempel fra: https://jsfiddle.net/contentful/kefaj4s8/
+var imported = document.createElement('script');
+imported.src = '/scripts/bundleE.js'; //Import going.js (contentful-management) for goingBtn.
+document.head.appendChild(imported);
 
+//Eksempel fra: https://jsfiddle.net/contentful/kefaj4s8/
 /*-------------- CLIENT --------------*/
 var client = contentful.createClient({
     // This is the space ID. A space is like a project folder in Contentful terms
@@ -282,9 +285,18 @@ function renderEventInfoCal(event){
     var date = event.fields.time;
     var startTime = date.substring(date.length - 5);
 
+    /*----if fields is null or undefined----*/
+    var location = event.fields.location;
+    if(location == null || location == 'undefined'){
+        location = 'TBA'; //If location is missing.
+    }else{
+        location = location;
+    }
+    /*----end if fields is null or undefined----*/
+
     return  '<h4 class="JSeventTitleCal">' + event.fields.title + '</h4>' +
         '<div class="JSlocationWrapperCal"><i class="JSicon-room-filled-cal"></i>' +
-        '<p class="JSlocationCal">' + event.fields.location + '</p></div>';
+        '<p class="JSlocationCal">' + location + '</p></div>';
 }
 /*-------------- END GET DATA FROM ONE EVENT: CALENDAR --------------*/
 
@@ -325,11 +337,38 @@ function renderEventInfoList(event){
     var date = event.fields.time;
     var startTime = date.substring(date.length - 5);
 
-    /*if(event.this == 'undefined'){
-        return '';
-    }*/
+    /*----if fields is null or undefined----*/
+    var location = event.fields.location;
+    if(location == null || location == 'undefined'){
+        location = 'TBA'; //If location is missing.
+    }else{
+        location = location;
+    }
 
-    //var count = event.peopleGoing.split(' ').length;
+    var numberOfParticipants = event.fields.numberOfParticipants;
+    if(numberOfParticipants == null || numberOfParticipants == 'undefined'){
+        numberOfParticipants = 'Unlimited'; //If numberOfParticipants is missing.
+    }else{
+        numberOfParticipants = numberOfParticipants;
+    }
+
+    var peopleGoing = event.fields.peopleAttending;
+    if(peopleGoing == null || peopleGoing == 'undefined'){
+        peopleGoing = ''; //If peopleGoing is missing.
+        var countPeopleGoing = peopleGoing.length; //List = 0
+    }else {
+        countPeopleGoing = peopleGoing.length; //Count peopleGoing
+        peopleGoing = peopleGoing.join(' <br>');//Display peopleGoing in list.
+    }
+
+    var anythingElse = event.fields.anythingElse;
+    if(anythingElse == null || anythingElse == 'undefined'){
+        anythingElse = ''; //If anythingElse is missing.
+    }else{
+        anythingElse = anythingElse;
+    }
+    /*----end if fields is null or undefined----*/
+
 
     return  '<div class="JSleftListInfo">' +
         '<div class="JStitleEditWrapper">' +
@@ -339,32 +378,28 @@ function renderEventInfoList(event){
         '<h4>WHAT TO EXPECT</h4><p>' + event.fields.whatToExpect + '</p>' +
         '<h4>PREREQUISITES</h4><p>' + event.fields.prerequisites + '</p>' +
         '<h4>BEST SUITED FOR</h4><p>' + event.fields.whoShouldJoin + '</p>' +
-        '<h4>OTHER INFORMATION</h4><p>' + event.fields.anythingElse + '</p>' +
+        '<h4>OTHER INFORMATION</h4><p>' + anythingElse + '</p>' +
         '</div>' +
 
         '<div class="JSrightListInfo">' +
-        //'<div class="JStimeWrapperList">' +
         '<i class="JSicon-clock"></i><p class="JSstartTimeList">' + startTime + ' - 15:45</p>' +
-        //'</div>' +
         '<div class="JSlocationWrapperList">' +
-        '<i class="JSicon-room"></i><p class="JSlocationList">' + event.fields.location + '</p>' +
+        '<i class="JSicon-room"></i><p class="JSlocationList">' + location + '</p>' +
         '</div>' +
-        '<div class="JSnumberOfPWrapperList"><h4>NUMBER OF PARTICIPANTS</h4><p>' + event.fields.numberOfParticipants + '</p></div>' +
+        '<div class="JSnumberOfPWrapperList"><h4>NUMBER OF PARTICIPANTS</h4><p>' + numberOfParticipants + '</p></div>' +
 
         /*-------------- GOING BTN --------------*/
         '<div class="JSgoingBtnWrapper">' +
             '<button type="button" class="JSgoing JSgoingBtn"></button>' +
             '<div class="JSgoingDropdownContent JShidden">' +
-                //'<div id="JSnameInputWrapper">' +
-                'Name: <input type="text" class="JSnameInput" name="name">' +
-                '<div tabindex="0" role="button" class="JSregisterBtn" type="submit">Register</div>' +
-                //'</div>' +
+                'Name: <input type="text" id="JSattendeesName" class="JSnameInput" name="name">' +
+                '<div tabindex="0" role="button" id="JSattendeesBtn" class="JSregisterBtn" type="submit">Register</div>' +
             '</div>' +
         '</div>' +
         /*-------------- END GOING BTN --------------*/
 
         '<div class="JSgoingWrapperList">' +
-        /*'<h4>' + count + ' ?PEOPLE GOING</h4>*/'<p>' + event.fields.peopleGoing + '</p>' +
+        '<h4>' + countPeopleGoing + ' PEOPLE GOING</h4><p>' + peopleGoing + '</p>' +
         '</div>' +
         '</div>';
 
@@ -377,7 +412,7 @@ function renderImage(image){
         return '<img src="' + image.fields.file.url + '"/>';
         /*}else if(image.fields.file == null || image.fields != true || image.fields.file == 'undefined'){
         return '<p>Image is missing</p>';*/
-        //NEEDS ERROR MESSAGE
+        //NEEDS ERROR MESSAGE?
     }
 }
 /*-------------- END GET IMAGE: LIST --------------*/
