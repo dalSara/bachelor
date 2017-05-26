@@ -9,31 +9,19 @@ function addTrack (){
 
     });
 
+    var globalTargetDateIndex = null;
+    var globalAllDatesArray = null;
 
-    //Html-objekter
+    var prevBtn = document.getElementById("prevBtn");
+    var thisWeekBtn = document.getElementById("thisWeekBtn");
+    var nextBtn = document.getElementById("nextBtn");
 
-    var JSaddTitle;
-    var JSaddHosts;
-    var JSaddPrereq;
-    var JSaddStartOne;
-    var JSaddStartTwo;
-    var JSaddStartThree;
-    var JSaddHourOne;
-    var JSaddHourTwo;
-    var JSaddHourThree;
-    var JSaddNrOfPart;
-    var JSaddExpect;
-    var JSaddJoin;
-    var JSaddImage;
-    var JSaddStockOne;
-    var JSaddStockTwo;
-    var JSaddStockThree;
-    var JSaddElse;
-    // var JSaddStatus;
+    var prevDate = document.getElementById("prevDate");
+    var thisDate = document.getElementById("thisDate");
+    var nextDate = document.getElementById("nextDate");
 
-    var addTrackBtn;
 
-   // var choosenTime = '2017-06-02T13:00:31Z';
+    // var choosenTime = '2017-06-02T13:00:31Z';
     var choosenTrack;
     var choosenImage;
 
@@ -55,6 +43,124 @@ function addTrack (){
         linkType: "Asset",
         type:"Link"
     }}
+
+    var JSdatePick1 = document.getElementById("JSdatePick1");
+    var JSdatePick2 = document.getElementById("JSdatePick2");
+    var JSdatePick3 = document.getElementById("JSdatePick3");
+    var JSaddTitle = document.getElementById("JSaddTitle");
+    var JSaddHosts = document.getElementById("JSaddHosts");
+    var JSaddPrereq = document.getElementById ("JSaddPrereq");
+    var JSaddStartOne = document.getElementById("JSaddStartOne");
+    var JSaddStartTwo = document.getElementById("JSaddStartTwo");
+    var JSaddStartThree = document.getElementById("JSaddStartThree");
+    var JSaddHourOne = document.getElementById("JSaddHourOne");
+    var JSaddHourTwo= document.getElementById("JSaddHourTwo");
+    var JSaddHourThree = document.getElementById("JSaddHourThree");
+    var JSaddNrOfPart = document.getElementById("JSaddNrOfPart");
+    var JSaddExpect = document.getElementById("JSaddExpect");
+    var JSaddJoin = document.getElementById("JSaddJoin");
+    var JSaddImage = document.getElementById("JSaddImage");
+    var JSaddStockOne = document.getElementById("JSaddStockOne");
+    var JSaddStockTwo = document.getElementById("JSaddStockTwo");
+    var JSaddStockThree = document.getElementById("JSaddStockThree");
+    var JSaddElse = document.getElementById("JSaddElse");
+    //var JSaddStatus = document.getElementById("JSaddStatus");
+    var addTrackBtn = document.getElementById("addTrackBtn");
+
+    JSaddStartOne.onclick = timeOne;
+    JSaddStartTwo.onclick = timeTwo;
+    JSaddStartThree.onclick = timeThree;
+    JSaddHourOne.onclick = smallTrack;
+    JSaddHourTwo.onclick = mediumTrack;
+    JSaddHourThree.onclick = largeTrack;
+    JSaddStockOne.onclick = chooseImageOne;
+    JSaddStockTwo.onclick = chooseImageTwo;
+    JSaddStockThree.onclick = chooseImageThree;
+    addTrackBtn.onclick = createNewEvent;
+
+    //Unlimited if no value on nrOfPart
+
+
+    function initDates(callbackAction){
+        client.getSpace('59mi8sr8zemv')
+            .then((space) =>
+                  space.getEntries(datesForShowDo)
+                  ).then(function(entries){
+
+            globalAllDatesArray = entries.items;
+            console.log('Entry Client: All dates (sorted):', globalAllDatesArray); //all dates
+
+            var today = new Date();
+            var year = today.getFullYear();
+            var month = ('0' + (today.getMonth() +1)).slice(-2);
+            var day = ('0' + today.getDate()).slice(-2);
+            today = year + '-' + month + '-' + day;
+
+            globalTargetDateIndex = 0;
+
+            for(var i = 0; i < globalAllDatesArray.length - 1; i++){
+
+                if(globalAllDatesArray[i].fields.date <= today && globalAllDatesArray[i+1].fields.date >= today){
+                    globalTargetDateIndex = i+1;
+                    break;
+                }
+                //var thisWeeksEvents = dates.fields.link; //!!!! ENDRE var navn?
+            }
+
+            updateDateLabels();
+            //callbackAction();
+            //TODO enable pre/next buttons
+
+            prevBtn.onclick = goPrevious;
+            nextBtn.onclick = goNext;
+
+        })
+
+        function goNext(){
+            if(globalTargetDateIndex < globalAllDatesArray.length - 1){
+                globalTargetDateIndex ++;
+                updateDateLabels();
+                //callbackAction();
+            }
+        }
+
+
+        function goPrevious(){
+            if(globalTargetDateIndex > 0){
+                globalTargetDateIndex --;
+                updateDateLabels();
+                //callbackAction();
+            }
+        }
+
+        function getDateLabel(index){
+            var date = globalAllDatesArray[index];
+
+            formatted = date.fields.date;
+            return formatted;
+        }
+
+        function updateDateLabels(){
+
+            if(globalTargetDateIndex > 0 ){
+                JSdatePick1.innerHTML = getDateLabel(globalTargetDateIndex - 1);
+            } else {
+                JSdatePick1.innerHTML = "";
+            }
+
+            if(globalTargetDateIndex < globalAllDatesArray.length - 1){
+                JSdatePick3.innerHTML = getDateLabel(globalTargetDateIndex + 1);
+            } else {
+                JSdatePick3.innerHTML = "";
+            }
+
+            JSdatePick2.innerHTML = getDateLabel(globalTargetDateIndex);
+        }
+    };
+
+
+
+
 
     //temporary code for the usertest
 
@@ -131,45 +237,6 @@ function addTrack (){
         return choosenImage
     }
 
-    var init = function (){
-
-
-        JSaddTitle = document.getElementById("JSaddTitle");
-        JSaddHosts = document.getElementById("JSaddHosts");
-        JSaddPrereq = document.getElementById ("JSaddPrereq");
-        JSaddStartOne = document.getElementById("JSaddStartOne");
-        JSaddStartTwo = document.getElementById("JSaddStartTwo");
-        JSaddStartThree = document.getElementById("JSaddStartThree");
-        JSaddHourOne = document.getElementById("JSaddHourOne");
-        JSaddHourTwo= document.getElementById("JSaddHourTwo");
-        JSaddHourThree = document.getElementById("JSaddHourThree");
-        JSaddNrOfPart = document.getElementById("JSaddNrOfPart");
-        JSaddExpect = document.getElementById("JSaddExpect");
-        JSaddJoin = document.getElementById("JSaddJoin");
-        JSaddImage = document.getElementById("JSaddImage");
-        JSaddStockOne = document.getElementById("JSaddStockOne");
-        JSaddStockTwo = document.getElementById("JSaddStockTwo");
-        JSaddStockThree = document.getElementById("JSaddStockThree");
-        JSaddElse = document.getElementById("JSaddElse");
-        //JSaddStatus = document.getElementById("JSaddStatus");
-        addTrackBtn = document.getElementById("addTrackBtn");
-
-        JSaddStartOne.onclick = timeOne;
-        JSaddStartTwo.onclick = timeTwo;
-        JSaddStartThree.onclick = timeThree;
-        JSaddHourOne.onclick = smallTrack;
-        JSaddHourTwo.onclick = mediumTrack;
-        JSaddHourThree.onclick = largeTrack;
-        JSaddStockOne.onclick = chooseImageOne;
-        JSaddStockTwo.onclick = chooseImageTwo;
-        JSaddStockThree.onclick = chooseImageThree;
-        addTrackBtn.onclick = createNewEvent;
-
-
-
-    }(); /*--end init--*/
-
-
     //the function that creates a new event, and post it to contentful
     function createNewEvent (){
         var JSaddNewTitle = JSaddTitle.value;
@@ -194,6 +261,7 @@ function addTrack (){
 
         var choosenTime = "2017-06-02T13:00";
         var choosenTrack = "Small";
+        var dateId = '2Bxpz2RgA4AQImQOssey8w';
 
 
         var newTrack = {
@@ -239,33 +307,7 @@ function addTrack (){
             }//end field
         }
 
-        var newGoing = {
-            fields: {
-                title: {
-                    'en-US': JSaddNewTitle
-                },
-                name: {
-                    'en-US': ""
-                }
-            }
-        }//end newGoing
 
-  /*      client.getSpace('59mi8sr8zemv')
-            .then((space) => {
-            space.createEntry('peopleGoing', newGoing)
-                .then( event => {
-
-                var attendeesId = attendees.sys.id
-
-                })
-            //Gets the ID from the newly created event
-            var newAttendeesId = {sys: {
-                id: attendeesId,
-                linkType: "Entry",
-                type:"Link"
-            }}
-
-            })*/
         client.getSpace('59mi8sr8zemv')
             .then((space) => {
             space.createEntry('events', newTrack)
@@ -273,11 +315,8 @@ function addTrack (){
 
                 var eventID = event.sys.id
 
-                //entry.fields.link["en-US"].push(newAttendeesId)
-
-
                 //This function is gets the entry of 16 june
-                space.getEntry('2Bxpz2RgA4AQImQOssey8w')
+                space.getEntry(dateId)
                     .then((entry) => {
 
                     //Gets the ID from the newly created event
@@ -300,7 +339,8 @@ function addTrack (){
                 //publish event
                 space.getEntry(eventID)
                     .then ((entry) => entry.publish())
-
+                space.getEntry(dateId)
+                    .then ((entry) => entry.publish())
             })
 
 

@@ -1,4 +1,11 @@
-function addAttendees (){
+
+var imported = document.createElement('script');
+imported.src = '/scripts/bundleE.js';
+document.head.appendChild(imported);
+
+//function addAttendees (){
+
+    /*
     //contentful management id the module that have contact with contentful.
     //this is the conection to the module
     var contentful = require('contentful-management')
@@ -6,7 +13,7 @@ function addAttendees (){
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
         accessToken: ''
 
-    });
+    });*/
 
     var JSattendeesName = document.getElementById("JSattendeesName");
     var JSattendeesBtn = document.getElementById("JSattendeesBtn");
@@ -35,5 +42,5 @@ function addAttendees (){
                   .then ((entry) => entry.publish())
 
                  )};
-}
-exports.addAttendees = addAttendees
+
+//exports.addAttendees = addAttendees
