@@ -50,13 +50,6 @@ h6 {
   font-weight: bold;
   font-size: 1em; }
 
-/* CHECK IF IN USE, IF NOT DELETE
-.lead {
-    font-family: 'Volte Medium';
-    font-size: 1.5em;
-    margin-bottom: 80px;
-}
-*/
 @media (max-width: 900px) {
   html {
     font-size: 1em; }
@@ -67,11 +60,7 @@ h6 {
   h2 {
     font-size: 1.4em; }
   h3 {
-    font-size: 1.2em; }
-  /*.lead {
-        font-size: 1.2em;
-        margin-bottom: 40px;
-    }*/ }
+    font-size: 1.2em; } }
 
 a {
   color: inherit;
@@ -83,53 +72,19 @@ a {
 p {
   margin: 0 0 40px 0; }
 
-/*
-
-ul {
-    list-style: none;
-    padding: 0;
-    ul {
-        margin: 0;
-    }
-}
-
-p {
-    max-width: 700px;
-}
-
-figure {
-    margin: 0;
-}
-
-figcaption {
-    margin-top: 10px;
-}*/
 img {
   max-width: 100%; }
 
 a img {
   border: none; }
 
-/*
-iframe {
-    max-width: 100%;
-    border: none;
-}
-*/
 /********************************************
 wrappers
 ********************************************/
 .wrapper {
   box-sizing: content-box;
   padding: 0 5%;
-  margin: 0 auto;
-  /*&.full {
-        padding-right: 0;
-        padding-left: 0;
-    }*/
-  /*&.narrow {
-        max-width: 750px;
-    }*/ }
+  margin: 0 auto; }
   .wrapper.basic {
     max-width: 1200px; }
 
@@ -172,7 +127,8 @@ nav .Active a {
 .nav-up {
   top: -100px; }
 
-#previous, #prevDate {
+#previous,
+#prevDate {
   display: block; }
 
 #arrow-previous {
@@ -186,13 +142,13 @@ nav .Active a {
 
 #thisWeekBtn {
   text-decoration: none;
-  margin-bottom: 40px;
-  /*text-align: center;*/ }
+  margin-bottom: 40px; }
 
 #next {
   float: right; }
 
-#next, #nextDate {
+#next,
+#nextDate {
   display: block; }
 
 #arrow-next {
@@ -207,34 +163,13 @@ nav .Active a {
 /********************************************
 inputs
 ********************************************/
-/*button {
-    font-family: "Volte Semibold";
-    font-size: inherit;
-    line-height: inherit;
-    background-color: white;
-    color: #06f;
-    border: 3px solid #06f;
-    border-radius: 0;
-    padding: 10px 20px;
-    margin: 0;
-    -webkit-appearance: none;
-    cursor: pointer;
-    &.subtle {
-        padding: 5px 10px;
-        border: none;
-        border: 1px solid #ccc;
-        font-family: inherit;
-        color: inherit;
-        font-size: .778rem;
-    }
-}*/
 .buttonsAddTrack {
   display: inline-block;
   table-layout: fixed;
   width: 100%;
   margin-top: 10px; }
 
-.buttonsAddTrack span {
+.buttonsAddTrack a div {
   width: 50%;
   padding: .6em;
   text-align: center;
@@ -243,7 +178,6 @@ inputs
   font-weight: 500;
   font-size: 1rem; }
 
-/* Submit: */
 #addTrackBtn {
   background: #0066FF;
   border: 5px solid transparent;
@@ -341,7 +275,6 @@ textarea {
   padding: 12px 20px;
   resize: none; }
 
-/*-------------- END INPUT --------------*/
 /********************************************
 pageHeader
 ********************************************/
@@ -436,83 +369,6 @@ main {
     padding: 5px;
 }*/
 /********************************************
-show/hide desktop cal & mobile cal
-********************************************/
-/*
-@media screen and (min-width: 768px) {
-    #cal-mobile {
-        display: none;
-    }
-    .duration {
-        display: none;
-    }
-    .rooms {
-        padding-top: 1em;
-        float: right;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    #cal-desktop {
-        display: none;
-    }
-    .duration {
-        margin-top: 5px;
-        font-size: 1em;
-        text-align: right;
-        opacity: 0.8;
-    }
-    .flex-list {
-        -webkit-flex-direction: column;
-        flex-direction: column;
-    }
-    .going-size {
-        width: auto;
-    }
-    .event-wrap {
-        overflow: visible;
-    }
-    .info {
-        float: none;
-        margin-right: 0;
-        width: 100% !important;
-    }
-    .info-right {
-        border-bottom: 1px solid #ccc;
-        margin: 0px;
-    }
-    .listStyle {
-        margin: 200px 0 80px;
-        * {
-            transition: all .5s;
-        }
-        h2,
-        li>* {
-            box-sizing: content-box;
-            max-width: 1200px;
-            margin-right: auto;
-            margin-left: auto;
-            padding-right: 0;
-            padding-left: 0;
-        }
-        h2 {
-            margin-bottom: 20px;
-        }
-        li {
-            background: #fff;
-            margin-bottom: 2em;
-            >a {
-                display: block;
-                text-decoration: none;
-                position: relative;
-                padding-top: 30px;
-                padding-bottom: 15px;
-            }
-        }
-    }
-}
-*/
-/********************************************
 index
 ********************************************/
 /*-------------- CALENDAR --------------*/
@@ -523,7 +379,8 @@ index
 #arrowWrapper {
   text-align: center; }
 
-.JSeventTitleCal, .JSlocationCal {
+.JSeventTitleCal,
+.JSlocationCal {
   color: white; }
 
 .JSeventTitleCal {
@@ -585,7 +442,8 @@ index
 .JSlocationWrapperCal {
   float: right; }
 
-.JSicon-room-filled-cal, .JSlocationCal {
+.JSicon-room-filled-cal,
+.JSlocationCal {
   float: left; }
 
 .JSicon-room-filled-cal {
@@ -655,13 +513,18 @@ index
     content: "1500- \A 1545"; } }
 
 /*-------------- END CALENDAR --------------*/
+/*-------------- ARROW DOWN --------------*/
 .bounce {
   -moz-animation: bounce 2s infinite;
   -webkit-animation: bounce 2s infinite;
   animation: bounce 2s infinite; }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0); }
   40% {
     transform: translateY(-30px); }
@@ -706,7 +569,8 @@ index
   text-decoration-color: #06f;
   margin-right: 10px; }
 
-.JSeventTitleList, .JSicon-edit {
+.JSeventTitleList,
+.JSicon-edit {
   float: left; }
 
 .JSicon-edit {
@@ -740,7 +604,8 @@ index
   background-color: #000;
   margin-right: 10px; }
 
-.JSicon-clock, .JSstartTimeList {
+.JSicon-clock,
+.JSstartTimeList {
   float: left; }
 
 .JSicon-room {
@@ -753,10 +618,14 @@ index
   mask-size: cover;
   background-color: #000; }
 
-.JSicon-room, .JSlocationList {
+.JSicon-room,
+.JSlocationList {
   float: left; }
 
-.JSlocationWrapperList, .JSgoingWrapperList, .JStitleEditWrapper, .JSnumberOfPWrapperList {
+.JSlocationWrapperList,
+.JSgoingWrapperList,
+.JStitleEditWrapper,
+.JSnumberOfPWrapperList {
   clear: left; }
 
 .JSgoingWrapperList {
@@ -769,7 +638,7 @@ index
   -ms-transform: rotate(180deg);
   transform: rotate(180deg); }
 
-/*---------TESTING RESPONSIVE -------*/
+/*---------LIST RESPONSIVE -------*/
 @media (max-width: 1200px) {
   wrapper {
     padding: 0 2%; }
@@ -791,11 +660,13 @@ index
   .JSrightListInfo {
     width: 100%;
     padding: 0; }
-  .JSicon-clock, .JSicon-room, .JSicon-edit {
+  .JSicon-clock,
+  .JSicon-room,
+  .JSicon-edit {
     width: 20px;
     height: 20px; } }
 
-/* TESTING MODAL FOR ADD TRACK */
+/* MODAL FOR ADD TRACK */
 .modaloverlay {
   background: rgba(0, 0, 0, 0.8);
   bottom: 0;
@@ -825,20 +696,20 @@ index
     -webkit-overflow-scrolling: touch; }
     @media (min-width: 60em) {
       .modaloverlay .modal {
-        height: 50%;
+        height: 40%;
         margin: 5% auto;
         max-height: 57em;
         max-width: 66em;
-        width: 50%; } }
-    .modaloverlay .modal > iframe, .modaloverlay .modal > div {
+        width: 39%; } }
+    .modaloverlay .modal > iframe,
+    .modaloverlay .modal > div {
       border: none;
       width: 100%;
       height: 100%; }
   .modaloverlay .close {
     background-color: #06f;
     color: #fff;
-    font-size: 24px;
-    padding: 20px;
+    padding: .8em;
     text-align: center;
     text-decoration: none;
     top: 0;

@@ -2,8 +2,8 @@
 
 $bgcolor: #f6f6f6; //the offwhite/grey color for background
 $eventcolor: #06f; //the blue mw-color that we use for calendar
+$redcolor: #ff5c5c; //the red mw-color that we barely use
 $bodytext: #3d3d3d; //not quite black body text for p-tags and such
-
 @mixin border-radius($radius) {
     -webkit-border-radius: $radius;
     -moz-border-radius: $radius;
@@ -26,7 +26,7 @@ html {
 }
 
 body {
-    background: #f6f6f6;
+    background: $bgcolor;
     color: $bodytext;
     margin: 0;
 }
@@ -48,7 +48,7 @@ h1 {
     word-wrap: break-word;
     margin: 0 200px 40px 0;
     /* right space for download button */
-    color: #ff5c5c;
+    color: $redcolor;
 }
 
 h2,
@@ -74,14 +74,6 @@ h6 {
     font-size: 1em;
 }
 
-/* CHECK IF IN USE, IF NOT DELETE
-.lead {
-    font-family: 'Volte Medium';
-    font-size: 1.5em;
-    margin-bottom: 80px;
-}
-*/
-
 @media (max-width: 900px) {
     html {
         font-size: 1em;
@@ -97,10 +89,6 @@ h6 {
     h3 {
         font-size: 1.2em;
     }
-    /*.lead {
-        font-size: 1.2em;
-        margin-bottom: 40px;
-    }*/
 }
 
 a {
@@ -112,31 +100,9 @@ a {
     }
 }
 
-// CHECK IF IN USE, IF NOT DELETE
-
 p {
     margin: 0 0 40px 0;
-}/*
-
-ul {
-    list-style: none;
-    padding: 0;
-    ul {
-        margin: 0;
-    }
 }
-
-p {
-    max-width: 700px;
-}
-
-figure {
-    margin: 0;
-}
-
-figcaption {
-    margin-top: 10px;
-}*/
 
 img {
     max-width: 100%;
@@ -145,12 +111,7 @@ img {
 a img {
     border: none;
 }
-/*
-iframe {
-    max-width: 100%;
-    border: none;
-}
-*/
+
 
 /********************************************
 wrappers
@@ -160,16 +121,9 @@ wrappers
     box-sizing: content-box;
     padding: 0 5%;
     margin: 0 auto;
-    /*&.full {
-        padding-right: 0;
-        padding-left: 0;
-    }*/
     &.basic {
         max-width: 1200px;
     }
-    /*&.narrow {
-        max-width: 750px;
-    }*/
 }
 
 
@@ -216,67 +170,54 @@ nav {
     justify-content: space-between;
     padding-top: 0.5rem;
 }
+
 .nav-up {
     top: -100px;
 }
-#previous, #prevDate{
-     display: block;
- }
- #arrow-previous{
-     -webkit-transform: rotate(90deg);
-     -moz-transform: rotate(90deg);
-     -o-transform: rotate(90deg);
-     -ms-transform: rotate(90deg);
-     transform: rotate(90deg);
-     height: 15px;
-     width: 15px;
- }
- #thisWeekBtn{
-     text-decoration: none;
-     margin-bottom: 40px;
-     /*text-align: center;*/
- }
- #next{
-     float: right;
- }
- #next, #nextDate{
-     display: block;
- }
- #arrow-next{
-     -webkit-transform: rotate(-90deg);
-     -moz-transform: rotate(-90deg);
-     -o-transform: rotate(-90deg);
-     -ms-transform: rotate(-90deg);
-     transform: rotate(-90deg);
-     height: 15px;
-     width: 15px;
- }
+
+#previous,
+#prevDate {
+    display: block;
+}
+
+#arrow-previous {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    height: 15px;
+    width: 15px;
+}
+
+#thisWeekBtn {
+    text-decoration: none;
+    margin-bottom: 40px;
+}
+
+#next {
+    float: right;
+}
+
+#next,
+#nextDate {
+    display: block;
+}
+
+#arrow-next {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    height: 15px;
+    width: 15px;
+}
+
 
 /********************************************
 inputs
 ********************************************/
-
-/*button {
-    font-family: "Volte Semibold";
-    font-size: inherit;
-    line-height: inherit;
-    background-color: white;
-    color: #06f;
-    border: 3px solid #06f;
-    border-radius: 0;
-    padding: 10px 20px;
-    margin: 0;
-    -webkit-appearance: none;
-    cursor: pointer;
-    &.subtle {
-        padding: 5px 10px;
-        border: none;
-        border: 1px solid #ccc;
-        font-family: inherit;
-        color: inherit;
-        font-size: .778rem;
-    }
-}*/
 
 .buttonsAddTrack {
     display: inline-block;
@@ -285,7 +226,7 @@ inputs
     margin-top: 10px;
 }
 
-.buttonsAddTrack span {
+.buttonsAddTrack a div {
     width: 50%;
     padding: .6em;
     text-align: center;
@@ -295,7 +236,6 @@ inputs
     font-size: 1rem;
 }
 
-/* Submit: */
 #addTrackBtn {
     background: #0066FF;
     border: 5px solid transparent;
@@ -318,6 +258,7 @@ inputs
     width: 100%;
     text-align: center;
 }
+
 .selectDate {
     display: inline-block;
     border: 3px solid #CCCCCC;
@@ -342,10 +283,10 @@ inputs
 }
 
 .stockImgAddTrack {
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    -webkit-filter: grayscale(100%);
+    /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
     width: 300px;
-
 }
 
 .selectedTime {
@@ -409,9 +350,6 @@ textarea {
 }
 
 
-/*-------------- END INPUT --------------*/
-
-
 /********************************************
 pageHeader
 ********************************************/
@@ -459,7 +397,6 @@ pageHeader
         z-index: 10;
         .logo {
             float: left;
-
         }
         .logo img {
             height: 20px;
@@ -524,11 +461,12 @@ main {
 }
 
 
-
 /*DO WE WANT TO HAVE A SCROLL-UP BUTTON STILL?
 .scrollToTopBtn {
     /*text-align: center;*/
-    /*position: relative;
+
+
+/*position: relative;
     position: fixed;
     bottom: 10px;
     right: 10px;
@@ -540,122 +478,54 @@ main {
 
 
 /********************************************
-show/hide desktop cal & mobile cal
-********************************************/
-/*
-@media screen and (min-width: 768px) {
-    #cal-mobile {
-        display: none;
-    }
-    .duration {
-        display: none;
-    }
-    .rooms {
-        padding-top: 1em;
-        float: right;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    #cal-desktop {
-        display: none;
-    }
-    .duration {
-        margin-top: 5px;
-        font-size: 1em;
-        text-align: right;
-        opacity: 0.8;
-    }
-    .flex-list {
-        -webkit-flex-direction: column;
-        flex-direction: column;
-    }
-    .going-size {
-        width: auto;
-    }
-    .event-wrap {
-        overflow: visible;
-    }
-    .info {
-        float: none;
-        margin-right: 0;
-        width: 100% !important;
-    }
-    .info-right {
-        border-bottom: 1px solid #ccc;
-        margin: 0px;
-    }
-    .listStyle {
-        margin: 200px 0 80px;
-        * {
-            transition: all .5s;
-        }
-        h2,
-        li>* {
-            box-sizing: content-box;
-            max-width: 1200px;
-            margin-right: auto;
-            margin-left: auto;
-            padding-right: 0;
-            padding-left: 0;
-        }
-        h2 {
-            margin-bottom: 20px;
-        }
-        li {
-            background: #fff;
-            margin-bottom: 2em;
-            >a {
-                display: block;
-                text-decoration: none;
-                position: relative;
-                padding-top: 30px;
-                padding-bottom: 15px;
-            }
-        }
-    }
-}
-*/
-/********************************************
 index
 ********************************************/
 
+
 /*-------------- CALENDAR --------------*/
+
 #calendarWrapper {
     width: 100%;
     margin-top: -20px;
 }
 
-#arrowWrapper{
-     text-align: center;
- }
+#arrowWrapper {
+    text-align: center;
+}
 
-.JSeventTitleCal, .JSlocationCal{
+.JSeventTitleCal,
+.JSlocationCal {
     color: white;
 }
-.JSeventTitleCal{
+
+.JSeventTitleCal {
     margin-bottom: 5px;
 }
-#startTimes{
+
+#startTimes {
     display: grid;
     grid-template-columns: 120px;
     grid-gap: 10px;
     float: left;
 }
-.times{
+
+.times {
     height: 200px;
     /*border: 1px solid gray;*/
 }
-.JScal{
+
+.JScal {
     padding: 20px;
     border-radius: 10px;
     background-color: #06f;
     border: 5px solid #f6f6f6;
 }
-.JScal:hover{
+
+.JScal:hover {
     border: 5px solid #06f;
 }
-#calendar{
+
+#calendar {
     display: grid;
     height: auto;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -665,35 +535,58 @@ index
     /*border: 1px solid black;*/
     grid-gap: 10px;
 }
+
+
 /*LARGE EVENTS*/
-.JSlargeTrackCal{
+
+.JSlargeTrackCal {
     grid-row: 1/4;
-}/*END LARGE EVENTS*/
+}
+
+
+/*END LARGE EVENTS*/
+
 
 /*MEDIUM EVENTS*/
-.JSmediumTrackCal-13{
+
+.JSmediumTrackCal-13 {
     grid-row: 1/3;
 }
-.JSmediumTrackCal-14{
+
+.JSmediumTrackCal-14 {
     grid-row: 2/4;
-}/*END MEDIUM EVENTS*/
+}
+
+
+/*END MEDIUM EVENTS*/
+
 
 /*SMALL EVENTS*/
-.JSsmallTrackCal-13{
+
+.JSsmallTrackCal-13 {
     grid-row: 1/2;
 }
-.JSsmallTrackCal-14{
+
+.JSsmallTrackCal-14 {
     grid-row: 2/3;
 }
-.JSsmallTrackCal-15{
+
+.JSsmallTrackCal-15 {
     grid-row: 3/4;
-}/*END SMALL EVENTS*/
-.JSlocationWrapperCal{
+}
+
+
+/*END SMALL EVENTS*/
+
+.JSlocationWrapperCal {
     float: right;
 }
-.JSicon-room-filled-cal, .JSlocationCal{
+
+.JSicon-room-filled-cal,
+.JSlocationCal {
     float: left;
 }
+
 .JSicon-room-filled-cal {
     display: inline-block;
     width: 30px;
@@ -712,8 +605,8 @@ index
     display: none;
 }
 
-/*---------RESPONSIVE CALENDAR-------*/
 
+/*---------RESPONSIVE CALENDAR-------*/
 
 @media (max-width: 1200px) {
     #calendar {
@@ -727,11 +620,9 @@ index
         width: 20px;
         height: 20px;
     }
-
     #startTimes {
         display: none;
     }
-
     //ALL EVENTS
     .JSlargeTrackCal,
     .JSmediumTrackCal-13,
@@ -746,7 +637,6 @@ index
         justify-self: stretch;
         grid-row: auto;
     }
-
     .JSlargeTrackCal:before,
     .JSmediumTrackCal-13:before,
     .JSmediumTrackCal-14:before,
@@ -760,7 +650,6 @@ index
         padding-left: 20px;
         float: left;
     }
-
     .JSlargeTrackCal:before {
         content: "1300- \A 1545";
     }
@@ -779,31 +668,39 @@ index
     .JSsmallTrackCal-15:before {
         content: "1500- \A 1545";
     }
-
-
 }
 
 
 /*-------------- END CALENDAR --------------*/
+
+
+/*-------------- ARROW DOWN --------------*/
+
+//animation for arrow down under calendar
 .bounce {
-  -moz-animation: bounce 2s infinite;
-  -webkit-animation: bounce 2s infinite;
-  animation: bounce 2s infinite;
+    -moz-animation: bounce 2s infinite;
+    -webkit-animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-30px);
-  }
-  60% {
-    transform: translateY(-15px);
-  }
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
 }
 
-.filled-arrow-down{
+//image for arrow down, used for arrow elsewhere as well
+.filled-arrow-down {
     display: inline-block;
     width: 30px;
     height: 30px;
@@ -815,36 +712,45 @@ index
     margin-top: 20px;
 }
 
+
 /*-------------- LIST --------------*/
-.JSeventList{
+
+.JSeventList {
     width: 1200px;
     height: auto;
     background-color: white;
     margin-bottom: 40px;
     float: left;
 }
-.JSeventInfoList{
+
+.JSeventInfoList {
     padding: 40px;
 }
-.JSleftListInfo{
+
+.JSleftListInfo {
     width: 700px;
     float: left;
     padding-right: 50px;
 }
-.JSrightListInfo{
+
+.JSrightListInfo {
     width: 400px;
     float: left;
 }
 
-.JSeventTitleList{
+.JSeventTitleList {
     text-decoration: underline;
-    -moz-text-decoration-color: #06f; /* Code for Firefox */
+    -moz-text-decoration-color: #06f;
+    /* Code for Firefox */
     text-decoration-color: #06f;
     margin-right: 10px;
 }
-.JSeventTitleList, .JSicon-edit{
+
+.JSeventTitleList,
+.JSicon-edit {
     float: left;
 }
+
 .JSicon-edit {
     display: inline-block;
     width: 30px;
@@ -856,16 +762,19 @@ index
     background-color: #000;
     margin-bottom: 20px;
 }
-.JSeventHost{
+
+.JSeventHost {
     clear: left;
 }
-.JSeventImage{
+
+.JSeventImage {
     width: 1200px;
     max-height: 350px;
     overflow: hidden;
     background-color: #fff;
 }
-.JSicon-clock{
+
+.JSicon-clock {
     display: inline-block;
     width: 30px;
     height: 30px;
@@ -876,10 +785,13 @@ index
     background-color: #000;
     margin-right: 10px;
 }
-.JSicon-clock, .JSstartTimeList{
+
+.JSicon-clock,
+.JSstartTimeList {
     float: left;
 }
-.JSicon-room{
+
+.JSicon-room {
     display: inline-block;
     width: 30px;
     height: 30px;
@@ -889,17 +801,24 @@ index
     mask-size: cover;
     background-color: #000;
 }
-.JSicon-room, .JSlocationList{
+
+.JSicon-room,
+.JSlocationList {
     float: left;
 }
-.JSlocationWrapperList, .JSgoingWrapperList, .JStitleEditWrapper, .JSnumberOfPWrapperList{
+
+.JSlocationWrapperList,
+.JSgoingWrapperList,
+.JStitleEditWrapper,
+.JSnumberOfPWrapperList {
     clear: left;
 }
-.JSgoingWrapperList{
+
+.JSgoingWrapperList {
     margin-top: 40px;
 }
 
-#arrowScrollToTop{
+#arrowScrollToTop {
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
     -o-transform: rotate(180deg);
@@ -907,8 +826,8 @@ index
     transform: rotate(180deg);
 }
 
-/*---------TESTING RESPONSIVE -------*/
 
+/*---------LIST RESPONSIVE -------*/
 
 @media (max-width: 1200px) {
     wrapper {
@@ -921,7 +840,6 @@ index
         width: 100%;
         transition: top 0.2s ease-in-out;
         margin-left: 0;
-
     }
     .JSeventInfoList {
         width: 100%;
@@ -939,64 +857,67 @@ index
         width: 100%;
         padding: 0;
     }
-    .JSicon-clock, .JSicon-room, .JSicon-edit {
+    .JSicon-clock,
+    .JSicon-room,
+    .JSicon-edit {
         width: 20px;
         height: 20px;
     }
 }
 
-/* TESTING MODAL FOR ADD TRACK */
+
+/* MODAL FOR ADD TRACK */
 
 // Modal
-.modaloverlay{
-  background:rgba(0,0,0,0.8);
-  bottom:0;
-  left:0;
-  opacity:0;
-  pointer-events:none;
-  position:fixed;
-  right:0;
-  top:0;
-  -webkit-transition: opacity 400ms ease-in;
-  -moz-transition: opacity 400ms ease-in;
-  transition: opacity 400ms ease-in;
-  z-index:-1;
-  display: none;
-  &:target{
-    display: block;
-    opacity:1;
-    pointer-events:auto;
-    z-index:99999;
-  }
-  .modal{
-    background-color:white;
-    height: 100%;
-    position:relative;
-    margin:0 auto;
-    padding:3em;
-      text-align: center;
-    -webkit-overflow-scrolling: touch;
-    @media (min-width: 60em) {
-      height:50%;
-  	 margin:5% auto;
-  	 max-height: 57em;
-      max-width:66em;
-      width:50%;
-  	}
-	> iframe, > div{
-		border:none;
-		width:100%;
-		height:100%;
+.modaloverlay {
+    background: rgba(0, 0, 0, 0.8);
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    z-index: -1;
+    display: none;
+    &:target {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 99999;
     }
-  }
-  .close{
-    background-color: $eventcolor;
-    color: #fff;
-    font-size:24px;
-    padding: 20px;
-    text-align:center;
-    text-decoration:none;
-    top:0;
-    z-index: 1;
-  }
+    .modal {
+        background-color: white;
+        height: 100%;
+        position: relative;
+        margin: 0 auto;
+        padding: 3em;
+        text-align: center;
+        -webkit-overflow-scrolling: touch;
+        @media (min-width: 60em) {
+            height:40%;
+            margin: 5% auto;
+            max-height: 57em;
+            max-width: 66em;
+            width: 39%;
+        }
+        >iframe,
+        >div {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .close {
+        background-color: $eventcolor;
+        color: #fff;
+        padding: .8em;
+        text-align: center;
+        text-decoration: none;
+        top: 0;
+        z-index: 1;
+    }
 }

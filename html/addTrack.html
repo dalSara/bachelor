@@ -43,24 +43,6 @@
                 <h2>Add track</h2>
                 Pick the date for your track<br><br>
 
-                <!-------------- NAVIGATION -------------->
-                <!--
-                <div id="navWeek">
-                    <div><a id="prevBtn"><i class="fa fa-angle-left" aria-hidden="true"></i> Previous<br>
-                        <strong id="prevDate"></strong>
-                        </a>
-                    </div>
-                    <div style="text-align: center"><a id="thisWeekBtn"><br>
-                        <h2 id="thisDate"></h2><br>
-                        </a>
-                    </div>
-                    <div><a id="nextBtn">Next  <i class="fa fa-angle-right" aria-hidden="true"></i><br>
-                        <strong id="nextDate"></strong>
-                        </a>
-                    </div>
-                </div>-->
-                <!-------------- END NAVIGATION -------------->
-
                 <!-------------- PICK DATE -------------->
                 <div class="pickDateTrack">
                     <i id="arrow-previous" class="filled-arrow-down" style="float: left"></i>
@@ -91,7 +73,7 @@
                 <!--    Location<br>
 <input type="text" value="A room will be assigned to you by the organizer." disabled> --> <br><br>
                 * What to expect (The agenda, what will you teach to other etc)<br>
-                <input id="JSaddExpect" type="text" value=""><br><br>
+                <textarea id="JSaddExpect" type="text" value=""></textarea><br><br>
                 * Who should join? (Who is this track best suited for?)<br>
                 <input id="JSaddJoin" type="text" value=""><br><br>  <!--Do you have an image to add attention to your track? (you can edit this later)<br>
 <input id="JSaddImage" type="text" value=""><br><br> -->You can choose a stock photo (click to select)<br>
@@ -102,18 +84,19 @@
                 <div id="JSaddStockThree" class="stockImg"><img src="https://images.contentful.com/59mi8sr8zemv/5u6CWGgkmcwiIUEIsiQMGE/8eee432604d7e9695507b9f9907175d4/Chicago-0021__1_.jpg" class="stockImgAddTrack"></div><br>
 
                 Anything else to add? (links, videos for preparation, other tracks, co-host, equipment etc)<br>
-                <input id="JSaddElse" type="text" value="">
+                <textarea id="JSaddElse" type="text" value=""></textarea>
                 <div class="buttonsAddTrack">
                     <!--<a href="index.html" id="addTrackBtn"></a>-->
                     <div id="test"></div>
                     <a href="#publish">
-                        <span tabindex="0" role="button" id="addTrackBtn" type="submit" value="Add track">Publish</span>
+                        <div tabindex="0" role="button" id="addTrackBtn" type="submit" value="Add track">Publish</div>
                     </a>
                 </div>
                 <div id="publish" class="modaloverlay">
                   <div class="modal">
                     <div>
                         <h2>Success!</h2>
+                        <p></p>
                         <p>Your track has been published and will be available for everyone in a few minutes.</p>
                         <p><a href="../index.html" class="close">OK</a></p>
                     </div>
