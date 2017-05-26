@@ -315,12 +315,6 @@ function addTrack (){
 
                 var eventID = event.sys.id
 
-<<<<<<< HEAD
-=======
-                //entry.fields.link["en-US"].push(newAttendeesId)
-
-
->>>>>>> origin/master
                 //This function is gets the entry of 16 june
                 space.getEntry(dateId)
                     .then((entry) => {
