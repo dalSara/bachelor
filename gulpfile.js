@@ -59,7 +59,7 @@ gulp.task('browserify', function() {
         .pipe(source(destFileE))
         .pipe(gulp.dest(destFolder))
 
-
+*/
 
 
 gulp.task('default', ['serve' ,'browserify'], function(){ //['serve', 'data' 'watch' , ],
