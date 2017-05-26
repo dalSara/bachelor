@@ -285,7 +285,7 @@ inputs
     margin-top: 10px;
 }
 
-.buttonsAddTrack div {
+.buttonsAddTrack span {
     width: 50%;
     padding: .6em;
     text-align: center;
@@ -943,4 +943,60 @@ index
         width: 20px;
         height: 20px;
     }
+}
+
+/* TESTING MODAL FOR ADD TRACK */
+
+// Modal
+.modaloverlay{
+  background:rgba(0,0,0,0.8);
+  bottom:0;
+  left:0;
+  opacity:0;
+  pointer-events:none;
+  position:fixed;
+  right:0;
+  top:0;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  z-index:-1;
+  display: none;
+  &:target{
+    display: block;
+    opacity:1;
+    pointer-events:auto;
+    z-index:99999;
+  }
+  .modal{
+    background-color:white;
+    height: 100%;
+    position:relative;
+    margin:0 auto;
+    padding:3em;
+      text-align: center;
+    -webkit-overflow-scrolling: touch;
+    @media (min-width: 60em) {
+      height:50%;
+  	 margin:5% auto;
+  	 max-height: 57em;
+      max-width:66em;
+      width:50%;
+  	}
+	> iframe, > div{
+		border:none;
+		width:100%;
+		height:100%;
+    }
+  }
+  .close{
+    background-color: $eventcolor;
+    color: #fff;
+    font-size:24px;
+    padding: 20px;
+    text-align:center;
+    text-decoration:none;
+    top:0;
+    z-index: 1;
+  }
 }

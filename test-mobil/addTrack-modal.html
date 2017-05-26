@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+
+        <link rel="stylesheet" type="text/css" href="../css/fonts.css">
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+
+        <title>Add track - Show & Do</title>
+        <style>
+
+
+
+        </style>
+    </head>
+
+    <body>
+
+        <!--------------------------------HEADER-------------------------------->
+        <header class="pageHeader">
+            <div class="wrapper basic">
+                <a class="logo" href="../index.html">
+                    <img src="../assets/images/logo-sd.svg" alt="Making Waves Logo">
+                </a>
+                <!--<button>Menu</button>-->
+                <nav class="mainMenu">
+                    <ul>
+                        <li><a href="addTrack.html">Add track</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <!--------------------------------end HEADER-------------------------------->
+
+        <main>
+            <div class="wrapper basic">
+
+                <h2>Add track</h2>
+                Pick the date for your track<br><br>
+
+                <!-------------- NAVIGATION -------------->
+                <!--
+                <div id="navWeek">
+                    <div><a id="prevBtn"><i class="fa fa-angle-left" aria-hidden="true"></i> Previous<br>
+                        <strong id="prevDate"></strong>
+                        </a>
+                    </div>
+                    <div style="text-align: center"><a id="thisWeekBtn"><br>
+                        <h2 id="thisDate"></h2><br>
+                        </a>
+                    </div>
+                    <div><a id="nextBtn">Next  <i class="fa fa-angle-right" aria-hidden="true"></i><br>
+                        <strong id="nextDate"></strong>
+                        </a>
+                    </div>
+                </div>-->
+                <!-------------- END NAVIGATION -------------->
+
+                <!-------------- PICK DATE -------------->
+                <div class="pickDateTrack">
+                    <i id="arrow-previous" class="filled-arrow-down" style="float: left"></i>
+                    <div class="selectDate dateSelected" id="JSdatePick1">00.00.17</div>
+                    <div class="selectDate" id="JSdatePick2">00.00.17</div>
+                    <div class="selectDate" id="JSdatePick3">00.00.17</div>
+                    <i id="arrow-next" class="filled-arrow-down" style="float: right"></i>
+                </div>
+
+                <!-------------- END PICK DATE -------------->
+
+                *  Title <br>
+                <input id="JSaddTitle" type="text" value=""><br><br>* Host(s) (who’s going to hold the track? Fill in your name and co-hosts names)<br>
+                <input id="JSaddHosts" type="text" value=""><br><br>* Prerequisites (is there anything the attendees need to know beforehand?)<br>
+                <input id="JSaddPrereq" type="text" value=""><br><br>* Preferred starttime (click to select)
+                <br>
+                <div class="selectTime" id="JSaddStartOne" value="2017-06-02T13:00:31Z">13.00</div>
+                <div class="selectTime" id="JSaddStartTwo" value="2017-06-02T14:00:31Z">14.00</div>
+                <div class="selectTime" id="JSaddStartThree">15.00</div>
+                <br><br>* How long will your track be? (click to select)
+                <br>
+                <div class="selectTime" id="JSaddHourOne">1 hour</div>
+                <div class="selectTime" id="JSaddHourTwo">2 hours</div>
+                <div class="selectTime" id="JSaddHourThree">3 hours</div><br><br>
+                How many of your co-workers may join your track?
+                <input id="JSaddNrOfPart" type="text" value=""><br><br>
+                A room will be assigned to you by the organizer.
+                <!--    Location<br>
+<input type="text" value="A room will be assigned to you by the organizer." disabled> --> <br><br>
+                * What to expect (The agenda, what will you teach to other etc)<br>
+                <input id="JSaddExpect" type="text" value=""><br><br>
+                * Who should join? (Who is this track best suited for?)<br>
+                <input id="JSaddJoin" type="text" value=""><br><br>  <!--Do you have an image to add attention to your track? (you can edit this later)<br>
+<input id="JSaddImage" type="text" value=""><br><br> -->You can choose a stock photo (click to select)<br>
+                <div id="JSaddStockOne" class="stockImg"><img src="//images.contentful.com/59mi8sr8zemv/4KahBhVQTCykgOYsKS66Ws/a8f2880ff4971097c530667f14defffd/Oslo-0068.jpg" class="stockImgAddTrack">
+                </div>
+                <div id="JSaddStockTwo" class="stockImg"><img src="//images.contentful.com/59mi8sr8zemv/2dmGUtiw7uwugWQcsiGcUk/00ef2bcad9d4a74e17f1e52c46801ffb/Oslo-0036.jpg?" class="stockImgAddTrack">
+                </div>
+                <div id="JSaddStockThree" class="stockImg"><img src="https://images.contentful.com/59mi8sr8zemv/5u6CWGgkmcwiIUEIsiQMGE/8eee432604d7e9695507b9f9907175d4/Chicago-0021__1_.jpg" class="stockImgAddTrack"></div><br>
+
+                Anything else to add? (links, videos for preparation, other tracks, co-host, equipment etc)<br>
+                <input id="JSaddElse" type="text" value="">
+                <div class="buttonsAddTrack">
+                    <!--<a href="index.html" id="addTrackBtn"></a>-->
+                    <div id="test"></div>
+                    <a href="#google">
+                        <span tabindex="0" role="button" id="addTrackBtn" type="submit" value="Add track">Publish</span>
+                    </a>
+                </div>
+                <div id="google" class="modaloverlay">
+                  <div class="modal">
+                    <div>
+                        <h2>Success!</h2>
+                        <p>Your track has been published and will be available for everyone in a few minutes.</p>
+                        <p><a href="#close" class="close">OK</a></p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+        </main>
+        <script src="../scripts/bundle.js"></script>
+        <script src="../node_modules/contentful/browser-dist/contentful.min.js"></script>
+        <script src="../scripts/date.js"></script>
+
+        <script>
+            initDates(function(){})
+
+        </script>
+
+
+    </body>
+
+</html>
