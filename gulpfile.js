@@ -1,25 +1,16 @@
-//copy paste fra Magnus
 var gulp        = require('gulp');
-var browserSync = require('browser-sync').create();
-var sass        = require('gulp-sass');
-var browserify  = require('browserify')
-//var watchify    = require('watchify');
+var browserify  = require('browserify');
 var rename      = require('gulp-rename');
 var source      = require('vinyl-source-stream');
-var sourceFile  = './scripts/main.js';
-//var sourceFileE  = './scripts/mainE.js';
-var destFolder  = './scripts/';
-var destFile    = 'bundle.js';
-//var destFileE    = 'bundleE.js';
-
+var es          = require('event-stream');
+var browserSync = require('browser-sync').create();
+var sass        = require('gulp-sass');
 
 // Static Server + watching scss/html files
 gulp.task('serve', ['sass'], function() {
-
     browserSync.init({
         server: "./"
     });
-
     gulp.watch("*.scss", ['sass']);
     gulp.watch("*.html").on('change', browserSync.reload);
 });
@@ -32,35 +23,30 @@ gulp.task('sass', function() {
         .pipe(browserSync.stream());
 });
 
-
-
-/*
-// Basic usage
-gulp.task('scripts', function() {
-    // Single entry point to browserify
-    gulp.src('./scripts/main.js')
-        .pipe(browserify())
-        .pipe(rename('bundle.js'))
-        .pipe(gulp.dest('./'))
+gulp.task('browserify', function(){
+    // we define our input files, which we want to have
+    // bundled:
+    var files = [
+        './scripts/main-dataDelivery.js',
+        './scripts/main-jqueryFunctions.js',
+        './scripts/main-going.js',
+        './scripts/main-addTrack.js',
+        './scripts/main-editTrack.js'
+    ];
+    // map them to our stream function
+    var tasks = files.map(function(entry) {
+        return browserify({ entries: [entry] })
+            .bundle()
+            .pipe(source(entry))
+        // rename them to have "bundle as postfix"
+            .pipe(rename({
+            extname: '.bundle.js'
+        }))
+            .pipe(gulp.dest('./scripts/dist'));
+    });
+    // create a merged stream
+    return es.merge.apply(null, tasks);
 });
-*/
-gulp.task('browserify', function() {
-    return browserify(sourceFile)
-        .bundle()
-        .pipe(source(destFile))
-        .pipe(gulp.dest(destFolder));
-});
-
-/*
-gulp.task('browserify', function() {
-    return browserify(sourceFileE)
-        standalone: 'cM'
-        .bundle()
-        .pipe(source(destFileE))
-        .pipe(gulp.dest(destFolder))
-
-*/
-
 
 gulp.task('default', ['serve' ,'browserify'], function(){ //['serve', 'data' 'watch' , ],
 

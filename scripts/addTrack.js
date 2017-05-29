@@ -1,20 +1,23 @@
-function addTrack (){
+//var contentful = require('contentful');
+var contentfulManagement = require('contentful-management');
 
+function addTrack (){
+//module.exports = function(){
     //contentful management id the module that have contact with contentful.
     //this is the conection to the module
-    var contentful = require('contentful-management')
-    var client = contentful.createClient({
+
+    var client = contentfulManagement.createClient({
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-        accessToken: ''
+        accessToken: 'b60f393ec836a43747cb5a238cdc49e379361c7d7a0a96012191fb3745e2532b'
 
     });
 
     var globalTargetDateIndex = null;
     var globalAllDatesArray = null;
 
-    var prevBtn = document.getElementById("prevBtn");
+    //var prevBtn = document.getElementById("prevBtn");
     var thisWeekBtn = document.getElementById("thisWeekBtn");
-    var nextBtn = document.getElementById("nextBtn");
+    //var nextBtn = document.getElementById("nextBtn");
 
     var prevDate = document.getElementById("prevDate");
     var thisDate = document.getElementById("thisDate");
@@ -111,8 +114,8 @@ initDates();
             //callbackAction();
             //TODO enable pre/next buttons
 
-            prevBtn.onclick = goPrevious;
-            nextBtn.onclick = goNext;
+            //prevBtn.onclick = goPrevious;
+            //nextBtn.onclick = goNext;
 
         })
 
@@ -349,4 +352,5 @@ initDates();
     }//end create new event
 
 }//end add track
-exports.addTrack = addTrack
+
+exports.addTrack = addTrack;
