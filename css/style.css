@@ -550,6 +550,7 @@ index
   float: left; }
 
 .JSeventTitleList {
+  line-height: 1.5em;
   text-decoration: underline;
   -moz-text-decoration-color: #06f;
   /* Code for Firefox */
@@ -683,10 +684,8 @@ index
     -webkit-overflow-scrolling: touch; }
     @media (min-width: 60em) {
       .modaloverlay .modal {
-        height: 40%;
-        margin: 5% auto;
-        max-height: 57em;
-        max-width: 66em;
+        max-height: 20em;
+        margin: 10% auto;
         width: 39%; } }
     .modaloverlay .modal > iframe,
     .modaloverlay .modal > div {
