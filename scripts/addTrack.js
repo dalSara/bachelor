@@ -5,16 +5,15 @@ function addTrack (){
     var contentful = require('contentful-management')
     var client = contentful.createClient({
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-        accessToken: ''
-
+        accessToken: '',
+        resolveLinks: true
     });
 
-    var globalTargetDateIndex = null;
-    var globalAllDatesArray = null;
 
-    var prevBtn = document.getElementById("prevBtn");
+
+    var arrowPrevious = document.getElementById("arrowPrevious");
     var thisWeekBtn = document.getElementById("thisWeekBtn");
-    var nextBtn = document.getElementById("nextBtn");
+    var arrowNext = document.getElementById("arrowNext");
 
     var prevDate = document.getElementById("prevDate");
     var thisDate = document.getElementById("thisDate");
@@ -32,6 +31,8 @@ function addTrack (){
         linkType: "Asset",
         type:"Link"
     }}
+
+
 
     var imageTwo = {sys: {
         id: '2dmGUtiw7uwugWQcsiGcUk',
@@ -64,7 +65,7 @@ function addTrack (){
     var JSaddStockTwo = document.getElementById("JSaddStockTwo");
     var JSaddStockThree = document.getElementById("JSaddStockThree");
     var JSaddElse = document.getElementById("JSaddElse");
-    //var JSaddStatus = document.getElementById("JSaddStatus");
+    //var JSaddStatus = document.getElementById("JSaddStatus"); //belongs to a function that is not in use at the time
     var addTrackBtn = document.getElementById("addTrackBtn");
 
     JSaddStartOne.onclick = timeOne;
@@ -79,42 +80,99 @@ function addTrack (){
     addTrackBtn.onclick = createNewEvent;
 
     //Unlimited if no value on nrOfPart
-initDates();
+    initDates();
 
-    function initDates(callbackAction){
+    function getSelectedDate(specifiedDate) {
+        selectedDate = new Date();
+        if(specifiedDate) selectedDate = specifiedDate;
+        /*-------------- TODAYS DATE --------------*/
+        //ISO8601 formatted YYYY-MM-DD (to match Contentful):
+        var year = selectedDate.getFullYear();
+        var month = ('0' + (selectedDate.getMonth() +1)).slice(-2);
+        var day = ('0' + selectedDate.getDate()).slice(-2);
+        var selectedDate = year + '-' + month + '-' + day;
+        /*-------------- END TODAYS DATE --------------*/
+
+        return selectedDate;
+    }
+
+
+
+    function initDates(){
+
+        var globalTargetDateIndex = null;
+        var globalAllDatesArray = null;
+        var selectedDate = null;
+        var allDates = null;
+        var thisShowDoEvents = null;
+
+        var locale = 'en-US'
+
+
+        var day = {sys: {
+            id: "datesForShowDo",
+            type: "ContentType",
+        }}
+
         client.getSpace('59mi8sr8zemv')
             .then((space) =>
-                  space.getEntries('datesForShowDo')
-                  ).then(function(entries){
+                  space.getEntries({
+            content_type: 'datesForShowDo',
+            select: 'fields.date',
+            order: 'fields.date', //Sort by date in datesForShowDo
+            locale: 'en-US'
+            //includes: '10'
+        }
 
-            globalAllDatesArray = entries.items;
-            console.log('Entry Client: All dates (sorted):', globalAllDatesArray); //all dates
+                 ).then(function(fields){
+            console.log('bajs', fields)
+            allDates = fields.date.[]
+            console.log('BajsBajs:', allDates); //all dates
 
-            var today = new Date();
-            var year = today.getFullYear();
-            var month = ('0' + (today.getMonth() +1)).slice(-2);
-            var day = ('0' + today.getDate()).slice(-2);
-            today = year + '-' + month + '-' + day;
+            selectedDate = getSelectedDate();
 
-            globalTargetDateIndex = 0;
+            //loop through dates in datesForShowDo
+            for(var i = 0; i < allDates.length; i++){
+                if(allDates[i].fields.date <= selectedDate && allDates[i+1].fields.date >= selectedDate){
+                    globalTargetDateIndex = i + 1;
 
-            for(var i = 0; i < globalAllDatesArray.length - 1; i++){
+                    var oneDate = allDates[globalTargetDateIndex].fields.date;
+                    console.log('Later than selectedDate', oneDate);
 
-                if(globalAllDatesArray[i].fields.date <= today && globalAllDatesArray[i+1].fields.date >= today){
-                    globalTargetDateIndex = i+1;
+                    thisShowDoEvents = allDates[i + 1].fields.link; //EVENTS TO DISPLAY
                     break;
                 }
-                //var thisWeeksEvents = dates.fields.link; //!!!! ENDRE var navn?
             }
 
-            updateDateLabels();
-            //callbackAction();
-            //TODO enable pre/next buttons
+            // console.log(fields.date)
+            globalAllDatesArray = fields.date;
+            console.log('Entry Client: All dates (sorted):', globalAllDatesArray); //all dates
+        }))
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ('0' + (today.getMonth() +1)).slice(-2);
+        var day = ('0' + today.getDate()).slice(-2);
+        today = year + '-' + month + '-' + day;
 
-            prevBtn.onclick = goPrevious;
-            nextBtn.onclick = goNext;
+        globalTargetDateIndex = 0;
 
-        })
+        for(var i = 0; i < globalAllDatesArray.length - 1; i++){
+
+            if(globalAllDatesArray[i].fields.date <= today && globalAllDatesArray[i+1].fields.date >= today){
+                globalTargetDateIndex = i+1;
+                break;
+            }
+            //var thisWeeksEvents = dates.fields.link; //!!!! ENDRE var navn?
+        }
+
+        updateDateLabels();
+        //callbackAction();
+        //TODO enable pre/next buttons
+
+        arrowPrevious.onclick = goPrevious;
+        arrowNext.onclick = goNext;
+
+
 
         function goNext(){
             if(globalTargetDateIndex < globalAllDatesArray.length - 1){
@@ -145,18 +203,18 @@ initDates();
             if(globalTargetDateIndex > 0 ){
                 JSdatePick1.innerHTML = getDateLabel(globalTargetDateIndex - 1);
             } else {
-                JSdatePick1.innerHTML = "";
+                JSdatePick1.innerHTML = "--";
             }
 
             if(globalTargetDateIndex < globalAllDatesArray.length - 1){
                 JSdatePick3.innerHTML = getDateLabel(globalTargetDateIndex + 1);
             } else {
-                JSdatePick3.innerHTML = "";
+                JSdatePick3.innerHTML = "TBA";
             }
 
             JSdatePick2.innerHTML = getDateLabel(globalTargetDateIndex);
         }
-    };
+    };//end initdates
 
 
 
@@ -303,6 +361,9 @@ initDates();
                 anythingElse: {
                     'en-US': JSaddNewElse
                 },
+                peopleAttending: {
+                    'en-US': [""]
+                },
 
             }//end field
         }
@@ -327,6 +388,7 @@ initDates();
                     }}
 
                     //Creates a reference field in dates for show & do
+
                     entry.fields.link["en-US"].push(newId)
 
 
@@ -347,6 +409,6 @@ initDates();
         })//end getspace
 
     }//end create new event
-
+    console.log (entry.fields.link["en-US"])
 }//end add track
 exports.addTrack = addTrack
