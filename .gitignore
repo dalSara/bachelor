@@ -3,7 +3,11 @@
 # Example .gitignore files: https://github.com/github/gitignore
 /bower_components/
 
-bundle.js
-bundleE.js
+main-addTrack.bundle.js
+main-dataDelivery.bundle.js
+main-editTrack.bundle.js
+main-going.bundle.js
+main-jqueryFunctions.bundle.js
+
 node_modules
 .DS_Store

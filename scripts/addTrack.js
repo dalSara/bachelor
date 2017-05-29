@@ -1,19 +1,33 @@
-function addTrack (){
+//var contentful = require('contentful');
+var contentfulManagement = require('contentful-management');
 
+function addTrack (){
+//module.exports = function(){
     //contentful management id the module that have contact with contentful.
     //this is the conection to the module
-    var contentful = require('contentful-management')
-    var client = contentful.createClient({
+
+    var client = contentfulManagement.createClient({
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
+<<<<<<< HEAD
         accessToken: '',
         resolveLinks: true
+=======
+        accessToken: 'b60f393ec836a43747cb5a238cdc49e379361c7d7a0a96012191fb3745e2532b'
+
+>>>>>>> 54bb4c6c97716a07e49d0f06259d2fe0b2a3b4dd
     });
 
 
+<<<<<<< HEAD
 
     var arrowPrevious = document.getElementById("arrowPrevious");
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     var arrowNext = document.getElementById("arrowNext");
+=======
+    //var prevBtn = document.getElementById("prevBtn");
+    var thisWeekBtn = document.getElementById("thisWeekBtn");
+    //var nextBtn = document.getElementById("nextBtn");
+>>>>>>> 54bb4c6c97716a07e49d0f06259d2fe0b2a3b4dd
 
     var prevDate = document.getElementById("prevDate");
     var thisDate = document.getElementById("thisDate");
@@ -172,6 +186,11 @@ function addTrack (){
         arrowPrevious.onclick = goPrevious;
         arrowNext.onclick = goNext;
 
+<<<<<<< HEAD
+=======
+            //prevBtn.onclick = goPrevious;
+            //nextBtn.onclick = goNext;
+>>>>>>> 54bb4c6c97716a07e49d0f06259d2fe0b2a3b4dd
 
 
         function goNext(){
@@ -411,4 +430,5 @@ function addTrack (){
     }//end create new event
     console.log (entry.fields.link["en-US"])
 }//end add track
-exports.addTrack = addTrack
+
+exports.addTrack = addTrack;

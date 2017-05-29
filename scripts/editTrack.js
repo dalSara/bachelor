@@ -1,11 +1,13 @@
+var contentful = require('contentful');
+var contentfulManagement = require('contentful-management');
 
+//module.exports = function(){
 function editTrack (){
 
     // contentful-management.js v3.x.x
-    const contentful = require('contentful-management')
 
-    const client = contentful.createClient({
-        accessToken: '',
+    const client = contentfulManagement.createClient({
+        accessToken: 'b60f393ec836a43747cb5a238cdc49e379361c7d7a0a96012191fb3745e2532b',
         //  Space: '59mi8sr8zemv',
         resolveLinks: true
     })
@@ -133,9 +135,6 @@ function editTrack (){
     }//end EditEvent
     //getLink();
 
-}//end EditTrack
+};//end EditTrack
 
-
-
-
-exports.editTrack = editTrack
+exports.editTrack = editTrack;

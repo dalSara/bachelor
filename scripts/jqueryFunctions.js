@@ -1,4 +1,7 @@
 /*-------------- JQUERY FUNCTIONS --------------*/
+//module.exports = function(){
+    //function jqueryFunctions(){
+var $ = require('jquery');
 /*-------------- SMOOTH SCROLL FROM CALENDAR TO LIST --------------*/
 function smoothScrollDownFunction(){
     $(function(){
@@ -74,3 +77,7 @@ function goingBtnFunction(){
 }
 /*-------------- END GOING BTN --------------*/
 /*-------------- END JQUERY FUNCTIONS --------------*/
+//}
+//};
+exports.smoothScrollDownFunction = smoothScrollDownFunction;
+exports.goingBtnFunction = goingBtnFunction;
