@@ -1,4 +1,5 @@
 var jqueryFunctions = require('./jqueryFunctions');
 
-jqueryFunctions.smoothScrollDownFunction();
-jqueryFunctions.goingBtnFunction();
+jqueryFunctions.smoothScrollDown();
+jqueryFunctions.goingBtn();
+jqueryFunctions.scrollToTop();

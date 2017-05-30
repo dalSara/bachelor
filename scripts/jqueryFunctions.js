@@ -1,9 +1,7 @@
 /*-------------- JQUERY FUNCTIONS --------------*/
-//module.exports = function(){
-    //function jqueryFunctions(){
 var $ = require('jquery');
 /*-------------- SMOOTH SCROLL FROM CALENDAR TO LIST --------------*/
-function smoothScrollDownFunction(){
+function smoothScrollDown(){
     $(function(){
         var didScroll;
         var lastScrollTop = 0;
@@ -62,7 +60,7 @@ function smoothScrollDownFunction(){
 /*-------------- END SMOOTH SCROLL FROM CAlENDAR TO LIST --------------*/
 
 /*-------------- GOING BTN --------------*/
-function goingBtnFunction(){
+function goingBtn(){
     $(function(){
         $('.JSgoing').click(function() {
             $(this).addClass('JSgoing-clicked');
@@ -76,8 +74,18 @@ function goingBtnFunction(){
     });
 }
 /*-------------- END GOING BTN --------------*/
+/*-------------- SCROLL TO TOP --------------*/
+//Click event to scroll to top
+function scrollToTop(){
+    $('#arrowScrollToTop').click(function() {
+        $("html, body").animate({
+            scrollTop : 0},800);
+        return false;
+    })
+}
+/*-------------- end SCROLL TO TOP --------------*/
 /*-------------- END JQUERY FUNCTIONS --------------*/
-//}
-//};
-exports.smoothScrollDownFunction = smoothScrollDownFunction;
-exports.goingBtnFunction = goingBtnFunction;
+
+exports.smoothScrollDown = smoothScrollDown;
+exports.goingBtn = goingBtn;
+exports.scrollToTop = scrollToTop;

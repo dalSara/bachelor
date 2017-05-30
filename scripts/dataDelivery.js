@@ -1,7 +1,3 @@
-//var imported = document.createElement('script');
-//imported.src = '/scripts/bundleE.js'; //Import going.js (contentful-management) for goingBtn.
-//document.head.appendChild(imported);
-
 var contentful = require('contentful');
 var contentfulManagement = require('contentful-management');
 var jqueryFunctions = require('./jqueryFunctions');
@@ -89,8 +85,9 @@ function dataDelivery(){
         prevBtn.onclick = previousShowDo; //Display previous events
 
         /*jQuery functions*/
-        jqueryFunctions.smoothScrollDownFunction();
-        jqueryFunctions.goingBtnFunction();
+        jqueryFunctions.smoothScrollDown();
+        jqueryFunctions.goingBtn();
+        jqueryFunctions.scrollToTop();
         /*end jQuery functions*/
 
         going.addAttendees();
@@ -145,8 +142,9 @@ function dataDelivery(){
             addId();//Add id to events (in calendar and list)
 
             /*jQuery functions*/
-            jqueryFunctions.smoothScrollDownFunction(); //Onclick from calendar to list
-            jqueryFunctions.goingBtnFunction();
+            jqueryFunctions.smoothScrollDown(); //Onclick from calendar to list
+            jqueryFunctions.goingBtn();
+            jqueryFunctions.scrollToTop();
             /*end jQuery functions*/
         }else{
             alert('No more Show & Dos are added.');
@@ -169,8 +167,9 @@ function dataDelivery(){
             addId();//Add id to events (in calendar and list)
 
             /*jQuery functions*/
-            jqueryFunctions.smoothScrollDownFunction(); //Onclick from calendar to list
-            jqueryFunctions.goingBtnFunction();
+            jqueryFunctions.smoothScrollDown(); //Onclick from calendar to list
+            jqueryFunctions.goingBtn();
+            jqueryFunctions.scrollToTop();
             /*end jQuery functions*/
         }else{
             alert('No more Show & Dos to display from the past.');
