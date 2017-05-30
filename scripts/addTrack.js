@@ -191,20 +191,13 @@ function addTrack (){
             }
         }
 
-        function getDateLabel(index){
-            var date = globalAllDatesArray[index];
-
-            formatted = date.fields.date["en-US"];
-            return formatted;
-        }
-
         /*-------------- GET INDEX OF THE DATE --------------*/
         function getDateIndex(index){
-            var dateIndex = allDates[index + 1]; //[index+1]
+            var dateIndex = allDates[index]; //[index+1]
             var date = dateIndex.fields.date["en-US"];
 
             //Display date correctly in navigation
-            var day = date.substring(date.length - 2);
+            var day = date.substring(8, 10);
             var month = date.substring(5, 7);
             var year = date.substring(2, 4);
 
@@ -218,18 +211,18 @@ function addTrack (){
         function updateDateLabels(){
 
             if(globalTargetDateIndex > 0 ){
-                JSdatePick1.innerHTML = getDateLabel(globalTargetDateIndex - 1);
+                JSdatePick1.innerHTML = getDateIndex(globalTargetDateIndex - 1);
             } else {
                 JSdatePick1.innerHTML = "--";
             }
 
             if(globalTargetDateIndex < globalAllDatesArray.length - 1){
-                JSdatePick3.innerHTML = getDateLabel(globalTargetDateIndex + 1);
+                JSdatePick3.innerHTML = getDateIndex(globalTargetDateIndex + 1);
             } else {
                 JSdatePick3.innerHTML = "TBA";
             }
 
-            JSdatePick2.innerHTML = getDateLabel(globalTargetDateIndex);
+            JSdatePick2.innerHTML = getDateIndex(globalTargetDateIndex);
         }
 
              }))
