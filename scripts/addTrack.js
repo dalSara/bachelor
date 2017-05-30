@@ -25,10 +25,11 @@ function addTrack (){
     var thisDate = document.getElementById("thisDate");
     var nextDate = document.getElementById("nextDate");
 
-
-    // var choosenTime = '2017-06-02T13:00:31Z';
-    var choosenTrack;
+    var choosenTime = '2017-06-02T13:00';
+    var choosenTrack = "Small";
     var choosenImage;
+
+    var eventEndTime = null;
 
     //var startOne = '2017-06-02T13:00:31Z';
 
@@ -37,8 +38,6 @@ function addTrack (){
         linkType: "Asset",
         type:"Link"
     }}
-
-
 
     var imageTwo = {sys: {
         id: '2dmGUtiw7uwugWQcsiGcUk',
@@ -74,7 +73,7 @@ function addTrack (){
     //var JSaddStatus = document.getElementById("JSaddStatus"); //belongs to a function that is not in use at the time
     var addTrackBtn = document.getElementById("addTrackBtn");
 
-    JSaddStartOne.onclick = timeOne;
+    /*JSaddStartOne.onclick = timeOne;
     JSaddStartTwo.onclick = timeTwo;
     JSaddStartThree.onclick = timeThree;
     JSaddHourOne.onclick = smallTrack;
@@ -82,7 +81,7 @@ function addTrack (){
     JSaddHourThree.onclick = largeTrack;
     JSaddStockOne.onclick = chooseImageOne;
     JSaddStockTwo.onclick = chooseImageTwo;
-    JSaddStockThree.onclick = chooseImageThree;
+    JSaddStockThree.onclick = chooseImageThree;*/
     addTrackBtn.onclick = createNewEvent;
 
     //Unlimited if no value on nrOfPart
@@ -228,14 +227,10 @@ function addTrack (){
              }))
     };//end initdates
 
-
-
-
-
     //temporary code for the usertest
 
-    function timeOne (){
-        choosenTime = startOne
+    /*function timeOne (){
+        var choosenTime = '2017-06-02T13:00'
         document.getElementById("JSaddStartOne").classList.add('selectedTime');
         document.getElementById("JSaddStartTwo").classList.remove('selectedTime');
         document.getElementById("JSaddStartThree").classList.remove('selectedTime');
@@ -305,7 +300,18 @@ function addTrack (){
         document.getElementById("JSaddStockTwo").classList.remove('selectedTime');
         document.getElementById("JSaddStockOne").classList.remove('selectedTime');
         return choosenImage
+    }*/
+
+    /*-------------- SET END TIME --------------*/
+    /*function setEndTime(){
+
+        //var choosenTime = "2017-06-02T13:00";
+        //var choosenTrack = "Small";
+
+
+
     }
+    /*-------------- END SET END TIME --------------*/
 
     //the function that creates a new event, and post it to contentful
     function createNewEvent (){
@@ -326,13 +332,34 @@ function addTrack (){
         //var JSaddNewStockTwo = JSaddStockTwo.value;
         //var JSaddNewStockThree = JSaddStockThree.value;
         var JSaddNewElse = JSaddElse.value;
-        var JSaddStatus
 
 
-        var choosenTime = "2017-06-02T13:00";
-        var choosenTrack = "Small";
+        var startTime = choosenTime.substring(choosenTime.length - 5);
+        console.log('StartTime', startTime);
+        console.log('ChoosenTrack', choosenTrack);
+        //var eventEndTime;
+
+        /*If choosenTime is 13:00*/
+        if(startTime == '13:00' && choosenTrack == 'Large'){
+            eventEndTime = '15:45';
+        }else if(startTime == '13:00' && choosenTrack == 'Medium'){
+            eventEndTime = '14:45';
+        }else if(startTime == '13:00' && choosenTrack == 'Small'){
+            eventEndTime = '13:45';
+
+        /*If choosenTime is 14:00*/
+        }else if(startTime == '14:00' && choosenTrack == 'Medium'){
+            eventEndTime = '15:45';
+        }else if(startTime == '14:00' && choosenTrack == 'Small'){
+            eventEndTime = '14:45';
+
+        /*If choosenTime is 15:00*/
+        }else if(startTime == '15:00' && choosenTrack == 'Small'){
+            eventEndTime = '15:45';
+        }
+
+
         var dateId = '2Bxpz2RgA4AQImQOssey8w';
-
 
         var newTrack = {
             fields: {
@@ -351,6 +378,10 @@ function addTrack (){
                 },
                 size: {
                     'en-US': choosenTrack
+                },
+
+                endTime: {
+                    'en-US': eventEndTime
                 },
 
                 numberOfParticipants: {

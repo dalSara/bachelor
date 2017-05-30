@@ -90,17 +90,17 @@ function dataDelivery(){
         jqueryFunctions.scrollToTop();
         /*end jQuery functions*/
 
-        going.addAttendees();
+        //going.addAttendees();
     })
     /*-------------- END GET ENTRIES --------------*/
 
     /*-------------- GET INDEX OF THE DATE --------------*/
     function getDateIndex(index){
-        var dateIndex = allDates[index + 1]; //[index+1]
+        var dateIndex = allDates[index]; //[index+1]
         var date = dateIndex.fields.date;
 
         //Display date correctly in navigation
-        var day = date.substring(date.length - 2);
+        var day = date.substring(8, 10);
         var month = date.substring(5, 7);
         var year = date.substring(2, 4);
 
@@ -113,17 +113,17 @@ function dataDelivery(){
     /*-------------- ADD DATE TO NAVIGATION --------------*/
     function updateDateLabels(){
         if(globalTargetDateIndex > 0){
-            prevDate.innerHTML = getDateIndex(globalTargetDateIndex - 2);
+            prevDate.innerHTML = getDateIndex(globalTargetDateIndex - 1);
         } else {
             prevDate.innerHTML = "--";
         }
 
         if(globalTargetDateIndex < allDates.length - 1){
-            nextDate.innerHTML = getDateIndex(globalTargetDateIndex);
+            nextDate.innerHTML = getDateIndex(globalTargetDateIndex + 1);
         } else {
             nextDate.innerHTML = "TBA";
         }
-        thisDate.innerHTML = getDateIndex(globalTargetDateIndex - 1);
+        thisDate.innerHTML = getDateIndex(globalTargetDateIndex);
     }
     /*-------------- END ADD DATE TO NAVIGATION --------------*/
 
@@ -346,6 +346,13 @@ function dataDelivery(){
         var startTime = date.substring(date.length - 5);
 
         /*----if fields is null or undefined----*/
+        var endTime = event.fields.endTime;
+        if(endTime == null || endTime == 'undefined'){
+            endTime = 'Unspecified';
+        }else{
+            endTime = endTime;
+        }
+
         var location = event.fields.location;
         if(location == null || location == 'undefined'){
             location = 'TBA'; //If location is missing.
@@ -390,7 +397,7 @@ function dataDelivery(){
             '</div>' +
 
             '<div class="JSrightListInfo">' +
-            '<i class="JSicon-clock"></i><p class="JSstartTimeList">' + startTime + ' - 15:45</p>' +
+            '<i class="JSicon-clock"></i><p class="JSstartTimeList">' + startTime + ' - ' + endTime + '</p>' +
             '<div class="JSlocationWrapperList">' +
             '<i class="JSicon-room"></i><p class="JSlocationList">' + location + '</p>' +
             '</div>' +
@@ -400,8 +407,8 @@ function dataDelivery(){
             '<div class="JSgoingBtnWrapper">' +
                 '<button type="button" class="JSgoing JSgoingBtn"></button>' +
                 '<div class="JSgoingDropdownContent JShidden">' +
-                    'Name: <input type="text" id="JSattendeesName" class="JSnameInput" name="name">' +
-                    '<div tabindex="0" role="button" id="JSattendeesBtn" class="JSregisterBtn" type="submit">Register</div>' +
+                    'Name: <input type="text" class="JSnameInput" name="name">' +
+                    '<div tabindex="0" role="button" class="JSregisterBtn" type="submit">Register</div>' +
                 '</div>' +
             '</div>' +
             /*-------------- END GOING BTN --------------*/
