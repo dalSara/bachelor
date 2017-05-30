@@ -14,20 +14,14 @@ function addTrack (){
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     var arrowNext = document.getElementById("arrowNext");
 
-<<<<<<< HEAD
-    //var prevBtn = document.getElementById("prevBtn");
-    var thisWeekBtn = document.getElementById("thisWeekBtn");
-    //var nextBtn = document.getElementById("nextBtn");
-
     var prevDate = document.getElementById("prevDate");
     var thisDate = document.getElementById("thisDate");
     var nextDate = document.getElementById("nextDate");
 
     var choosenTime = '2017-06-02T13:00';
     var choosenTrack = "Small";
-=======
+
     var choosenTrack;
->>>>>>> Merge with Natalie
     var choosenImage;
 
     var eventEndTime = null;
@@ -75,13 +69,10 @@ function addTrack (){
     //var JSaddStatus = document.getElementById("JSaddStatus"); //belongs to a function that is not in use at the time
     var addTrackBtn = document.getElementById("addTrackBtn");
 
-<<<<<<< HEAD
     /*JSaddStartOne.onclick = timeOne;
-=======
 
     //------------ click funkctions --------//
     JSaddStartOne.onclick = timeOne;
->>>>>>> Merge with Natalie
     JSaddStartTwo.onclick = timeTwo;
     JSaddStartThree.onclick = timeThree;
     JSaddHourOne.onclick = smallTrack;
@@ -216,8 +207,6 @@ function addTrack (){
                     JSdatePick1.innerHTML = "--";
                 }
 
-<<<<<<< HEAD
-=======
                 if(globalTargetDateIndex < globalAllDatesArray.length - 1){
                     JSdatePick3.innerHTML = getDateIndex(globalTargetDateIndex + 1);
                 } else {
@@ -232,7 +221,6 @@ function addTrack (){
     };//end chooseDates
 
 
->>>>>>> Merge with Natalie
     //temporary code for the usertest
 
     /*function timeOne (){
@@ -368,8 +356,6 @@ function addTrack (){
         //var JSaddNewStockThree = JSaddStockThree.value;
         var JSaddNewElse = JSaddElse.value;
 
-
-<<<<<<< HEAD
         var startTime = choosenTime.substring(choosenTime.length - 5);
         console.log('StartTime', startTime);
         console.log('ChoosenTrack', choosenTrack);
@@ -397,12 +383,11 @@ function addTrack (){
 
         var dateId = '2Bxpz2RgA4AQImQOssey8w';
 
-=======
         var choosenTime = selectedDate+"T13:00";
         var choosenTrack = "Small";
 
         //----- JSON that gets sent to Contentful
->>>>>>> Merge with Natalie
+
         var newTrack = {
             fields: {
                 title: {
