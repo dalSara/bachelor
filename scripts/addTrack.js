@@ -2,32 +2,24 @@
 var contentfulManagement = require('contentful-management');
 
 function addTrack (){
-//module.exports = function(){
+    //module.exports = function(){
     //contentful management id the module that have contact with contentful.
     //this is the conection to the module
 
     var client = contentfulManagement.createClient({
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-<<<<<<< HEAD
-        accessToken: '',
-        resolveLinks: true
-=======
-        accessToken: 'b60f393ec836a43747cb5a238cdc49e379361c7d7a0a96012191fb3745e2532b'
+        resolveLinks: true,
+        accessToken: ''
 
->>>>>>> 54bb4c6c97716a07e49d0f06259d2fe0b2a3b4dd
     });
-
-
-<<<<<<< HEAD
 
     var arrowPrevious = document.getElementById("arrowPrevious");
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     var arrowNext = document.getElementById("arrowNext");
-=======
+
     //var prevBtn = document.getElementById("prevBtn");
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     //var nextBtn = document.getElementById("nextBtn");
->>>>>>> 54bb4c6c97716a07e49d0f06259d2fe0b2a3b4dd
 
     var prevDate = document.getElementById("prevDate");
     var thisDate = document.getElementById("thisDate");
@@ -96,23 +88,25 @@ function addTrack (){
     //Unlimited if no value on nrOfPart
     initDates();
 
-    function getSelectedDate(specifiedDate) {
-        selectedDate = new Date();
-        if(specifiedDate) selectedDate = specifiedDate;
-        /*-------------- TODAYS DATE --------------*/
-        //ISO8601 formatted YYYY-MM-DD (to match Contentful):
-        var year = selectedDate.getFullYear();
-        var month = ('0' + (selectedDate.getMonth() +1)).slice(-2);
-        var day = ('0' + selectedDate.getDate()).slice(-2);
-        var selectedDate = year + '-' + month + '-' + day;
-        /*-------------- END TODAYS DATE --------------*/
 
-        return selectedDate;
-    }
 
 
 
     function initDates(){
+
+        function getSelectedDate(specifiedDate) {
+            selectedDate = new Date();
+            if(specifiedDate) selectedDate = specifiedDate;
+            /*-------------- TODAYS DATE --------------*/
+            //ISO8601 formatted YYYY-MM-DD (to match Contentful):
+            var year = selectedDate.getFullYear();
+            var month = ('0' + (selectedDate.getMonth() +1)).slice(-2);
+            var day = ('0' + selectedDate.getDate()).slice(-2);
+            var selectedDate = year + '-' + month + '-' + day;
+            /*-------------- END TODAYS DATE --------------*/
+
+            return selectedDate;
+        }
 
         var globalTargetDateIndex = null;
         var globalAllDatesArray = null;
@@ -120,37 +114,28 @@ function addTrack (){
         var allDates = null;
         var thisShowDoEvents = null;
 
-        var locale = 'en-US'
-
-
-        var day = {sys: {
-            id: "datesForShowDo",
-            type: "ContentType",
-        }}
 
         client.getSpace('59mi8sr8zemv')
             .then((space) =>
                   space.getEntries({
             content_type: 'datesForShowDo',
-            select: 'fields.date',
             order: 'fields.date', //Sort by date in datesForShowDo
             locale: 'en-US'
             //includes: '10'
-        }
+        }).then(function(entries){
+            console.log('bajs', entries.items)
+            allDates = entries.items;
 
-                 ).then(function(fields){
-            console.log('bajs', fields)
-            allDates = fields.date.[]
             console.log('BajsBajs:', allDates); //all dates
 
             selectedDate = getSelectedDate();
 
             //loop through dates in datesForShowDo
             for(var i = 0; i < allDates.length; i++){
-                if(allDates[i].fields.date <= selectedDate && allDates[i+1].fields.date >= selectedDate){
+                if(allDates[i].fields.date["en-US"] <= selectedDate && allDates[i+1].fields.date["en-US"] >= selectedDate){
                     globalTargetDateIndex = i + 1;
 
-                    var oneDate = allDates[globalTargetDateIndex].fields.date;
+                    var oneDate = allDates[globalTargetDateIndex].fields.date["en-US"];
                     console.log('Later than selectedDate', oneDate);
 
                     thisShowDoEvents = allDates[i + 1].fields.link; //EVENTS TO DISPLAY
@@ -159,38 +144,34 @@ function addTrack (){
             }
 
             // console.log(fields.date)
-            globalAllDatesArray = fields.date;
-            console.log('Entry Client: All dates (sorted):', globalAllDatesArray); //all dates
-        }))
-        var today = new Date();
-        var year = today.getFullYear();
-        var month = ('0' + (today.getMonth() +1)).slice(-2);
-        var day = ('0' + today.getDate()).slice(-2);
-        today = year + '-' + month + '-' + day;
+            // globalAllDatesArray = fields.date["en-US"];
+            globalAllDatesArray = entries.items;
+            console.log('global (sorted):', globalAllDatesArray); //all dates
 
-        globalTargetDateIndex = 0;
+            var today = new Date();
+            var year = today.getFullYear();
+            var month = ('0' + (today.getMonth() +1)).slice(-2);
+            var day = ('0' + today.getDate()).slice(-2);
+            today = year + '-' + month + '-' + day;
 
-        for(var i = 0; i < globalAllDatesArray.length - 1; i++){
+            globalTargetDateIndex = 0;
 
-            if(globalAllDatesArray[i].fields.date <= today && globalAllDatesArray[i+1].fields.date >= today){
-                globalTargetDateIndex = i+1;
-                break;
+            for(var i = 0; i < globalAllDatesArray.length - 1; i++){
+
+                if(globalAllDatesArray[i].fields.date["en-US"] <= today && globalAllDatesArray[i+1].fields.date["en-US"] >= today){
+                    globalTargetDateIndex = i+1;
+                    break;
+                }
+                //var thisWeeksEvents = dates.fields.link; //!!!! ENDRE var navn?
             }
-            //var thisWeeksEvents = dates.fields.link; //!!!! ENDRE var navn?
-        }
 
-        updateDateLabels();
-        //callbackAction();
-        //TODO enable pre/next buttons
+            updateDateLabels();
+            //callbackAction();
+            //TODO enable pre/next buttons
 
-        arrowPrevious.onclick = goPrevious;
-        arrowNext.onclick = goNext;
+            arrowPrevious.onclick = goPrevious;
+            arrowNext.onclick = goNext;
 
-<<<<<<< HEAD
-=======
-            //prevBtn.onclick = goPrevious;
-            //nextBtn.onclick = goNext;
->>>>>>> 54bb4c6c97716a07e49d0f06259d2fe0b2a3b4dd
 
 
         function goNext(){
@@ -213,9 +194,26 @@ function addTrack (){
         function getDateLabel(index){
             var date = globalAllDatesArray[index];
 
-            formatted = date.fields.date;
+            formatted = date.fields.date["en-US"];
             return formatted;
         }
+
+        /*-------------- GET INDEX OF THE DATE --------------*/
+        function getDateIndex(index){
+            var dateIndex = allDates[index + 1]; //[index+1]
+            var date = dateIndex.fields.date["en-US"];
+
+            //Display date correctly in navigation
+            var day = date.substring(date.length - 2);
+            var month = date.substring(5, 7);
+            var year = date.substring(2, 4);
+
+            var dateFormat = day + '.' + month + '.' + year;
+
+            return dateFormat;
+        }
+
+        /*-------------- END GET INDEX OF THE  DATE --------------*/
 
         function updateDateLabels(){
 
@@ -233,6 +231,8 @@ function addTrack (){
 
             JSdatePick2.innerHTML = getDateLabel(globalTargetDateIndex);
         }
+
+             }))
     };//end initdates
 
 
@@ -428,7 +428,7 @@ function addTrack (){
         })//end getspace
 
     }//end create new event
-    console.log (entry.fields.link["en-US"])
+
 }//end add track
 
 exports.addTrack = addTrack;
