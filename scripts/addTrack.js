@@ -2,9 +2,6 @@
 var contentfulManagement = require('contentful-management');
 
 function addTrack (){
-    //module.exports = function(){
-    //contentful management id the module that have contact with contentful.
-    //this is the conection to the module
 
     var client = contentfulManagement.createClient({
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
@@ -12,11 +9,12 @@ function addTrack (){
         accessToken: ''
 
     });
-
+    //--------------Navigation btn ------------------------//
     var arrowPrevious = document.getElementById("arrowPrevious");
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     var arrowNext = document.getElementById("arrowNext");
 
+<<<<<<< HEAD
     //var prevBtn = document.getElementById("prevBtn");
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     //var nextBtn = document.getElementById("nextBtn");
@@ -27,12 +25,15 @@ function addTrack (){
 
     var choosenTime = '2017-06-02T13:00';
     var choosenTrack = "Small";
+=======
+    var choosenTrack;
+>>>>>>> Merge with Natalie
     var choosenImage;
 
     var eventEndTime = null;
 
     //var startOne = '2017-06-02T13:00:31Z';
-
+    //-------- temporary img var -----//
     var imageOne = {sys: {
         id: '4KahBhVQTCykgOYsKS66Ws',
         linkType: "Asset",
@@ -50,6 +51,7 @@ function addTrack (){
         type:"Link"
     }}
 
+    //----- HTML - Objects for the form -----------------//
     var JSdatePick1 = document.getElementById("JSdatePick1");
     var JSdatePick2 = document.getElementById("JSdatePick2");
     var JSdatePick3 = document.getElementById("JSdatePick3");
@@ -73,7 +75,13 @@ function addTrack (){
     //var JSaddStatus = document.getElementById("JSaddStatus"); //belongs to a function that is not in use at the time
     var addTrackBtn = document.getElementById("addTrackBtn");
 
+<<<<<<< HEAD
     /*JSaddStartOne.onclick = timeOne;
+=======
+
+    //------------ click funkctions --------//
+    JSaddStartOne.onclick = timeOne;
+>>>>>>> Merge with Natalie
     JSaddStartTwo.onclick = timeTwo;
     JSaddStartThree.onclick = timeThree;
     JSaddHourOne.onclick = smallTrack;
@@ -84,14 +92,15 @@ function addTrack (){
     JSaddStockThree.onclick = chooseImageThree;*/
     addTrackBtn.onclick = createNewEvent;
 
+    //--------- Call for functions ----------//
     //Unlimited if no value on nrOfPart
-    initDates();
+    chooseDates();
+    time();
 
 
 
-
-
-    function initDates(){
+    //---------- function to choose time----------//
+    function chooseDates(){
 
         function getSelectedDate(specifiedDate) {
             selectedDate = new Date();
@@ -120,7 +129,6 @@ function addTrack (){
             content_type: 'datesForShowDo',
             order: 'fields.date', //Sort by date in datesForShowDo
             locale: 'en-US'
-            //includes: '10'
         }).then(function(entries){
             console.log('bajs', entries.items)
             allDates = entries.items;
@@ -142,10 +150,9 @@ function addTrack (){
                 }
             }
 
-            // console.log(fields.date)
-            // globalAllDatesArray = fields.date["en-US"];
             globalAllDatesArray = entries.items;
-            console.log('global (sorted):', globalAllDatesArray); //all dates
+            console.log('events (sorted):', selectedDate); //all dates
+            console.log('Natalies liste:', thisShowDoEvents); //all dates
 
             var today = new Date();
             var year = today.getFullYear();
@@ -161,72 +168,71 @@ function addTrack (){
                     globalTargetDateIndex = i+1;
                     break;
                 }
-                //var thisWeeksEvents = dates.fields.link; //!!!! ENDRE var navn?
             }
 
             updateDateLabels();
-            //callbackAction();
-            //TODO enable pre/next buttons
 
             arrowPrevious.onclick = goPrevious;
             arrowNext.onclick = goNext;
 
-
-
-        function goNext(){
-            if(globalTargetDateIndex < globalAllDatesArray.length - 1){
-                globalTargetDateIndex ++;
-                updateDateLabels();
-                //callbackAction();
-            }
-        }
-
-
-        function goPrevious(){
-            if(globalTargetDateIndex > 0){
-                globalTargetDateIndex --;
-                updateDateLabels();
-                //callbackAction();
-            }
-        }
-
-        /*-------------- GET INDEX OF THE DATE --------------*/
-        function getDateIndex(index){
-            var dateIndex = allDates[index]; //[index+1]
-            var date = dateIndex.fields.date["en-US"];
-
-            //Display date correctly in navigation
-            var day = date.substring(8, 10);
-            var month = date.substring(5, 7);
-            var year = date.substring(2, 4);
-
-            var dateFormat = day + '.' + month + '.' + year;
-
-            return dateFormat;
-        }
-
-        /*-------------- END GET INDEX OF THE  DATE --------------*/
-
-        function updateDateLabels(){
-
-            if(globalTargetDateIndex > 0 ){
-                JSdatePick1.innerHTML = getDateIndex(globalTargetDateIndex - 1);
-            } else {
-                JSdatePick1.innerHTML = "--";
+            function goNext(){
+                if(globalTargetDateIndex < globalAllDatesArray.length - 1){
+                    globalTargetDateIndex ++;
+                    updateDateLabels();
+                }
             }
 
-            if(globalTargetDateIndex < globalAllDatesArray.length - 1){
-                JSdatePick3.innerHTML = getDateIndex(globalTargetDateIndex + 1);
-            } else {
-                JSdatePick3.innerHTML = "TBA";
+            function goPrevious(){
+                if(globalTargetDateIndex > 0){
+                    globalTargetDateIndex --;
+                    updateDateLabels();
+                    //callbackAction();
+                }
             }
 
-            JSdatePick2.innerHTML = getDateIndex(globalTargetDateIndex);
-        }
+            /*-------------- GET INDEX OF THE DATE --------------*/
+            // totaly stolen from Natalie =)
+            function getDateIndex(index){
+                var dateIndex = allDates[index]; //[index+1]
+                var date = dateIndex.fields.date["en-US"];
 
-             }))
-    };//end initdates
+                //Display date correctly in navigation
+                var day = date.substring(8, 10);
+                var month = date.substring(5, 7);
+                var year = date.substring(2, 4);
 
+                var dateFormat = day + '.' + month + '.' + year;
+
+                return dateFormat;
+            }
+
+            /*-------------- END GET INDEX OF THE  DATE --------------*/
+
+            function updateDateLabels(){
+
+                if(globalTargetDateIndex > 0 ){
+                    JSdatePick1.innerHTML = getDateIndex(globalTargetDateIndex - 1);
+                } else {
+                    JSdatePick1.innerHTML = "--";
+                }
+
+<<<<<<< HEAD
+=======
+                if(globalTargetDateIndex < globalAllDatesArray.length - 1){
+                    JSdatePick3.innerHTML = getDateIndex(globalTargetDateIndex + 1);
+                } else {
+                    JSdatePick3.innerHTML = "TBA";
+                }
+
+                JSdatePick2.innerHTML = getDateIndex(globalTargetDateIndex);
+            }
+
+            console.log('valgt dato', )
+        }))
+    };//end chooseDates
+
+
+>>>>>>> Merge with Natalie
     //temporary code for the usertest
 
     /*function timeOne (){
@@ -236,7 +242,6 @@ function addTrack (){
         document.getElementById("JSaddStartThree").classList.remove('selectedTime');
         return choosenTime
     }
-
 
     function timeTwo (){
         var choosenTime = '2017-06-02T14:00'
@@ -269,6 +274,7 @@ function addTrack (){
         document.getElementById("JSaddHourThree").classList.remove('selectedTime');
         return choosenTrack
     }
+
     function largeTrack (){
         var choosenTrack = "Large"
         document.getElementById("JSaddHourThree").classList.add('selectedTime');
@@ -313,8 +319,37 @@ function addTrack (){
     }
     /*-------------- END SET END TIME --------------*/
 
+
+    var dateId = '2Bxpz2RgA4AQImQOssey8w';
+
+    function time (){
+        client.getSpace('59mi8sr8zemv')
+            .then((space) => {
+            space.getEntry(dateId, {
+                resolveLinks: true
+            })
+                .then((entry) => {
+
+                var foo = {sys: {
+                    id: '62kwrp5OrSECIYE6c0OeM6',
+                    linkType: "Entry",
+                    type:"Link",
+                    linkContentType:['envents']
+                }}
+
+                //  var foo = fields.link;
+                console.log('time1', entry.fields)
+                console.log('time2', choosenTime)
+                //console.log('Natalies liste', thisShowDoEvents)
+            })
+        })
+    }
+
     //the function that creates a new event, and post it to contentful
     function createNewEvent (){
+
+        //---Geting the value of the input fields in the html
+
         var JSaddNewTitle = JSaddTitle.value;
         var JSaddNewHosts = JSaddHosts.value;
         var JSaddNewPrereq = JSaddPrereq.value;
@@ -334,6 +369,7 @@ function addTrack (){
         var JSaddNewElse = JSaddElse.value;
 
 
+<<<<<<< HEAD
         var startTime = choosenTime.substring(choosenTime.length - 5);
         console.log('StartTime', startTime);
         console.log('ChoosenTrack', choosenTrack);
@@ -361,6 +397,12 @@ function addTrack (){
 
         var dateId = '2Bxpz2RgA4AQImQOssey8w';
 
+=======
+        var choosenTime = selectedDate+"T13:00";
+        var choosenTrack = "Small";
+
+        //----- JSON that gets sent to Contentful
+>>>>>>> Merge with Natalie
         var newTrack = {
             fields: {
                 title: {
@@ -409,9 +451,9 @@ function addTrack (){
                 },
 
             }//end field
-        }
+        }//en newTrack
 
-
+        //-- Creates the new track in events, with ref to korrekt date
         client.getSpace('59mi8sr8zemv')
             .then((space) => {
             space.createEntry('events', newTrack)
@@ -431,16 +473,10 @@ function addTrack (){
                     }}
 
                     //Creates a reference field in dates for show & do
-
                     entry.fields.link["en-US"].push(newId)
-
-
                     //update the event
                     return entry.update()
-
                 })
-
-
                 //publish event
                 space.getEntry(eventID)
                     .then ((entry) => entry.publish())
