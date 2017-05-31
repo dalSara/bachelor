@@ -99,7 +99,7 @@ nav ul {
     border: 4px solid #0066FF;
     font-family: "Volte-Semibold", sans-serif;
     font-size: .8rem;
-    color: #0066FF;
+    color: #06f;
     text-transform: none;
     padding: .2rem; }
     nav ul li:hover {
@@ -160,7 +160,7 @@ nav .Active a {
   width: 15px; }
 
 /********************************************
-inputs
+inputs and style for add track
 ********************************************/
 .buttonsAddTrack {
   display: inline-block;
@@ -273,6 +273,10 @@ textarea {
   height: 150px;
   padding: 12px 20px;
   resize: none; }
+
+.obligatoryField {
+  color: #06f;
+  font-size: 1.3em; }
 
 /********************************************
 pageHeader

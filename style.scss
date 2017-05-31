@@ -140,7 +140,7 @@ nav {
             border: 4px solid #0066FF;
             font-family: "Volte-Semibold", sans-serif;
             font-size: .8rem;
-            color: #0066FF;
+            color: $eventcolor;
             text-transform: none;
             padding: .2rem;
             &:hover {
@@ -209,7 +209,7 @@ nav {
  }
 
 /********************************************
-inputs
+inputs and style for add track
 ********************************************/
 
 .buttonsAddTrack {
@@ -342,6 +342,10 @@ textarea {
     resize: none;
 }
 
+.obligatoryField {
+    color: $eventcolor;
+    font-size: 1.3em;
+}
 
 /********************************************
 pageHeader
