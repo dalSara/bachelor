@@ -90,7 +90,7 @@ function dataDelivery(){
         jqueryFunctions.scrollToTop();
         /*end jQuery functions*/
 
-        //going.addAttendees();
+        going.addAttendees();
     })
     /*-------------- END GET ENTRIES --------------*/
 
@@ -146,6 +146,7 @@ function dataDelivery(){
             jqueryFunctions.goingBtn();
             jqueryFunctions.scrollToTop();
             /*end jQuery functions*/
+            going.addAttendees();
         }else{
             alert('No more Show & Dos are added.');
             return globalTargetDateIndex--; //To stop adding index
@@ -171,6 +172,7 @@ function dataDelivery(){
             jqueryFunctions.goingBtn();
             jqueryFunctions.scrollToTop();
             /*end jQuery functions*/
+            going.addAttendees();
         }else{
             alert('No more Show & Dos to display from the past.');
             return globalTargetDateIndex; //To stop adding index
@@ -315,8 +317,6 @@ function dataDelivery(){
 
     /*-------------- PUT ELEMENTS TOGETHER: LIST --------------*/
     function renderSingleEventList(event){
-        var sysID = event.sys.id; //Events sys.id from Contentful
-
         //if event exists in date
         if(event != null || event == true){
 
@@ -333,7 +333,7 @@ function dataDelivery(){
             renderImage(event.fields.image) +
             '</div>' +
 
-            '<div  id="'+ sysID +'" class="JSeventInfoList">' +
+            '<div class="JSeventInfoList">' +
             renderEventInfoList(event) +
             '</div>' +
             '</div>';
@@ -342,13 +342,15 @@ function dataDelivery(){
 
     /*-------------- GET DATA FROM ONE EVENT: LIST --------------*/
     function renderEventInfoList(event){
+        var sysID = event.sys.id; //Events sys.id from Contentful
+
         var date = event.fields.time;
         var startTime = date.substring(date.length - 5);
 
         /*----if fields is null or undefined----*/
         var endTime = event.fields.endTime;
         if(endTime == null || endTime == 'undefined'){
-            endTime = 'Unspecified';
+            endTime = 'Unspecified'; //If endTime is missing.
         }else{
             endTime = endTime;
         }
@@ -367,11 +369,55 @@ function dataDelivery(){
             numberOfParticipants = numberOfParticipants;
         }
 
+
+        //If peopleGoing is missing.
+        /*if(peopleGoing == null || peopleGoing == 'undefined'){
+            var names = '';
+            var countPeopleGoing = peopleGoing.length; //List = 0
+
+        //If peopleGoing is TRUE
+        }else if(peopleGoing != null || peopleGoing != 'undefined'){
+            console.log(peopleGoing.length);
+
+            for(var i = 0; i < peopleGoing.length; i++){
+                var oneName = peopleGoing[i];
+                names = oneName;
+                console.log('Full name', oneName);
+
+
+            }
+        }*/
+
+
+                /*peopleGoing = peopleGoing[oneName];
+                console.log('..', oneName);
+                //countPeopleGoing = peopleGoing.length;
+
+            }else if(oneName != ""){
+                oneName = oneName;
+                console.log('2', oneName);
+                peopleGoing = peopleGoing[oneName]; //.join('<br>');
+                //countPeopleGoing = peopleGoing.length;
+            }
+        }
+
+        var oneName = countPeopleGoing[i];
+
+                if(oneName == ''){
+                    countPeopleGoing = peopleGoing.length;
+                    peopleGoing = '..';
+                }else{
+                    countPeopleGoing = peopleGoing.length;
+                    peopleGoing = peopleGoing.join(' <br>');
+                }
+                //console.log(oneName);*/
+            //}
+
         var peopleGoing = event.fields.peopleAttending;
         if(peopleGoing == null || peopleGoing == 'undefined'){
             peopleGoing = ''; //If peopleGoing is missing.
             var countPeopleGoing = peopleGoing.length; //List = 0
-        }else {
+        }else{
             countPeopleGoing = peopleGoing.length; //Count peopleGoing
             peopleGoing = peopleGoing.join(' <br>');//Display peopleGoing in list.
         }
@@ -407,8 +453,8 @@ function dataDelivery(){
             '<div class="JSgoingBtnWrapper">' +
                 '<button type="button" class="JSgoing JSgoingBtn"></button>' +
                 '<div class="JSgoingDropdownContent JShidden">' +
-                    'Name: <input type="text" class="JSnameInput" name="name">' +
-                    '<div tabindex="0" role="button" class="JSregisterBtn" type="submit">Register</div>' +
+                    'Name: <input type="text" placeholder="Firstname Lastname" id="' + sysID + 'Input" class="JSnameInput" name="name">' +
+                    '<div tabindex="0" role="button" id="'+ sysID +'" class="JSregisterBtn" type="submit">Register</div>' +
                 '</div>' +
             '</div>' +
             /*-------------- END GOING BTN --------------*/
@@ -420,10 +466,6 @@ function dataDelivery(){
 
     }
     /*-------------- END GET DATA FROM ONE EVENT: LIST --------------*/
-
-    function alertID(clickedID){
-        alert(clickedID);
-    }
 
     /*-------------- GET IMAGE: LIST --------------*/
     function renderImage(image){

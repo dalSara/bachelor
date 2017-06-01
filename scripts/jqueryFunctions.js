@@ -65,10 +65,16 @@ function goingBtn(){
         $('.JSgoing').click(function() {
             $(this).addClass('JSgoing-clicked');
             $(this).next('.JSgoingDropdownContent').stop().slideToggle(500);
+            //$(this).next().children('div').attr('id', 'JSattendeesBtn'); //Add id to add going.attendees();
+            //going.addAttendees();
 
             $('.JSregisterBtn').click(function() {
+                //going.addAttendees();
+                //$(this).removeAttr('id', 'JSattendeesBtn');
                 $('.JSgoingDropdownContent').stop().slideUp(500);
                 $(this).parent().siblings('.JSgoing').addClass('JSgoing-registered');
+
+                //$(this).click(going.addAttendees);
             })
         })
     });

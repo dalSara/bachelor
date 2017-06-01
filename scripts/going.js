@@ -1,6 +1,6 @@
 //var contentful = require('contentful');
 var contentful = require('contentful-management');
-//var dataDelivery = require('./dataDelivery');
+var dataDelivery = require('./dataDelivery');
 
 //module.exports = function(){
 function addAttendees(){
@@ -10,19 +10,25 @@ function addAttendees(){
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
         accessToken: 'b60f393ec836a43747cb5a238cdc49e379361c7d7a0a96012191fb3745e2532b'
 
-    });
+    })
 
-    //var JSeventInfoList = document.getElementsByClassName("JSeventInfoList");
-    var JSattendeesName = document.getElementById("JSattendeesName");
-    var JSattendeesBtn = document.getElementById("JSattendeesBtn");
+    var buttons = document.getElementsByClassName('JSregisterBtn');
 
+    for(var i = 0; i < buttons.length; i++){
+        const id = buttons[i].id; //Get id on JSregisterBtn's
 
-    function newAttendees(){
+        buttons[i].addEventListener('click', function(){
 
-        var eventId = '3P7kGXEmWc28oY0UYmk2yE';
-        var getName = JSattendeesName.value;
+            var input = document.getElementById(id+'Input'); //Get id on input fields
+            const name = input.value; //Get name in input fields
 
-        client.getSpace('59mi8sr8zemv')
+            newAttendees(id, name);
+        });
+    }
+
+    function newAttendees(eventId, getName){
+
+        client.getSpace('59mi8sr8zemv') //Events
             .then((space) => space.getEntry(eventId))
             .then((entry) => {
 
@@ -36,9 +42,6 @@ function addAttendees(){
             .then ((entry) => entry.publish())
             .catch(console.error)
     };
-
-    JSattendeesBtn.onclick = newAttendees;
-
 }
 
 exports.addAttendees = addAttendees;
