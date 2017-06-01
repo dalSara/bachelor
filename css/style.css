@@ -97,7 +97,7 @@ nav ul {
   margin: 0; }
   nav ul li {
     border: 4px solid #0066FF;
-    font-family: "Volte-Semibold", sans-serif;
+    font-family: 'Volte Semibold', sans-serif;
     font-size: .8rem;
     color: #06f;
     text-transform: none;
@@ -324,7 +324,6 @@ pageHeader
 mainMenu
 ********************************************/
 .mainMenu {
-  /*font-family: 'Volte Semibold';*/
   transition: all .5s; }
   .mainMenu a {
     padding: 10px; }
@@ -570,7 +569,7 @@ index
   width: 30px;
   height: 30px;
   -webkit-mask: url("../assets/images/pencil-write-2.svg") no-repeat 50% 50%;
-  mask: url("../assets/images/notepad-edit.svg") no-repeat 50% 50%;
+  mask: url("../assets/images/pencil-write-2.svg") no-repeat 50% 50%;
   -webkit-mask-size: cover;
   mask-size: cover;
   background-color: #000;

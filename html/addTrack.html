@@ -122,40 +122,41 @@
         <script src="../scripts/dist/scripts/main-addTrack.bundle.js"></script>
         <!--<script src="../node_modules/contentful/browser-dist/contentful.min.js"></script>-->
         <script>
-        document.getElementById('addTrackBtn').onclick = function() {modalFunction()};
-            var errorModal = document.getElementById('error');
-            var publishModal = document.getElementById('publish');
-            var closeModal = document.getElementById('closeError');
+            document.getElementById('addTrackBtn').onclick = function() {modalFunction()};
 
-        function modalFunction() {
-            var JSaddNewTitle = JSaddTitle.value;
-            var JSaddNewHosts = JSaddHosts.value;
-            var JSaddNewPrereq = JSaddPrereq.value;
-            var JSaddNewExpect = JSaddExpect.value;
-            var JSaddNewJoin = JSaddJoin.value;
+                var errorModal = document.getElementById('error');
+                var publishModal = document.getElementById('publish');
+                var closeModal = document.getElementById('closeError');
 
-            /*if one input is empty show error feedback modal */
-            if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "") {
-                errorModal.style.display = 'block';
-                errorModal.style.opacity = '1';
-                errorModal.style.pointerEvents = 'auto';
-                errorModal.style.zIndex = '99999';
+            function modalFunction() {
+                var JSaddNewTitle = JSaddTitle.value;
+                var JSaddNewHosts = JSaddHosts.value;
+                var JSaddNewPrereq = JSaddPrereq.value;
+                var JSaddNewExpect = JSaddExpect.value;
+                var JSaddNewJoin = JSaddJoin.value;
 
-                closeModal.onclick = function() {
-                    errorModal.style.display = 'none';
-                    errorModal.style.opacity = '0';
-                    errorModal.style.pointerEvents = 'none';
-                    errorModal.style.zIndex = '-1';
-                };
+                /*if one input is empty show error feedback modal */
+                if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "") {
+                    errorModal.style.display = 'block';
+                    errorModal.style.opacity = '1';
+                    errorModal.style.pointerEvents = 'auto';
+                    errorModal.style.zIndex = '99999';
 
-            } else {
-                publishModal.style.display = 'block';
-                publishModal.style.opacity = '1';
-                publishModal.style.pointerEvents = 'auto';
-                publishModal.style.zIndex = '99999';
+                    closeModal.onclick = function() {
+                        errorModal.style.display = 'none';
+                        errorModal.style.opacity = '0';
+                        errorModal.style.pointerEvents = 'none';
+                        errorModal.style.zIndex = '-1';
+                    };
+
+                } else {
+                    publishModal.style.display = 'block';
+                    publishModal.style.opacity = '1';
+                    publishModal.style.pointerEvents = 'auto';
+                    publishModal.style.zIndex = '99999';
+                }
+
             }
-
-        }
 
     </script>
     </body>

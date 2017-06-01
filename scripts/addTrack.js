@@ -1,5 +1,7 @@
 //var contentful = require('contentful');
 var contentfulManagement = require('contentful-management');
+var jqueryFunctions = require('./jqueryFunctions');
+
 
 function addTrack (){
 
@@ -87,7 +89,7 @@ function addTrack (){
     //Unlimited if no value on nrOfPart
     chooseDates();
     time();
-
+    jqueryFunctions.smoothScrollDown();
 
 
     //---------- function to choose time----------//
