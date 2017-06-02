@@ -16,7 +16,7 @@ This is a prototype of a booking system for Show & Do Competence Sessions. This 
 | Contentful >= 3.8.1                | `-`           | `npm install contentful` |
 | Contentful-management >= 1.3.1     | `-`           | `npm install contentful-management` |
 | jquery >= 3.2.x                    | `-`           | [jquery.com](https://jquery.com/) |
-| npm >= 3.10.x                      | `-`           | [nodejs.org](http://nodejs.org/) |
+| npm >= 3.10.x                      | `npm -v`           | [nodejs.org](http://nodejs.org/) |
 
 
 ## Install
