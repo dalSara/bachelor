@@ -9,7 +9,6 @@ function addAttendees(){
     var client = contentful.createClient({
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
         accessToken: ''
-
     })
 
     var buttons = document.getElementsByClassName('JSregisterBtn');
@@ -22,7 +21,9 @@ function addAttendees(){
             var input = document.getElementById(id+'Input'); //Get id on input fields
             const name = input.value; //Get name in input fields
 
-            newAttendees(id, name);
+            if(name == true || name != ''){ //If input field is
+                newAttendees(id, name);
+            }
         });
     }
 

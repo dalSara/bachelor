@@ -826,10 +826,6 @@ index
     width: 250px;
     margin-bottom: 20px;
 }
-.JSgoingBtn:after{
-    width: 250px;
-    content: "Going?";
-}
 .JSgoing-clicked{
     background-color: #06f;
     color: #fff;
@@ -853,11 +849,9 @@ index
     padding: 0.5rem;
     cursor: pointer;
 }
-.JSgoing-registered:after{
+.JSgoing-registered{
     background-color: #0066FF;
-    transition: .2s;
     color: white;
-    content: "You're going!";
 }
 /*---------END GOING-BTN-------*/
 

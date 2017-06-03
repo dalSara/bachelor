@@ -61,23 +61,18 @@ function smoothScrollDown(){
 
 /*-------------- GOING BTN --------------*/
 function goingBtn(){
-    $(function(){
-        $('.JSgoing').click(function() {
-            $(this).addClass('JSgoing-clicked');
-            $(this).next('.JSgoingDropdownContent').stop().slideToggle(500);
-            //$(this).next().children('div').attr('id', 'JSattendeesBtn'); //Add id to add going.attendees();
-            //going.addAttendees();
+    $('.JSgoing').click(function() {
+        $(this).next('.JSgoingDropdownContent').stop().slideToggle(500);
 
-            $('.JSregisterBtn').click(function() {
-                //going.addAttendees();
-                //$(this).removeAttr('id', 'JSattendeesBtn');
+        $('.JSregisterBtn').click(function() {
+            //If name is added in input field:
+            if($(this).siblings('.JSnameInput').val() == true || $(this).siblings('.JSnameInput').val() != ''){
                 $('.JSgoingDropdownContent').stop().slideUp(500);
                 $(this).parent().siblings('.JSgoing').addClass('JSgoing-registered');
-
-                //$(this).click(going.addAttendees);
-            })
+                $(this).parent().siblings('.JSgoing').text("You're going!"); //Feedback to user
+            }
         })
-    });
+    })
 }
 /*-------------- END GOING BTN --------------*/
 /*-------------- SCROLL TO TOP --------------*/

@@ -451,7 +451,7 @@ function dataDelivery(){
 
             /*-------------- GOING BTN --------------*/
             '<div class="JSgoingBtnWrapper">' +
-                '<button type="button" class="JSgoing JSgoingBtn"></button>' +
+                '<button type="button" class="JSgoing JSgoingBtn">Going?</button>' +
                 '<div class="JSgoingDropdownContent JShidden">' +
                     'Name: <input type="text" placeholder="Firstname Lastname" id="' + sysID + 'Input" class="JSnameInput" name="name">' +
                     '<div tabindex="0" role="button" id="'+ sysID +'" class="JSregisterBtn" type="submit">Register</div>' +
