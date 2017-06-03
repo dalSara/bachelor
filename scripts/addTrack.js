@@ -15,16 +15,15 @@ function addTrack (){
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     var arrowNext = document.getElementById("arrowNext");
 
-    var choosenTime = '2017-06-02T13:00';
-    var choosenTrack = "Small";
+    var choosenTrack;
 
     var choosenTrack;
     var choosenImage;
 
     var eventEndTime = null;
     // var thisShowDoEvents = null;
+    var startOne;
 
-    //var startOne = '2017-06-02T13:00:31Z';
     //-------- temporary img var -----//
     var imageOne = {sys: {
         id: '4KahBhVQTCykgOYsKS66Ws',
@@ -67,7 +66,7 @@ function addTrack (){
     //var JSaddStatus = document.getElementById("JSaddStatus"); //belongs to a function that is not in use at the time
     var addTrackBtn = document.getElementById("addTrackBtn");
 
-    /*JSaddStartOne.onclick = timeOne;
+    JSaddStartOne.onclick = timeOne;
 
     //------------ click funkctions --------//
     JSaddStartOne.onclick = timeOne;
@@ -78,7 +77,7 @@ function addTrack (){
     JSaddHourThree.onclick = largeTrack;
     JSaddStockOne.onclick = chooseImageOne;
     JSaddStockTwo.onclick = chooseImageTwo;
-    JSaddStockThree.onclick = chooseImageThree;*/
+    JSaddStockThree.onclick = chooseImageThree;
     addTrackBtn.onclick = createNewEvent;
 
     //--------- Call for functions ----------//
@@ -227,53 +226,45 @@ function addTrack (){
 
     //temporary code for the usertest
 
-    /*function timeOne (){
-        var choosenTime = '2017-06-02T13:00'
+    function timeOne (){
         document.getElementById("JSaddStartOne").classList.add('selectedTime');
         document.getElementById("JSaddStartTwo").classList.remove('selectedTime');
         document.getElementById("JSaddStartThree").classList.remove('selectedTime');
-        return choosenTime
     }
 
     function timeTwo (){
-        var choosenTime = '2017-06-02T14:00'
         document.getElementById("JSaddStartTwo").classList.add('selectedTime');
         document.getElementById("JSaddStartOne").classList.remove('selectedTime');
         document.getElementById("JSaddStartThree").classList.remove('selectedTime');
-        return choosenTime
     }
 
     function timeThree (){
-        var choosenTime = '2017-06-02T15:00'
         document.getElementById("JSaddStartThree").classList.add('selectedTime');
         document.getElementById("JSaddStartOne").classList.remove('selectedTime');
         document.getElementById("JSaddStartTwo").classList.remove('selectedTime');
-        return choosenTime
     }
-
     function smallTrack (){
-        var choosenTrack = "Small"
         document.getElementById("JSaddHourOne").classList.add('selectedTime');
         document.getElementById("JSaddHourTwo").classList.remove('selectedTime');
         document.getElementById("JSaddHourThree").classList.remove('selectedTime');
-        return choosenTrack
     }
 
     function mediumTrack (){
-        var choosenTrack = "Medium"
         document.getElementById("JSaddHourTwo").classList.add('selectedTime');
         document.getElementById("JSaddHourOne").classList.remove('selectedTime');
         document.getElementById("JSaddHourThree").classList.remove('selectedTime');
-        return choosenTrack
+
+        if(JSaddHourTwo.classList.contains('selectedTime') == true){
+            choosenTrack = 'Medium'}
     }
 
     function largeTrack (){
-        var choosenTrack = "Large"
         document.getElementById("JSaddHourThree").classList.add('selectedTime');
         document.getElementById("JSaddHourOne").classList.remove('selectedTime');
         document.getElementById("JSaddHourTwo").classList.remove('selectedTime');
-        return choosenImage
 
+        if(JSaddHourThree.classList.contains('selectedTime') == true){
+            choosenTrack = 'Large'}
     }
 
     function chooseImageOne (){
@@ -298,7 +289,11 @@ function addTrack (){
         document.getElementById("JSaddStockTwo").classList.remove('selectedTime');
         document.getElementById("JSaddStockOne").classList.remove('selectedTime');
         return choosenImage
-    }*/
+    }
+
+
+
+
 
     /*-------------- SET END TIME --------------*/
     /*function setEndTime(){
@@ -315,12 +310,14 @@ function addTrack (){
     function time (thisShowDoEvents){
         client.getSpace('59mi8sr8zemv')
             .then((space) => {
-            space.getEntry(dateId, {
-
+            space.getEntry(dateId,{
+                //order: 'fields.date', //Sort by date in datesForShowDo
+                resolveLinks: true,
+                locale: 'en-US'
             })
                 .then((entry) => {
                 var allInDate = entry.fields.link['en-US'];
-               // var eventForDate = allInDate[i].sys.id;
+                // var eventForDate = allInDate[i].sys.id;
                 var eventIdArry = [];
 
 
@@ -329,7 +326,7 @@ function addTrack (){
                     eventIdArry.push(eventForDate);
 
                 }
-                   console.log('array', eventIdArry)
+                console.log('array', eventIdArry)
 
                 space.getEntries('events')
                     .then((entries) =>{
@@ -343,17 +340,89 @@ function addTrack (){
                     //var allEventForDate = entries.items
                     var eventDateId = entries.items
 
-                for(var i = 0; i < eventDateId.length; i++){
-                    var allEventForDate = eventDateId[i].sys.id;
-                    foo.push(allEventForDate);
-                }
+                    for(var i = 0; i < eventDateId.length; i++){
+                        var allEventForDate = eventDateId[i].sys.id;
+                        foo.push(allEventForDate);
+                    }
 
 
                     console.log('hubba', eventDateId)
                     console.log('hubbaBubba', eventDateId[2].sys.id)
                     console.log('hubbaDubba', foo)
 
-                    })
+                    var n = 5
+                    var matrix = new Array(3);
+                    for (var i = 0; i < matrix.length; i++) {
+                        matrix[i] = new Array(n);
+                    }
+
+
+                    for(id of eventIdArry){
+                        for(event of entries.items){
+                            if(id === event.sys.id){
+                                var size = event.fields.size['en-US']
+                                var time = event.fields.time['en-US'].split("T")[1]
+
+                                var row = -1
+                                if(time === "13:00") row = 0;
+                                if(time === "14:00") row = 1;
+                                if(time === "15:00") row = 2;
+
+                                if(size === "Small"){
+                                    for(var i=0; i < n; i++){
+                                        if(matrix[row][i] == null){
+                                            matrix[row][i] = true
+                                            break
+                                        }
+                                    }
+
+                                } else if(size === "Medium"){
+                                    for(var i=0; i < n; i++){
+                                        if(matrix[row][i] == null && matrix[row][i+1] == null){
+                                            matrix[row][i] = true
+                                            matrix[row][i +1] == true
+                                            break
+                                        }
+                                    }
+                                } else if(size === "Large"){
+                                    for(var i=0; i < n; i++){
+                                        if(matrix[row][i] == null && matrix[row][i+1] == null && matrix[row][i+2] == null){
+                                            matrix[row][i] = true
+                                            matrix[row][i +1] == true
+                                            matrix[row][i +2] == true
+                                            break
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+
+
+                    //matrix is filled now
+
+                    var startOne = false
+                    for(var i=0; i < n; i++){
+                        if(matrix[0][i] == null){
+                            startOne = true
+                            break
+                        }
+                    }
+                    if (startOne )
+                        JSaddStartOne.style.display = 'inline-block'
+                    else
+                        JSaddStartOne.style.display = 'none'
+                    /*
+    JSaddStartOne
+    JSaddStartTwo
+    JSaddStartThree
+    JSaddHourOne
+    JSaddHourTwo
+    JSaddHourThree
+    */
+
+                })
 
                 //  var foo = fields.link;
                 console.log('time1', eventForDate)
@@ -386,6 +455,23 @@ function addTrack (){
         //var JSaddNewStockThree = JSaddStockThree.value;
         var JSaddNewElse = JSaddElse.value;
 
+        ///---------Function for selected time----------////
+        if(JSaddStartOne.classList.contains('selectedTime') == true){
+            choosenTime = '2017-06-02T13:00';
+        }else if(JSaddStartTwo.classList.contains('selectedTime') == true) {
+            choosenTime = '2017-06-02T14:00';
+        }else if(JSaddStartThree.classList.contains('selectedTime') == true){
+            choosenTime = '2017-06-02T15:00';
+        }
+
+        //----------- Function for selected size ---------///
+        if(JSaddHourOne.classList.contains('selectedTime') == true){
+            choosenTrack = 'Small';
+        }else if(JSaddHourTwo.classList.contains('selectedTime') == true) {
+            choosenTrack = 'Medium';
+        }else if(JSaddStockThree.classList.contains('selectedTime') == true){
+            choosenTrack = 'Large';
+        }
 
 
         var startTime = choosenTime.substring(choosenTime.length - 5);
@@ -411,6 +497,7 @@ function addTrack (){
         }else if(startTime == '15:00' && choosenTrack == 'Small'){
             eventEndTime = '15:45';
         }
+
 
 
         var dateId = '2Bxpz2RgA4AQImQOssey8w';
