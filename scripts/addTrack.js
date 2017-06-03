@@ -5,7 +5,7 @@ function addTrack (){
 
     var client = contentfulManagement.createClient({
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-        accessToken: '',
+        accessToken: 'b60f393ec836a43747cb5a238cdc49e379361c7d7a0a96012191fb3745e2532b',
         resolveLinks: true
         //space: '59mi8sr8zemv'
 
@@ -14,8 +14,6 @@ function addTrack (){
     var arrowPrevious = document.getElementById("arrowPrevious");
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     var arrowNext = document.getElementById("arrowNext");
-
-    var choosenTrack;
 
     var choosenTrack;
     var choosenImage;
@@ -66,15 +64,9 @@ function addTrack (){
     //var JSaddStatus = document.getElementById("JSaddStatus"); //belongs to a function that is not in use at the time
     var addTrackBtn = document.getElementById("addTrackBtn");
 
-    JSaddStartOne.onclick = timeOne;
+
 
     //------------ click funkctions --------//
-    JSaddStartOne.onclick = timeOne;
-    JSaddStartTwo.onclick = timeTwo;
-    JSaddStartThree.onclick = timeThree;
-    JSaddHourOne.onclick = smallTrack;
-    JSaddHourTwo.onclick = mediumTrack;
-    JSaddHourThree.onclick = largeTrack;
     JSaddStockOne.onclick = chooseImageOne;
     JSaddStockTwo.onclick = chooseImageTwo;
     JSaddStockThree.onclick = chooseImageThree;
@@ -222,27 +214,63 @@ function addTrack (){
              )
 
     // };//end chooseDates
-    console.log('hej',thisShowDoEvents )
 
-    //temporary code for the usertest
 
-    function timeOne (){
+    function addListenerToSizeBtn (){
+        JSaddHourOne.onclick = smallTrack;
+        JSaddHourTwo.onclick = mediumTrack;
+        JSaddHourThree.onclick = largeTrack;
+    }
+
+    function timeOne (matrix){
         document.getElementById("JSaddStartOne").classList.add('selectedTime');
         document.getElementById("JSaddStartTwo").classList.remove('selectedTime');
         document.getElementById("JSaddStartThree").classList.remove('selectedTime');
+        addListenerToSizeBtn();
+
+        if(hasTwoElementsByColumn(matrix, 0)){
+            JSaddHourTwo.style.display ='inline-block'
+        }else{
+            JSaddHourTwo.style.display ='none'
+        }
+
+
+        if(hasThreeElementsByColumn(matrix, 0)){
+            JSaddHourThree.style.display ='inline-block'
+        }else{
+            JSaddHourThree.style.display ='none'
+        }
+
     }
 
-    function timeTwo (){
+    function timeTwo (matrix){
         document.getElementById("JSaddStartTwo").classList.add('selectedTime');
         document.getElementById("JSaddStartOne").classList.remove('selectedTime');
         document.getElementById("JSaddStartThree").classList.remove('selectedTime');
+
+        addListenerToSizeBtn();
+
+        if(hasTwoElementsByColumn(matrix, 1)){
+            JSaddHourTwo.style.display ='inline-block'
+        }else{
+            JSaddHourTwo.style.display ='none'
+        }
+
+        JSaddHourThree.style.display ='none'
     }
 
-    function timeThree (){
+    function timeThree (matrix){
         document.getElementById("JSaddStartThree").classList.add('selectedTime');
         document.getElementById("JSaddStartOne").classList.remove('selectedTime');
         document.getElementById("JSaddStartTwo").classList.remove('selectedTime');
+
+        addListenerToSizeBtn();
+        JSaddHourTwo.style.display ='none'
+        JSaddHourThree.style.display ='none'
     }
+
+
+
     function smallTrack (){
         document.getElementById("JSaddHourOne").classList.add('selectedTime');
         document.getElementById("JSaddHourTwo").classList.remove('selectedTime');
@@ -254,8 +282,6 @@ function addTrack (){
         document.getElementById("JSaddHourOne").classList.remove('selectedTime');
         document.getElementById("JSaddHourThree").classList.remove('selectedTime');
 
-        if(JSaddHourTwo.classList.contains('selectedTime') == true){
-            choosenTrack = 'Medium'}
     }
 
     function largeTrack (){
@@ -263,8 +289,6 @@ function addTrack (){
         document.getElementById("JSaddHourOne").classList.remove('selectedTime');
         document.getElementById("JSaddHourTwo").classList.remove('selectedTime');
 
-        if(JSaddHourThree.classList.contains('selectedTime') == true){
-            choosenTrack = 'Large'}
     }
 
     function chooseImageOne (){
@@ -292,7 +316,46 @@ function addTrack (){
     }
 
 
+    function hasTwoElementsByColumn(matrix, row){
+        var n = matrix[row].length
+        for(var i=0; i < n; i++){
+            if(matrix[row][i] == null && matrix[row+1][i] == null){
+                return true
+            }
+        }
+        return false
+    }
 
+    function hasThreeElementsByColumn(matrix, row){
+        var n = matrix[row].length
+        for(var i=0; i < n; i++){
+            if(matrix[row][i] == null && matrix[row+1][i] == null && matrix[row+1][i] == null){
+                return true
+            }
+        }
+        return false
+    }
+
+
+    function hasElementOnRow(matrix, row){
+        var n = matrix[row].length
+        for(var i=0; i < n; i++){
+            if(matrix[row][i] == null){
+                return true
+            }
+        }
+        return false
+    }
+
+    function hasElement(matrix){
+        var n = matrix.length
+        for(var i=0; i < n; i++){
+            if(hasElementOnRow(matrix, i)){
+                return true
+            }
+        }
+        return false
+    }
 
 
     /*-------------- SET END TIME --------------*/
@@ -402,17 +465,49 @@ function addTrack (){
 
                     //matrix is filled now
 
-                    var startOne = false
-                    for(var i=0; i < n; i++){
-                        if(matrix[0][i] == null){
-                            startOne = true
-                            break
-                        }
-                    }
-                    if (startOne )
-                        JSaddStartOne.style.display = 'inline-block'
-                    else
+                    if(! hasElement(matrix)){
+
                         JSaddStartOne.style.display = 'none'
+                        JSaddStartTwo.style.display = 'none'
+                        JSaddStartThree.style.display = 'none'
+                        JSaddHourOne.style.display = 'none'
+                        JSaddHourTwo.style.display = 'none'
+                        JSaddHourThree.style.display = 'none'
+
+
+                    } else {
+
+                        JSaddHourOne.style.display = 'inline-block'
+
+                        JSaddStartOne.addEventListener('click', function(){
+                            timeOne(matrix);
+                        });
+                        JSaddStartTwo.addEventListener('click', function(){
+                            timeTwo(matrix);
+                        });
+                        JSaddStartThree.addEventListener('click', function(){
+                            timeThree(matrix);
+                        });
+
+
+                        if (hasElementOnRow(matrix, 0) )
+                            JSaddStartOne.style.display = 'inline-block'
+                        else
+                            JSaddStartOne.style.display = 'none'
+
+                        if (hasElementOnRow(matrix, 1) )
+                            JSaddStartTwo.style.display = 'inline-block'
+                        else
+                            JSaddStartTwo.style.display = 'none'
+
+                        if (hasElementOnRow(matrix, 2) )
+                            JSaddStartThree.style.display = 'inline-block'
+                        else
+                            JSaddStartThree.style.display = 'none'
+
+                    }
+
+
                     /*
     JSaddStartOne
     JSaddStartTwo
@@ -436,7 +531,7 @@ function addTrack (){
     function createNewEvent (){
 
         //---Geting the value of the input fields in the html
-
+        var choosenTime;
         var JSaddNewTitle = JSaddTitle.value;
         var JSaddNewHosts = JSaddHosts.value;
         var JSaddNewPrereq = JSaddPrereq.value;
@@ -469,7 +564,7 @@ function addTrack (){
             choosenTrack = 'Small';
         }else if(JSaddHourTwo.classList.contains('selectedTime') == true) {
             choosenTrack = 'Medium';
-        }else if(JSaddStockThree.classList.contains('selectedTime') == true){
+        }else if(JSaddHourThree.classList.contains('selectedTime') == true){
             choosenTrack = 'Large';
         }
 
@@ -501,8 +596,6 @@ function addTrack (){
 
 
         var dateId = '2Bxpz2RgA4AQImQOssey8w';
-
-        var choosenTrack = "Small";
 
         //----- JSON that gets sent to Contentful
 
