@@ -5,18 +5,15 @@ function addTrack (){
 
     var client = contentfulManagement.createClient({
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-        resolveLinks: true,
-        accessToken: ''
+        accessToken: '',
+        resolveLinks: true
+        //space: '59mi8sr8zemv'
 
     });
     //--------------Navigation btn ------------------------//
     var arrowPrevious = document.getElementById("arrowPrevious");
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     var arrowNext = document.getElementById("arrowNext");
-
-    var prevDate = document.getElementById("prevDate");
-    var thisDate = document.getElementById("thisDate");
-    var nextDate = document.getElementById("nextDate");
 
     var choosenTime = '2017-06-02T13:00';
     var choosenTrack = "Small";
@@ -25,6 +22,7 @@ function addTrack (){
     var choosenImage;
 
     var eventEndTime = null;
+    // var thisShowDoEvents = null;
 
     //var startOne = '2017-06-02T13:00:31Z';
     //-------- temporary img var -----//
@@ -85,141 +83,147 @@ function addTrack (){
 
     //--------- Call for functions ----------//
     //Unlimited if no value on nrOfPart
-    chooseDates();
+    //   chooseDates();
     time();
 
 
 
     //---------- function to choose time----------//
-    function chooseDates(){
+    //  function chooseDates(){
 
-        function getSelectedDate(specifiedDate) {
-            selectedDate = new Date();
-            if(specifiedDate) selectedDate = specifiedDate;
-            /*-------------- TODAYS DATE --------------*/
-            //ISO8601 formatted YYYY-MM-DD (to match Contentful):
-            var year = selectedDate.getFullYear();
-            var month = ('0' + (selectedDate.getMonth() +1)).slice(-2);
-            var day = ('0' + selectedDate.getDate()).slice(-2);
-            var selectedDate = year + '-' + month + '-' + day;
-            /*-------------- END TODAYS DATE --------------*/
+    function getSelectedDate(specifiedDate) {
+        selectedDate = new Date();
+        if(specifiedDate) selectedDate = specifiedDate;
+        /*-------------- TODAYS DATE --------------*/
+        //ISO8601 formatted YYYY-MM-DD (to match Contentful):
+        var year = selectedDate.getFullYear();
+        var month = ('0' + (selectedDate.getMonth() +1)).slice(-2);
+        var day = ('0' + selectedDate.getDate()).slice(-2);
+        var selectedDate = year + '-' + month + '-' + day;
+        /*-------------- END TODAYS DATE --------------*/
 
-            return selectedDate;
+        return selectedDate;
+    }
+
+    var globalTargetDateIndex = null;
+    var globalAllDatesArray = null;
+    var selectedDate = null;
+    var allDates = null;
+    var thisShowDoEvents;
+
+
+    client.getSpace('59mi8sr8zemv')
+        .then((space) =>
+              space.getEntries({
+        content_type: 'datesForShowDo',
+        order: 'fields.date', //Sort by date in datesForShowDo
+        locale: 'en-US'
+    }).then(function(entries){
+        //console.log('bajs', entries.items)
+        allDates = entries.items;
+
+        //console.log('BajsBajs:', allDates); //all dates
+        //console.log('BajsBajsSkit:', entries.sys); //all dates
+
+        selectedDate = getSelectedDate();
+
+        //loop through dates in datesForShowDo
+        for(var i = 0; i < allDates.length; i++){
+            if(allDates[i].fields.date["en-US"] <= selectedDate && allDates[i+1].fields.date["en-US"] >= selectedDate){
+                globalTargetDateIndex = i + 1;
+
+                var oneDate = allDates[globalTargetDateIndex].fields.date["en-US"];
+                //console.log('Later than selectedDate', oneDate);
+
+                thisShowDoEvents = allDates[i + 1].fields.link["en-US"]; //EVENTS TO DISPLAY .
+                console.log('thisShowDoEvents', thisShowDoEvents);
+                break;
+            }
         }
 
-        var globalTargetDateIndex = null;
-        var globalAllDatesArray = null;
-        var selectedDate = null;
-        var allDates = null;
-        var thisShowDoEvents = null;
+        globalAllDatesArray = entries.items;
+        //console.log('events (sorted):', selectedDate); //all dates
+        //console.log('Natalies liste:', thisShowDoEvents); //all dates
 
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ('0' + (today.getMonth() +1)).slice(-2);
+        var day = ('0' + today.getDate()).slice(-2);
+        today = year + '-' + month + '-' + day;
 
-        client.getSpace('59mi8sr8zemv')
-            .then((space) =>
-                  space.getEntries({
-            content_type: 'datesForShowDo',
-            order: 'fields.date', //Sort by date in datesForShowDo
-            locale: 'en-US'
-        }).then(function(entries){
-            console.log('bajs', entries.items)
-            allDates = entries.items;
+        globalTargetDateIndex = 0;
 
-            console.log('BajsBajs:', allDates); //all dates
+        for(var i = 0; i < globalAllDatesArray.length - 1; i++){
 
-            selectedDate = getSelectedDate();
+            if(globalAllDatesArray[i].fields.date["en-US"] <= today && globalAllDatesArray[i+1].fields.date["en-US"] >= today){
+                globalTargetDateIndex = i+1;
+                break;
+            }
+        }
 
-            //loop through dates in datesForShowDo
-            for(var i = 0; i < allDates.length; i++){
-                if(allDates[i].fields.date["en-US"] <= selectedDate && allDates[i+1].fields.date["en-US"] >= selectedDate){
-                    globalTargetDateIndex = i + 1;
+        updateDateLabels();
 
-                    var oneDate = allDates[globalTargetDateIndex].fields.date["en-US"];
-                    console.log('Later than selectedDate', oneDate);
+        arrowPrevious.onclick = goPrevious;
+        arrowNext.onclick = goNext;
 
-                    thisShowDoEvents = allDates[i + 1].fields.link; //EVENTS TO DISPLAY
-                    break;
-                }
+        function goNext(){
+            if(globalTargetDateIndex < globalAllDatesArray.length - 1){
+                globalTargetDateIndex ++;
+                updateDateLabels();
+            }
+        }
+
+        function goPrevious(){
+            if(globalTargetDateIndex > 0){
+                globalTargetDateIndex --;
+                updateDateLabels();
+                //callbackAction();
+            }
+        }
+
+        /*-------------- GET INDEX OF THE DATE --------------*/
+        // totaly stolen from Natalie =)
+        function getDateIndex(index){
+            var dateIndex = allDates[index]; //[index+1]
+            var date = dateIndex.fields.date["en-US"];
+
+            //Display date correctly in navigation
+            var day = date.substring(8, 10);
+            var month = date.substring(5, 7);
+            var year = date.substring(2, 4);
+
+            var dateFormat = day + '.' + month + '.' + year;
+
+            return dateFormat;
+        }
+
+        /*-------------- END GET INDEX OF THE  DATE --------------*/
+
+        function updateDateLabels(){
+
+            if(globalTargetDateIndex > 0 ){
+                JSdatePick1.innerHTML = getDateIndex(globalTargetDateIndex - 1);
+            } else {
+                JSdatePick1.innerHTML = "--";
             }
 
-            globalAllDatesArray = entries.items;
-            console.log('events (sorted):', selectedDate); //all dates
-            console.log('Natalies liste:', thisShowDoEvents); //all dates
-
-            var today = new Date();
-            var year = today.getFullYear();
-            var month = ('0' + (today.getMonth() +1)).slice(-2);
-            var day = ('0' + today.getDate()).slice(-2);
-            today = year + '-' + month + '-' + day;
-
-            globalTargetDateIndex = 0;
-
-            for(var i = 0; i < globalAllDatesArray.length - 1; i++){
-
-                if(globalAllDatesArray[i].fields.date["en-US"] <= today && globalAllDatesArray[i+1].fields.date["en-US"] >= today){
-                    globalTargetDateIndex = i+1;
-                    break;
-                }
+            if(globalTargetDateIndex < globalAllDatesArray.length - 1){
+                JSdatePick3.innerHTML = getDateIndex(globalTargetDateIndex + 1);
+            } else {
+                JSdatePick3.innerHTML = "TBA";
             }
 
-            updateDateLabels();
+            JSdatePick2.innerHTML = getDateIndex(globalTargetDateIndex);
+        }
 
-            arrowPrevious.onclick = goPrevious;
-            arrowNext.onclick = goNext;
+        console.log('føre hej', thisShowDoEvents)
 
-            function goNext(){
-                if(globalTargetDateIndex < globalAllDatesArray.length - 1){
-                    globalTargetDateIndex ++;
-                    updateDateLabels();
-                }
-            }
+    }
+           )
+             )
 
-            function goPrevious(){
-                if(globalTargetDateIndex > 0){
-                    globalTargetDateIndex --;
-                    updateDateLabels();
-                    //callbackAction();
-                }
-            }
-
-            /*-------------- GET INDEX OF THE DATE --------------*/
-            // totaly stolen from Natalie =)
-            function getDateIndex(index){
-                var dateIndex = allDates[index]; //[index+1]
-                var date = dateIndex.fields.date["en-US"];
-
-                //Display date correctly in navigation
-                var day = date.substring(8, 10);
-                var month = date.substring(5, 7);
-                var year = date.substring(2, 4);
-
-                var dateFormat = day + '.' + month + '.' + year;
-
-                return dateFormat;
-            }
-
-            /*-------------- END GET INDEX OF THE  DATE --------------*/
-
-            function updateDateLabels(){
-
-                if(globalTargetDateIndex > 0 ){
-                    JSdatePick1.innerHTML = getDateIndex(globalTargetDateIndex - 1);
-                } else {
-                    JSdatePick1.innerHTML = "--";
-                }
-
-                if(globalTargetDateIndex < globalAllDatesArray.length - 1){
-                    JSdatePick3.innerHTML = getDateIndex(globalTargetDateIndex + 1);
-                } else {
-                    JSdatePick3.innerHTML = "TBA";
-                }
-
-                JSdatePick2.innerHTML = getDateIndex(globalTargetDateIndex);
-            }
-
-            console.log('valgt dato', )
-        }))
-    };//end chooseDates
-
+    // };//end chooseDates
+    console.log('hej',thisShowDoEvents )
 
     //temporary code for the usertest
 
@@ -302,32 +306,58 @@ function addTrack (){
         //var choosenTime = "2017-06-02T13:00";
         //var choosenTrack = "Small";
 
-
-
     }
     /*-------------- END SET END TIME --------------*/
 
 
     var dateId = '2Bxpz2RgA4AQImQOssey8w';
 
-    function time (){
+    function time (thisShowDoEvents){
         client.getSpace('59mi8sr8zemv')
             .then((space) => {
             space.getEntry(dateId, {
-                resolveLinks: true
+
             })
                 .then((entry) => {
+                var allInDate = entry.fields.link['en-US'];
+               // var eventForDate = allInDate[i].sys.id;
+                var eventIdArry = [];
 
-                var foo = {sys: {
-                    id: '62kwrp5OrSECIYE6c0OeM6',
-                    linkType: "Entry",
-                    type:"Link",
-                    linkContentType:['envents']
-                }}
+
+                for(var i = 0; i < allInDate.length; i++){
+                    var eventForDate = allInDate[i].sys.id;
+                    eventIdArry.push(eventForDate);
+
+                }
+                   console.log('array', eventIdArry)
+
+                space.getEntries('events')
+                    .then((entries) =>{
+                    var foo = [];
+                    var nrOfSmall; //fields.size['en-US']
+                    var nrOfMedium; //fields.size['en-US']
+                    var nrOfLarge; //fields.size['en-US']
+                    var nrOfOne;    //fields.time['en-US']
+                    var nrOfTwo;     //fields.time['en-US']
+                    var nrOfThree;   //fields.time['en-US']
+                    //var allEventForDate = entries.items
+                    var eventDateId = entries.items
+
+                for(var i = 0; i < eventDateId.length; i++){
+                    var allEventForDate = eventDateId[i].sys.id;
+                    foo.push(allEventForDate);
+                }
+
+
+                    console.log('hubba', eventDateId)
+                    console.log('hubbaBubba', eventDateId[2].sys.id)
+                    console.log('hubbaDubba', foo)
+
+                    })
 
                 //  var foo = fields.link;
-                console.log('time1', entry.fields)
-                console.log('time2', choosenTime)
+                console.log('time1', eventForDate)
+                console.log('time2', allInDate)
                 //console.log('Natalies liste', thisShowDoEvents)
             })
         })
@@ -356,6 +386,8 @@ function addTrack (){
         //var JSaddNewStockThree = JSaddStockThree.value;
         var JSaddNewElse = JSaddElse.value;
 
+
+
         var startTime = choosenTime.substring(choosenTime.length - 5);
         console.log('StartTime', startTime);
         console.log('ChoosenTrack', choosenTrack);
@@ -369,13 +401,13 @@ function addTrack (){
         }else if(startTime == '13:00' && choosenTrack == 'Small'){
             eventEndTime = '13:45';
 
-        /*If choosenTime is 14:00*/
+            /*If choosenTime is 14:00*/
         }else if(startTime == '14:00' && choosenTrack == 'Medium'){
             eventEndTime = '15:45';
         }else if(startTime == '14:00' && choosenTrack == 'Small'){
             eventEndTime = '14:45';
 
-        /*If choosenTime is 15:00*/
+            /*If choosenTime is 15:00*/
         }else if(startTime == '15:00' && choosenTrack == 'Small'){
             eventEndTime = '15:45';
         }
@@ -383,7 +415,6 @@ function addTrack (){
 
         var dateId = '2Bxpz2RgA4AQImQOssey8w';
 
-        var choosenTime = selectedDate+"T13:00";
         var choosenTrack = "Small";
 
         //----- JSON that gets sent to Contentful
@@ -469,7 +500,6 @@ function addTrack (){
                     .then ((entry) => entry.publish())
             })
 
-
         })//end getspace
 
     }//end create new event
@@ -477,3 +507,5 @@ function addTrack (){
 }//end add track
 
 exports.addTrack = addTrack;
+
+
