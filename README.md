@@ -5,7 +5,7 @@
 This is a prototype of a booking system for Show & Do Competence Sessions. This project is built on the CMS Contentful. Using node.js and Javascript.
 
 
-## Requirements
+## Requirements 
 
 | Prerequisite                       | How to check  | How to install
 | ---------------------------------- | ------------- | ------------- |
