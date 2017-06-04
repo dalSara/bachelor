@@ -177,7 +177,7 @@ inputs and style for add track
   font-weight: 500;
   font-size: 1rem; }
 
-#addTrackBtn {
+.trackBtn {
   background: #0066FF;
   border: 5px solid transparent;
   color: #FFFFFF; }
@@ -562,10 +562,10 @@ index
   margin-right: 10px; }
 
 .JSeventTitleList,
-.JSicon-edit {
+.JSiconEdit {
   float: left; }
 
-.JSicon-edit {
+.JSiconEdit {
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -630,6 +630,53 @@ index
   -ms-transform: rotate(180deg);
   transform: rotate(180deg); }
 
+/*---------GOING-BTN-------*/
+.JSgoingBtnWrapper {
+  clear: left; }
+
+.JSgoingBtn {
+  font-family: "Volte Semibold";
+  font-size: inherit;
+  line-height: inherit;
+  background-color: white;
+  color: #06f;
+  border: 3px solid #06f;
+  border-radius: 0;
+  padding: 10px 20px;
+  margin: 0;
+  -webkit-appearance: none;
+  cursor: pointer;
+  width: 250px;
+  margin-bottom: 20px; }
+
+.JSgoing-clicked {
+  background-color: #06f;
+  color: #fff; }
+
+.JShidden {
+  display: none; }
+
+.JSgoingDropdownContent {
+  overflow: hidden;
+  width: 250px;
+  background-color: #fff; }
+
+.JSregisterBtn {
+  display: inline-block;
+  background-color: #0066FF;
+  border: 4px solid #0066FF;
+  font-family: Volte-Semibold;
+  font-size: 1rem;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 0.5rem;
+  cursor: pointer; }
+
+.JSgoing-registered {
+  background-color: #0066FF;
+  color: white; }
+
+/*---------END GOING-BTN-------*/
 /*---------LIST RESPONSIVE -------*/
 @media (max-width: 1200px) {
   wrapper {
@@ -654,7 +701,7 @@ index
     padding: 0; }
   .JSicon-clock,
   .JSicon-room,
-  .JSicon-edit {
+  .JSiconEdit {
     width: 20px;
     height: 20px; } }
 
