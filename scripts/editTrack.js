@@ -7,7 +7,7 @@ function editTrack(eventId){
     // contentful-management.js v3.x.x
 
     const client = contentfulManagement.createClient({
-        accessToken: '',
+        accessToken: 'b60f393ec836a43747cb5a238cdc49e379361c7d7a0a96012191fb3745e2532b',
         //  Space: '59mi8sr8zemv',
         resolveLinks: true
     })
@@ -18,7 +18,11 @@ function editTrack(eventId){
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     var arrowNext = document.getElementById("arrowNext");
 
-
+    var imageTwo = {sys: {
+        id: '2dmGUtiw7uwugWQcsiGcUk',
+        linkType: "Asset",
+        type:"Link"
+    }}
 
     //var init = function (){
 
@@ -73,13 +77,7 @@ function editTrack(eventId){
         var eventId = getQueryVariable("id"); //Id from URL
 
         //  Now that we have a space, we can get entries from that space
-        space.getEntry(eventId) //Defining-tone-of-vice
-        //   space.getEntries('datesForShowDo')
-        //     .then((entries) => {
-        //console.log(entry.items[4])
-        //    })//end get entries
-
-        //This function is finding the correct contenttype in contentful and add new data to that space
+        space.getEntry(eventId)
 
             .then((entry) => {
 
@@ -638,7 +636,7 @@ function editTrack(eventId){
         //-- Creates the new track in events, with ref to korrekt date
         client.getSpace('59mi8sr8zemv')
             .then((space) => {
-            space.createEntry('events', newTrack)
+            space.getEntry(eventId, newTrack)
                 .then( event => {
 
                 var eventID = event.sys.id
@@ -648,14 +646,15 @@ function editTrack(eventId){
                     .then((entry) => {
 
                     //Gets the ID from the newly created event
+                    /*
                     var newId = {sys: {
                         id: eventID,
                         linkType: "Entry",
                         type:"Link"
-                    }}
+                    }}*/
 
                     //Creates a reference field in dates for show & do
-                    entry.fields.link["en-US"].push(newId)
+                    entry.fields.link["en-US"].push(eventId)
                     //update the event
                     return entry.update()
                 })
