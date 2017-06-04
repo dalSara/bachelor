@@ -7,7 +7,7 @@ function editTrack(eventId){
     // contentful-management.js v3.x.x
 
     const client = contentfulManagement.createClient({
-        accessToken: '',
+        accessToken: 'b60f393ec836a43747cb5a238cdc49e379361c7d7a0a96012191fb3745e2532b',
         //  Space: '59mi8sr8zemv',
         resolveLinks: true
     })
@@ -108,20 +108,20 @@ function editTrack(eventId){
             if(thisStartTime == '13:00'){
                 document.getElementById("JSaddStartOne").classList.add('selectedTime');
             }else if(thisStartTime == '14:00'){
-                document.getElementById("JSaddStartOne").classList.add('selectedTime');
+                document.getElementById("JSaddStartTwo").classList.add('selectedTime');
             }else if(thisStartTime == '15:00'){
-                document.getElementById("JSaddStartOne").classList.add('selectedTime');
+                document.getElementById("JSaddStartThree").classList.add('selectedTime');
             }
             /*-------------- END SET TIME --------------*/
 
             /*-------------- SET SIZE --------------*/
             var thisSize = entry.fields.size['en-US'];
             if(thisSize == 'Large'){
-                document.getElementById("JSaddStartOne").classList.add('selectedTime');
+                document.getElementById("JSaddHourOne").classList.add('selectedTime');
             }else if(thisSize == 'Medium'){
-                document.getElementById("JSaddStartOne").classList.add('selectedTime');
+                document.getElementById("JSaddHourTwo").classList.add('selectedTime');
             }else if(thisSize == 'Small'){
-                document.getElementById("JSaddStartOne").classList.add('selectedTime');
+                document.getElementById("JSaddHourThree").classList.add('selectedTime');
             }
             /*-------------- END SET SIZE --------------*/
         })//end entry
