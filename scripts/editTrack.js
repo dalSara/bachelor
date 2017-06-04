@@ -103,23 +103,25 @@ function editTrack(eventId){
             /*-------------- SET TIME --------------*/
             var thisTime = entry.fields.time['en-US'];
             var thisStartTime = thisTime.substring(thisTime.length - 5);
+            var starttimeTxt = "The starttime you choosed was:";
             if(thisStartTime == '13:00'){
-                document.getElementById("JSaddStartOne").classList.add('selectedTime');
+                document.getElementById("addedStart").innerHTML = starttimeTxt + " 13:00";
             }else if(thisStartTime == '14:00'){
-                document.getElementById("JSaddStartTwo").classList.add('selectedTime');
+                document.getElementById("addedStart").innerHTML = starttimeTxt + " 14:00";
             }else if(thisStartTime == '15:00'){
-                document.getElementById("JSaddStartThree").classList.add('selectedTime');
+                document.getElementById("addedStart").innerHTML = starttimeTxt + " 15:00";
             }
             /*-------------- END SET TIME --------------*/
 
             /*-------------- SET SIZE --------------*/
             var thisSize = entry.fields.size['en-US'];
+            var hourTxt = "The lenght you choosed was:";
             if(thisSize == 'Large'){
-                document.getElementById("JSaddHourThree").classList.add('selectedTime');
+                document.getElementById("addedHour").innerHTML = hourTxt + " 3 hours";
             }else if(thisSize == 'Medium'){
-                document.getElementById("JSaddHourTwo").classList.add('selectedTime');
+                document.getElementById("addedHour").innerHTML = hourTxt + " 2 hours";
             }else if(thisSize == 'Small'){
-                document.getElementById("JSaddHourOne").classList.add('selectedTime');
+                document.getElementById("addedHour").innerHTML = hourTxt + " 1 hour";
             }
             /*-------------- END SET SIZE --------------*/
         })//end entry
