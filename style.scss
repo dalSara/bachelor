@@ -815,8 +815,8 @@ index
     font-size: inherit;
     line-height: inherit;
     background-color: white;
-    color: #06f;
-    border: 3px solid #06f;
+    color: $eventcolor;
+    border: 3px solid $eventcolor;
     border-radius: 0;
     padding: 10px 20px;
     margin: 0;
@@ -830,7 +830,7 @@ index
     content: "Going?";
 }
 .JSgoing-clicked{
-    background-color: #06f;
+    background-color: $eventcolor;
     color: #fff;
 }
 .JShidden{
@@ -843,9 +843,9 @@ index
 }
 .JSregisterBtn{
     display: inline-block;
-    background-color: #0066FF;
-    border: 4px solid #0066FF;
-    font-family: Volte-Semibold;
+    background-color: $eventcolor;
+    border: 4px solid $eventcolor;
+    font-family: 'Volte Semibold', sans-serif;
     font-size: 1rem;
     color: #FFFFFF;
     text-align: center;
@@ -853,7 +853,7 @@ index
     cursor: pointer;
 }
 .JSgoing-registered:after{
-    background-color: #0066FF;
+    background-color: $eventcolor;
     transition: .2s;
     color: white;
     content: "You're going!";
@@ -924,15 +924,17 @@ index
     }
 
     .modal {
-        background-color: white;
+        background-color: #fff;
         height: 100%;
         position: relative;
         margin: 0 auto;
         padding: 3em;
+        padding-top: 40%;
         text-align: center;
         -webkit-overflow-scrolling: touch;
         @media (min-width: 60em) {
             max-height: 20em;
+            padding-top: 3em;
             margin: 10% auto;
             width: 39%;
         }
@@ -944,9 +946,12 @@ index
         }
     }
     .close {
+        display: block;
+        width: 80%;
+        margin: 0 auto;
         background-color: $eventcolor;
         color: #fff;
-        padding: .8em;
+        padding: .9em;
         text-align: center;
         text-decoration: none;
         top: 0;
