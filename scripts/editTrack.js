@@ -22,22 +22,22 @@ function editTrack(eventId){
 
     //var init = function (){
 
-    JSeditTitle = document.getElementById("JSeditTitle");
-    JSeditHosts = document.getElementById("JSeditHosts");
-    JSeditPrereq = document.getElementById("JSeditPrereq");
-    JSaddStartOne = document.getElementById("JSaddStartOne");
-    JSaddStartTwo = document.getElementById("JSaddStartTwo");
-    JSaddStartthree = document.getElementById("JSaddStartthree");
-    JSaddHourOne = document.getElementById("JSaddHourOne");
-    JSaddHourthree = document.getElementById("JSaddHourthree");
-    JSeditNrOfPart = document.getElementById("JSeditNrOfPart");
-    JSeditExpect = document.getElementById("JSeditExpect");
-    JSeditJoin = document.getElementById("JSeditJoin");
+    var JSeditTitle = document.getElementById("JSeditTitle");
+    var JSeditHosts = document.getElementById("JSeditHosts");
+    var JSeditPrereq = document.getElementById("JSeditPrereq");
+    var JSaddStartOne = document.getElementById("JSaddStartOne");
+    var JSaddStartTwo = document.getElementById("JSaddStartTwo");
+    var JSaddStartthree = document.getElementById("JSaddStartthree");
+    var JSaddHourOne = document.getElementById("JSaddHourOne");
+    var JSaddHourthree = document.getElementById("JSaddHourthree");
+    var JSeditNrOfPart = document.getElementById("JSeditNrOfPart");
+    var JSeditExpect = document.getElementById("JSeditExpect");
+    var JSeditJoin = document.getElementById("JSeditJoin");
     //      JSeditImage = document.getElementById("JSeditImage");
     //        JSeditStockOne = document.getElementById("JSeditStockOne");
     //      JSeditStockTwo = document.getElementById("JSeditStockTwo");
     //    JSeditStockThree = document.getElementById("JSeditStockThree");
-    JSeditElse = document.getElementById("JSeditElse");
+    var JSeditElse = document.getElementById("JSeditElse");
     //  JSeditStatus = document.getElementById("JSeditStatus");
     // JSeditTitle = document.getElementById("JSeditTitle");
 
@@ -45,7 +45,7 @@ function editTrack(eventId){
     JSaddStockOne.onclick = chooseImageOne;
     JSaddStockTwo.onclick = chooseImageTwo;
     JSaddStockThree.onclick = chooseImageThree;
-    addTrackBtn.onclick = createNewEvent;
+    editTrackBtn.onclick = createNewEvent;
 
     //}(); /*--end init--*/
 
@@ -670,8 +670,6 @@ function editTrack(eventId){
         })//end getspace
 
     }//end create new event
-
-
 
 
     //}//end addEditTrack
