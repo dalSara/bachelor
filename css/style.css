@@ -97,7 +97,7 @@ nav ul {
   margin: 0; }
   nav ul li {
     border: 4px solid #0066FF;
-    font-family: "Volte-Semibold", sans-serif;
+    font-family: 'Volte Semibold', sans-serif;
     font-size: .8rem;
     color: #06f;
     text-transform: none;
@@ -177,7 +177,7 @@ inputs and style for add track
   font-weight: 500;
   font-size: 1rem; }
 
-.trackBtn {
+#addTrackBtn {
   background: #0066FF;
   border: 5px solid transparent;
   color: #FFFFFF; }
@@ -324,7 +324,6 @@ pageHeader
 mainMenu
 ********************************************/
 .mainMenu {
-  /*font-family: 'Volte Semibold';*/
   transition: all .5s; }
   .mainMenu a {
     padding: 10px; }
@@ -562,15 +561,15 @@ index
   margin-right: 10px; }
 
 .JSeventTitleList,
-.JSiconEdit {
+.JSicon-edit {
   float: left; }
 
-.JSiconEdit {
+.JSicon-edit {
   display: inline-block;
   width: 30px;
   height: 30px;
   -webkit-mask: url("../assets/images/pencil-write-2.svg") no-repeat 50% 50%;
-  mask: url("../assets/images/notepad-edit.svg") no-repeat 50% 50%;
+  mask: url("../assets/images/pencil-write-2.svg") no-repeat 50% 50%;
   -webkit-mask-size: cover;
   mask-size: cover;
   background-color: #000;
@@ -649,6 +648,10 @@ index
   width: 250px;
   margin-bottom: 20px; }
 
+.JSgoingBtn:after {
+  width: 250px;
+  content: "Going?"; }
+
 .JSgoing-clicked {
   background-color: #06f;
   color: #fff; }
@@ -663,18 +666,20 @@ index
 
 .JSregisterBtn {
   display: inline-block;
-  background-color: #0066FF;
-  border: 4px solid #0066FF;
-  font-family: Volte-Semibold;
+  background-color: #06f;
+  border: 4px solid #06f;
+  font-family: 'Volte Semibold', sans-serif;
   font-size: 1rem;
   color: #FFFFFF;
   text-align: center;
   padding: 0.5rem;
   cursor: pointer; }
 
-.JSgoing-registered {
-  background-color: #0066FF;
-  color: white; }
+.JSgoing-registered:after {
+  background-color: #06f;
+  transition: .2s;
+  color: white;
+  content: "You're going!"; }
 
 /*---------END GOING-BTN-------*/
 /*---------LIST RESPONSIVE -------*/
@@ -701,7 +706,7 @@ index
     padding: 0; }
   .JSicon-clock,
   .JSicon-room,
-  .JSiconEdit {
+  .JSicon-edit {
     width: 20px;
     height: 20px; } }
 
@@ -726,16 +731,18 @@ index
     pointer-events: auto;
     z-index: 99999; }
   .modaloverlay .modal {
-    background-color: white;
+    background-color: #fff;
     height: 100%;
     position: relative;
     margin: 0 auto;
     padding: 3em;
+    padding-top: 40%;
     text-align: center;
     -webkit-overflow-scrolling: touch; }
     @media (min-width: 60em) {
       .modaloverlay .modal {
         max-height: 20em;
+        padding-top: 3em;
         margin: 10% auto;
         width: 39%; } }
     .modaloverlay .modal > iframe,
@@ -744,9 +751,12 @@ index
       width: 100%;
       height: 100%; }
   .modaloverlay .close {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
     background-color: #06f;
     color: #fff;
-    padding: .8em;
+    padding: .9em;
     text-align: center;
     text-decoration: none;
     top: 0;

@@ -63,8 +63,8 @@
                 <input id="JSaddPrereq" type="text" value=""><br><br>
                 <span class="obligatoryField">*</span> Preferred starttime (click to select)
                 <br>
-                <div class="selectTime" id="JSaddStartOne" >13.00</div>
-                <div class="selectTime" id="JSaddStartTwo" >14.00</div>
+                <div class="selectTime" id="JSaddStartOne" value="2017-06-02T13:00:31Z">13.00</div>
+                <div class="selectTime" id="JSaddStartTwo" value="2017-06-02T14:00:31Z">14.00</div>
                 <div class="selectTime" id="JSaddStartThree">15.00</div>
                 <br><br>
                 <span class="obligatoryField">*</span> How long will your track be? (click to select)
@@ -91,9 +91,10 @@
                 Anything else to add? (links, videos for preparation, other tracks, co-host, equipment etc)<br>
                 <textarea id="JSaddElse" type="text" value=""></textarea>
                 <div class="buttonsAddTrack">
-
+                    <!--<a href="index.html" id="addTrackBtn"></a>-->
+                    <div id="test"></div>
                     <a>
-                        <div tabindex="0" role="button" id="addTrackBtn" class="trackBtn" type="submit" value="Add track">Publish</div>
+                        <div tabindex="0" role="button" id="addTrackBtn" type="submit" value="Add track">Publish</div>
                     </a>
                 </div>
                 <div id="publish" class="modaloverlay">
@@ -120,43 +121,44 @@
         </main>
         <script src="../scripts/dist/scripts/main-addTrack.bundle.js"></script>
         <!--<script src="../node_modules/contentful/browser-dist/contentful.min.js"></script>-->
-    <!---    <script>
-        document.getElementById('addTrackBtn').onclick = function() {modalFunction()};
-            var errorModal = document.getElementById('error');
-            var publishModal = document.getElementById('publish');
-            var closeModal = document.getElementById('closeError');
+        <script>
+            document.getElementById('addTrackBtn').onclick = function() {modalFunction()};
 
-        function modalFunction() {
-            var JSaddNewTitle = JSaddTitle.value;
-            var JSaddNewHosts = JSaddHosts.value;
-            var JSaddNewPrereq = JSaddPrereq.value;
-            var JSaddNewExpect = JSaddExpect.value;
-            var JSaddNewJoin = JSaddJoin.value;
+                var errorModal = document.getElementById('error');
+                var publishModal = document.getElementById('publish');
+                var closeModal = document.getElementById('closeError');
 
-            /*if one input is empty show error feedback modal */
-            if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "") {
-                errorModal.style.display = 'block';
-                errorModal.style.opacity = '1';
-                errorModal.style.pointerEvents = 'auto';
-                errorModal.style.zIndex = '99999';
+            function modalFunction() {
+                var JSaddNewTitle = JSaddTitle.value;
+                var JSaddNewHosts = JSaddHosts.value;
+                var JSaddNewPrereq = JSaddPrereq.value;
+                var JSaddNewExpect = JSaddExpect.value;
+                var JSaddNewJoin = JSaddJoin.value;
 
-                closeModal.onclick = function() {
-                    errorModal.style.display = 'none';
-                    errorModal.style.opacity = '0';
-                    errorModal.style.pointerEvents = 'none';
-                    errorModal.style.zIndex = '-1';
-                };
+                /*if one input is empty show error feedback modal */
+                if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "") {
+                    errorModal.style.display = 'block';
+                    errorModal.style.opacity = '1';
+                    errorModal.style.pointerEvents = 'auto';
+                    errorModal.style.zIndex = '99999';
 
-            } else {
-                publishModal.style.display = 'block';
-                publishModal.style.opacity = '1';
-                publishModal.style.pointerEvents = 'auto';
-                publishModal.style.zIndex = '99999';
+                    closeModal.onclick = function() {
+                        errorModal.style.display = 'none';
+                        errorModal.style.opacity = '0';
+                        errorModal.style.pointerEvents = 'none';
+                        errorModal.style.zIndex = '-1';
+                    };
+
+                } else {
+                    publishModal.style.display = 'block';
+                    publishModal.style.opacity = '1';
+                    publishModal.style.pointerEvents = 'auto';
+                    publishModal.style.zIndex = '99999';
+                }
+
             }
 
-        }
-
-    </script> --->
+    </script>
     </body>
 
 </html>
