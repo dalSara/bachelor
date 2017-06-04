@@ -1,19 +1,16 @@
 var contentful = require('contentful');
+var dataDelivery = require('./dataDelivery');
 var contentfulManagement = require('contentful-management');
 
-//module.exports = function(){
-function editTrack (){
+function editTrack(eventId){
 
     // contentful-management.js v3.x.x
 
     const client = contentfulManagement.createClient({
-        accessToken: '',
+        accessToken: 'b60f393ec836a43747cb5a238cdc49e379361c7d7a0a96012191fb3745e2532b',
         //  Space: '59mi8sr8zemv',
         resolveLinks: true
     })
-
-
-
 
     //Html-objekter (riktiga)
 
@@ -43,87 +40,86 @@ function editTrack (){
     // var JSeditStatus;
 
 
-    var init = function (){
+    //var init = function (){
 
+    JSeditTitle = document.getElementById("JSeditTitle");
+    JSeditHosts = document.getElementById("JSeditHosts");
+    JSeditPrereq = document.getElementById("JSeditPrereq");
+    //  JSeditStartOne = document.getElementById("JSeditStartOne");
+    //    JSeditStartTwo = document.getElementById("JSeditStartTwo");
+    //      JSeditStartthree = document.getElementById("JSeditStartthree");
+    //        JSeditHourOne = document.getElementById("JSeditHourOne");
+    //      JSeditHourthree = document.getElementById("JSeditHourthree");
+    JSeditNrOfPart = document.getElementById("JSeditNrOfPart");
+    JSeditExpect = document.getElementById("JSeditExpect");
+    JSeditJoin = document.getElementById("JSeditJoin");
+    //      JSeditImage = document.getElementById("JSeditImage");
+    //        JSeditStockOne = document.getElementById("JSeditStockOne");
+    //      JSeditStockTwo = document.getElementById("JSeditStockTwo");
+    //    JSeditStockThree = document.getElementById("JSeditStockThree");
+    JSeditElse = document.getElementById("JSeditElse");
+    //  JSeditStatus = document.getElementById("JSeditStatus");
+    // JSeditTitle = document.getElementById("JSeditTitle");
 
+    //}(); /*--end init--*/
 
-        JSeditTitle = document.getElementById("JSeditTitle");
-        JSeditHosts = document.getElementById("JSeditHosts");
-        JSeditPrereq = document.getElementById("JSeditPrereq");
-        //  JSeditStartOne = document.getElementById("JSeditStartOne");
-        //    JSeditStartTwo = document.getElementById("JSeditStartTwo");
-        //      JSeditStartthree = document.getElementById("JSeditStartthree");
-        //        JSeditHourOne = document.getElementById("JSeditHourOne");
-        //      JSeditHourthree = document.getElementById("JSeditHourthree");
-        JSeditNrOfPart = document.getElementById("JSeditNrOfPart");
-        JSeditExpect = document.getElementById("JSeditExpect");
-        JSeditJoin = document.getElementById("JSeditJoin");
-        //      JSeditImage = document.getElementById("JSeditImage");
-        //        JSeditStockOne = document.getElementById("JSeditStockOne");
-        //      JSeditStockTwo = document.getElementById("JSeditStockTwo");
-        //    JSeditStockThree = document.getElementById("JSeditStockThree");
-        JSeditElse = document.getElementById("JSeditElse");
-        //  JSeditStatus = document.getElementById("JSeditStatus");
-        // JSeditTitle = document.getElementById("JSeditTitle");
-
-
-        editEvent();
-
-
-    }(); /*--end init--*/
-
+    function getQueryVariable(id){ //Get eventId fro URL
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == id){
+                return pair[1];
+            }
+        }
+        return(false);
+    }
 
     //the function that creates a new event, and post it to contentful
-    function editEvent (){
+    //function addEditTrack(){
 
         // This API call will request a space with the specified ID
         client.getSpace('59mi8sr8zemv')
             .then((space) => {
 
-            var dateID = '3IYJydLps48CSGwyS4QKSw'
+            //var eventId = '3IYJydLps48CSGwyS4QKSw';
+
+            var eventId = getQueryVariable("id"); //Id from URL
 
             //  Now that we have a space, we can get entries from that space
-            space.getEntry(dateID) //Defining-tone-of-vice
+            space.getEntry(eventId) //Defining-tone-of-vice
             //   space.getEntries('datesForShowDo')
             //     .then((entries) => {
             //console.log(entry.items[4])
             //    })//end get entries
 
-
-
-
             //This function is finding the correct contenttype in contentful and add new data to that space
 
                 .then((entry) => {
 
-                console.log(entry.fields.time)
+                console.log(entry.fields.time);
 
+                //document.getElementById('pandaEdit').setAttribute('value', JSON.stringify(entry.fields.title));
+                document.getElementById('JSeditTitle').setAttribute('value', (entry.fields.title['en-US']));
 
+                document.getElementById('JSeditHosts').setAttribute('value', (entry.fields.host['en-US']));
+                document.getElementById('JSeditPrereq').setAttribute('value', (entry.fields.prerequisites['en-US']));
+                //  document.getElementById('JSeditStartOne').setAttribute('value', (entry.fields.time['en-US']))
+                //document.getElementById('JSeditStartTwo').setAttribute('value', JSON.stringify(entry.fields.time['en-US']))
+                //document.getElementById('JSeditStartthree').setAttribute('value', JSON.stringify(entry.fields.time['en-US']))
+                //   document.getElementById('JSeditHourOne').setAttribute('value', JSON.stringify(entry.fields.size['en-US']))
+                //document.getElementById('JSeditHourTwo').setAttribute('value', JSON.stringify(entry.fields.size))
+                //document.getElementById('JSeditHourthree').setAttribute('value', JSON.stringify(entry.fields.size))
+                document.getElementById('JSeditNrOfPart').setAttribute('value', (entry.fields.numberOfParticipants['en-US']));
+                document.getElementById('JSeditExpect').setAttribute('value', (entry.fields.whatToExpect['en-US']));
+                document.getElementById('JSeditJoin').setAttribute('value', (entry.fields.whoShouldJoin['en-US']));
+                document.getElementById('JSeditElse').setAttribute('value', (entry.fields.anythingElse['en-US']));
+                //document.getElementById('JSeditStatus').setAttribute('value', JSON.stringify(entry.fields.JSeditStatus));
 
-                    //document.getElementById('pandaEdit').setAttribute('value', JSON.stringify(entry.fields.title));
-                    document.getElementById('JSeditTitle').setAttribute('value', (entry.fields.title['en-US']));
-
-                    document.getElementById('JSeditHosts').setAttribute('value', (entry.fields.host['en-US']));
-                    document.getElementById('JSeditPrereq').setAttribute('value', (entry.fields.prerequisites['en-US']));
-                    //  document.getElementById('JSeditStartOne').setAttribute('value', (entry.fields.time['en-US']))
-                    //document.getElementById('JSeditStartTwo').setAttribute('value', JSON.stringify(entry.fields.time['en-US']))
-                    //document.getElementById('JSeditStartthree').setAttribute('value', JSON.stringify(entry.fields.time['en-US']))
-                    //   document.getElementById('JSeditHourOne').setAttribute('value', JSON.stringify(entry.fields.size['en-US']))
-                    //document.getElementById('JSeditHourTwo').setAttribute('value', JSON.stringify(entry.fields.size))
-                    //document.getElementById('JSeditHourthree').setAttribute('value', JSON.stringify(entry.fields.size))
-                    document.getElementById('JSeditNrOfPart').setAttribute('value', (entry.fields.numberOfParticipants['en-US']));
-                    document.getElementById('JSeditExpect').setAttribute('value', (entry.fields.whatToExpect['en-US']));
-                    document.getElementById('JSeditJoin').setAttribute('value', (entry.fields.whoShouldJoin['en-US']));
-                    document.getElementById('JSeditElse').setAttribute('value', (entry.fields.anythingElse['en-US']));
-                    //document.getElementById('JSeditStatus').setAttribute('value', JSON.stringify(entry.fields.JSeditStatus));
-
-
-
+            })//end entry
         })//end getSpace
-
-    }//end EditEvent
+    //}//end addEditTrack
     //getLink();
-
 };//end EditTrack
 
 exports.editTrack = editTrack;

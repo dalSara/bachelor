@@ -2,8 +2,7 @@ var contentful = require('contentful');
 var contentfulManagement = require('contentful-management');
 var jqueryFunctions = require('./jqueryFunctions');
 var going = require('./going');
-//Eksempel fra: https://jsfiddle.net/contentful/kefaj4s8/
-//module.exports = function(){
+
 function dataDelivery(){
     /*-------------- CLIENT --------------*/
     var client = contentful.createClient({
@@ -16,11 +15,11 @@ function dataDelivery(){
 
     var EVENT_CONTENT_TYPE_ID = 'datesForShowDo';
 
-    var selectedDate = null;
-    var globalTargetDateIndex = null;
-    var allDates = null;
+    var selectedDate;
+    var globalTargetDateIndex;
+    var allDates;
 
-    var thisShowDoEvents = null;
+    var thisShowDoEvents;
 
     /*-------------- DATE LABELS --------------*/
     var prevDate = document.getElementById("prevDate");
@@ -417,8 +416,13 @@ function dataDelivery(){
         if(peopleGoing == null || peopleGoing == 'undefined'){
             peopleGoing = ''; //If peopleGoing is missing.
             var countPeopleGoing = peopleGoing.length; //List = 0
-        }else{
+        }else if(peopleGoing != null || peopleGoing.trim() != ''){
+            for(var i = 0; i < peopleGoing.length; i++){
+                //console.log('ONE name', peopleGoing[i]);
+                //var names = peopleGoing[i];
+            }
             countPeopleGoing = peopleGoing.length; //Count peopleGoing
+            //peopleGoing = name;
             peopleGoing = peopleGoing.join(' <br>');//Display peopleGoing in list.
         }
 
@@ -430,10 +434,9 @@ function dataDelivery(){
         }
         /*----end if fields is null or undefined----*/
 
-
         return  '<div class="JSleftListInfo">' +
             '<div class="JStitleEditWrapper">' +
-            '<h3 class="JSeventTitleList">' + event.fields.title + '</h3><i class="JSicon-edit"></i>' +
+            '<h3 class="JSeventTitleList">' + event.fields.title + '</h3><a href="../html/editTrack.html'+ '?id=' + sysID +'" class="JSiconEdit"></a>' +
             '</div>' +
             '<h4 class="JSeventHost">HOST</h4><p>' + event.fields.host + '</p>' +
             '<h4>WHAT TO EXPECT</h4><p>' + event.fields.whatToExpect + '</p>' +
