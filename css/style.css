@@ -177,7 +177,7 @@ inputs and style for add track
   font-weight: 500;
   font-size: 1rem; }
 
-#addTrackBtn {
+.trackBtn {
   background: #0066FF;
   border: 5px solid transparent;
   color: #FFFFFF; }

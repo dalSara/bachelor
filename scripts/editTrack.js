@@ -121,9 +121,9 @@ function editTrack (){
 
         })//end getSpace
 
-    }//end EditEvent
+    })//end EditEvent
     //getLink();
 
 };//end EditTrack
-
+}
 exports.editTrack = editTrack;

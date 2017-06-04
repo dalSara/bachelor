@@ -18,10 +18,15 @@ function addTrack (){
     var choosenTrack;
     var choosenImage;
 
-    var eventEndTime = null;
-    // var thisShowDoEvents = null;
+    var eventEndTime;
     var oneDate;
 
+    var globalTargetDateIndex;
+    var globalAllDatesArray;
+    var selectedDate;
+    var allDates;
+    var thisShowDoEvents;
+    var dateId;
 
     //-------- temporary img var -----//
     var imageOne = {sys: {
@@ -62,20 +67,13 @@ function addTrack (){
     var JSaddStockTwo = document.getElementById("JSaddStockTwo");
     var JSaddStockThree = document.getElementById("JSaddStockThree");
     var JSaddElse = document.getElementById("JSaddElse");
-    //var JSaddStatus = document.getElementById("JSaddStatus"); //belongs to a function that is not in use at the time
     var addTrackBtn = document.getElementById("addTrackBtn");
-
-
 
     //------------ click funkctions --------//
     JSaddStockOne.onclick = chooseImageOne;
     JSaddStockTwo.onclick = chooseImageTwo;
     JSaddStockThree.onclick = chooseImageThree;
     addTrackBtn.onclick = createNewEvent;
-
-    //time();
-
-
 
     //---------- function to choose time----------//
 
@@ -95,15 +93,6 @@ function addTrack (){
 
     }
 
-
-    var globalTargetDateIndex;
-    var globalAllDatesArray;
-    var selectedDate;
-    var allDates;
-    var thisShowDoEvents;
-    var dateId;
-
-
     client.getSpace('59mi8sr8zemv')
         .then((space) =>
               space.getEntries({
@@ -114,9 +103,6 @@ function addTrack (){
              ).then(function(entries){
         console.log('bajs', entries.items)
         allDates = entries.items;
-
-        //console.log('BajsBajs:', allDates); //all dates
-        //console.log('BajsBajsSkit:', entries.sys); //all dates
 
         selectedDate = getSelectedDate();
         //loop through dates in datesForShowDo
@@ -215,9 +201,6 @@ function addTrack (){
     }).then(function(){time()});
 
 
-    console.log('dateId after', dateId);
-
-
     function addListenerToSizeBtn (){
         JSaddHourOne.onclick = smallTrack;
         JSaddHourTwo.onclick = mediumTrack;
@@ -271,7 +254,6 @@ function addTrack (){
         JSaddHourThree.style.display ='none'
     }
 
-
     function smallTrack (){
         document.getElementById("JSaddHourOne").classList.add('selectedTime');
         document.getElementById("JSaddHourTwo").classList.remove('selectedTime');
@@ -282,14 +264,12 @@ function addTrack (){
         document.getElementById("JSaddHourTwo").classList.add('selectedTime');
         document.getElementById("JSaddHourOne").classList.remove('selectedTime');
         document.getElementById("JSaddHourThree").classList.remove('selectedTime');
-
     }
 
     function largeTrack (){
         document.getElementById("JSaddHourThree").classList.add('selectedTime');
         document.getElementById("JSaddHourOne").classList.remove('selectedTime');
         document.getElementById("JSaddHourTwo").classList.remove('selectedTime');
-
     }
 
     function chooseImageOne (){
@@ -301,21 +281,16 @@ function addTrack (){
     }
 
     function chooseImageTwo (){
-        var choosenImage = imageTwo
         document.getElementById("JSaddStockTwo").classList.add('selectedTime');
         document.getElementById("JSaddStockOne").classList.remove('selectedTime');
         document.getElementById("JSaddStockThree").classList.remove('selectedTime');
-        return choosenImage
     }
 
     function chooseImageThree (){
-        var choosenImage = imageThree
         document.getElementById("JSaddStockThree").classList.add('selectedTime');
         document.getElementById("JSaddStockTwo").classList.remove('selectedTime');
         document.getElementById("JSaddStockOne").classList.remove('selectedTime');
-        return choosenImage
     }
-
 
     function hasTwoElementsByColumn(matrix, row){
         var n = matrix[row].length
@@ -358,41 +333,25 @@ function addTrack (){
         return false
     }
 
-
-
-    //var dateId = '2Bxpz2RgA4AQImQOssey8w';
-
-
     function time (thisShowDoEvents){
         client.getSpace('59mi8sr8zemv')
             .then((space) => {
             space.getEntry(dateId,{
-                //order: 'fields.date', //Sort by date in datesForShowDo
                 resolveLinks: true,
                 locale: 'en-US'
             })
                 .then((entry) => {
                 var allInDate = entry.fields.link['en-US'];
-                // var eventForDate = allInDate[i].sys.id;
                 var eventIdArry = [];
-
 
                 for(var i = 0; i < allInDate.length; i++){
                     var eventForDate = allInDate[i].sys.id;
                     eventIdArry.push(eventForDate);
 
                 }
-                // console.log('array', eventIdArry)
 
                 space.getEntries('events')
                     .then((entries) =>{
-
-                    var nrOfSmall; //fields.size['en-US']
-                    var nrOfMedium; //fields.size['en-US']
-                    var nrOfLarge; //fields.size['en-US']
-                    var nrOfOne;    //fields.time['en-US']
-                    var nrOfTwo;     //fields.time['en-US']
-                    var nrOfThree;   //fields.time['en-US']
 
                     var eventDateId = entries.items
 
@@ -405,7 +364,6 @@ function addTrack (){
                     for (var i = 0; i < matrix.length; i++) {
                         matrix[i] = new Array(n);
                     }
-
 
                     for(id of eventIdArry){
                         for(event of entries.items){
@@ -443,12 +401,10 @@ function addTrack (){
                                             break
                                         }
                                     }
-
                                 }
                             }
                         }
                     }
-
 
                     //matrix is filled now
 
@@ -494,35 +450,22 @@ function addTrack (){
 
                     }
                 })
-
-                console.log('time1', eventForDate)
-                console.log('time2', globalTargetDateIndex)
-                //console.log('Natalies liste', thisShowDoEvents)
             })
         })
-    }
+    }// end Time
+
 
     //the function that creates a new event, and post it to contentful
-    function createNewEvent (){
+    function createNewEvent (dateId){
 
         //---Geting the value of the input fields in the html
         var choosenTime;
         var JSaddNewTitle = JSaddTitle.value;
         var JSaddNewHosts = JSaddHosts.value;
         var JSaddNewPrereq = JSaddPrereq.value;
-        //var JSaddNewStartOne = JSaddStartOne.value;
-        //var JSaddNewStartTwo = JSaddStartTwo.value;
-        //var JSaddNewStartthree = JSaddStartthree.value;
-        //var JSaddNewHourOne = JSaddHourOne.value;
-        //var JSaddNewHourTwo = JSaddHourTwo.value;
-        //var JSaddNewHourthree = JSaddHourthree.value;
         var JSaddNewNrOfPart = JSaddNrOfPart.value;
         var JSaddNewExpect = JSaddExpect.value;
         var JSaddNewJoin = JSaddJoin.value;
-        // var JSaddNewImage = JSaddImage.value;
-        //  var JSaddNewStockOne = JSaddStockOne.value;
-        //var JSaddNewStockTwo = JSaddStockTwo.value;
-        //var JSaddNewStockThree = JSaddStockThree.value;
         var JSaddNewElse = JSaddElse.value;
 
         ///---------Function for selected time----------////
@@ -541,6 +484,15 @@ function addTrack (){
             choosenTrack = 'Medium';
         }else if(JSaddHourThree.classList.contains('selectedTime') == true){
             choosenTrack = 'Large';
+        }
+
+        //------ function fol selcting image
+        if(JSaddStockOne.classList.contains('selectedTime') == true){
+            choosenTrack = imageOne;
+        }else if(JSaddStockTwo.classList.contains('selectedTime') == true) {
+            choosenTrack = imageTwo;
+        }else if(JSaddStockThree.classList.contains('selectedTime') == true){
+            choosenTrack = imageThree;
         }
 
 
@@ -568,9 +520,39 @@ function addTrack (){
             eventEndTime = '15:45';
         }
 
+        //-----modal
 
 
-        // var dateId = '2Bxpz2RgA4AQImQOssey8w';
+            var errorModal = document.getElementById('error');
+            var publishModal = document.getElementById('publish');
+            var closeModal = document.getElementById('closeError');
+
+        function modalFunction() {
+
+            /*if one input is empty show error feedback modal */
+            if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "") {
+                errorModal.style.display = 'block';
+                errorModal.style.opacity = '1';
+                errorModal.style.pointerEvents = 'auto';
+                errorModal.style.zIndex = '99999';
+
+                closeModal.onclick = function() {
+                    errorModal.style.display = 'none';
+                    errorModal.style.opacity = '0';
+                    errorModal.style.pointerEvents = 'none';
+                    errorModal.style.zIndex = '-1';
+                };
+
+            } else {
+                publishModal.style.display = 'block';
+                publishModal.style.opacity = '1';
+                publishModal.style.pointerEvents = 'auto';
+                publishModal.style.zIndex = '99999';
+            }
+
+        }
+
+        //--- end modal
 
         //----- JSON that gets sent to Contentful
 
@@ -632,7 +614,7 @@ function addTrack (){
 
                 var eventID = event.sys.id
 
-                //This function is gets the entry of 16 june
+                //This function is gets the entry of choosen date
                 space.getEntry(dateId)
                     .then((entry) => {
 
@@ -653,7 +635,8 @@ function addTrack (){
                     .then ((entry) => entry.publish())
                 space.getEntry(dateId)
                     .then ((entry) => entry.publish())
-            })
+            }).then(function(){modalFunction()})
+
 
         })//end getspace
 

@@ -15,16 +15,6 @@
     </head>
     <body>
 
-        <!--        <div>
-<h3>Edit Track</h3>
-
-
-testTest: <input id="testTestEdit" type="text" value=""><br><br>
-panda: <input id="pandaEdit" type="text" value=""><br><br>
-<p id="editTrackBtn"> click me </p>
-
-</div>
---->
 
         <!--------------------------------HEADER-------------------------------->
         <header class="pageHeader">
@@ -46,81 +36,61 @@ panda: <input id="pandaEdit" type="text" value=""><br><br>
             <div class="wrapper basic">
 
                 <h2>Edit track</h2>
+                <br>
+                <span class="obligatoryField">*</span> Pick the date for your track<br><br>
 
-                Pick the date for your track
                 <!-------------- NAVIGATION -------------->
 
-                <!--         <div id="navigation">
-<div id="navWeek">
-<div><p id="prevBtn"><i class="fa fa-angle-left" aria-hidden="true"></i> Previous<br>
-<strong id="prevDate"></strong>
-</p>
-</div>
-<div style="text-align: center"><a id="thisWeekBtn"><br>
-<h2 id="thisDate"></h2><br>
-</a>
-</div>
-<div><p id="nextBtn">Next  <i class="fa fa-angle-right" aria-hidden="true"></i><br>
-<strong id="nextDate"></strong>
-</p>
-</div>
-</div>
-</div>
+                <div class="pickDateTrack">
+                    <i id="arrowPrevious" class="filled-arrow-down" style="float: left"></i>
+                    <div class="selectDate" id="JSdatePick1"></div>
+                    <div class="selectDate dateSelected" id="JSdatePick2"></div>
+                    <div class="selectDate" id="JSdatePick3"></div>
+                    <i id="arrowNext" class="filled-arrow-down" style="float: right"></i>
+                </div>
 
 
-
-<div id="navigation">
-<div id="navWeek">
-<div><a id="prevBtn"><i class="fa fa-angle-left" aria-hidden="true"></i> Previous</a></div>
-<div tabindex="0" role="button" class="selectDate" id="JSeditPrevDateOne">05.05.17</div>
-<div tabindex="0" role="button" class="selectDate" id="JSeditPrevDateTwo">15.00.17</div>
-<div tabindex="0" role="button"  class="selectDate selectedTime"  id="JSeditThisDate">05.05.17</div>
-<div tabindex="0" role="button" class="selectDate" id="JSeditNextDateOne">05.05.17</div>
-<div tabindex="0" role="button" class="selectDate" id="JSeditNextDateTwo">15.00.17</div>
-<div><a id="nextBtn">Next  <i class="fa fa-angle-right" aria-hidden="true"></i></a></div>
-
-</div>
-</div> -->
                 <!-------------- END NAVIGATION -------------->
-                Title <br>
-                <input id="JSeditTitle" type="text" value=""><br><br> Host(s) (who’s going to hold the track? Fill in your name and co-hosts names)<br>
-                <input id="JSeditHosts" type="text" value=""><br><br> Prerequisites (is there anything the attendees need to know beforehand?)<br>
-                <input id="JSeditPrereq" type="text" value=""><br><br> Preferred starttime (click to select)
+                <span class="obligatoryField">*</span> Title <br>
+                <input id="JSeditTitle" type="text" value=""><br><br> <span class="obligatoryField">*</span>Host(s) (who’s going to hold the track? Fill in your name and co-hosts names)<br>
+                <input id="JSeditHosts" type="text" value=""><br><br> <span class="obligatoryField">*</span> Prerequisites (is there anything the attendees need to know beforehand?)<br>
+                <input id="JSeditPrereq" type="text" value=""><br><br><span class="obligatoryField">*</span> Preferred starttime (click to select)
                 <br>
-                <div class="selectTime selectedTime" id="JSeditStartOne">13.00</div>
+                <div class="selectTime" id="JSeditStartOne">13.00</div>
                 <div class="selectTime" id="JSeditStartTwo">14.00</div>
                 <div class="selectTime" id="JSeditStartThree">15.00</div>
-                <br><br> How long will your track be? (click to select)
+                <br><br> <span class="obligatoryField">*</span>  How long will your track be? (click to select)
                 <br>
                 <div class="selectTime" id="JSeditHourOne">1 hour</div>
                 <div class="selectTime" id="JSeditHourTwo">2 hours</div>
                 <div class="selectTime" id="JSeditHourThree">3 hours</div><br><br>
                 How many of your co-workers may join your track?
-                <input id="JSeditNrOfPart" type="text" value=""><br><br>
-                Location<br>
-                <input type="text" value="A room will be assigned to you by the organizer." disabled><br><br>
-                What to expect (The agenda, what will you teach to other etc)<br>
-                <input id="JSeditExpect" type="text" value=""><br><br> Who should join? (Who is this track best suited for?)<br>
-                <input id="JSeditJoin" type="text" value=""><br><br>
-                <input id="JSeditImage" type="text" value=""><br><br>you can choose a stock photo (click to select)<br>
-                <div id="JSaddStockOne" class="stockImgAddTrack"><img src="//images.contentful.com/59mi8sr8zemv/4KahBhVQTCykgOYsKS66Ws/a8f2880ff4971097c530667f14defffd/Oslo-0068.jpg"></div>
-                <div id="JSaddStockTwo" class="stockImgAddTrack"><img src="//images.contentful.com/59mi8sr8zemv/2dmGUtiw7uwugWQcsiGcUk/00ef2bcad9d4a74e17f1e52c46801ffb/Oslo-0036.jpg?">
-                    <div id="JSaddStockThree" class="stockImgAddTrack"><img src="https://images.contentful.com/59mi8sr8zemv/5u6CWGgkmcwiIUEIsiQMGE/8eee432604d7e9695507b9f9907175d4/Chicago-0021__1_.jpg"></div><br>
+                <input id="JSeditNrOfPart" type="text" value=""><br><br><i>A room will be assigned to you by the organizer.</i>
+                <!--    Location<br>
+<input type="text" value="A room will be assigned to you by the organizer." disabled> --><br><br>
+                <span class="obligatoryField">*</span> What to expect (The agenda, what will you teach to other etc)<br>
+                <textarea id="JSeditExpect" type="text" value=""></textarea><br><br><span class="obligatoryField">*</span> Who should join? (Who is this track best suited for?)<br>
+                <input id="JSeditJoin" type="text" value="">
+                <br><br>you can choose a stock photo (click to select)<br>
+                <div id="JSaddStockOne" class="stockImg"><img src="//images.contentful.com/59mi8sr8zemv/4KahBhVQTCykgOYsKS66Ws/a8f2880ff4971097c530667f14defffd/Oslo-0068.jpg" class="stockImgAddTrack">
+                </div>
+                <div id="JSaddStockTwo" class="stockImg"><img src="//images.contentful.com/59mi8sr8zemv/2dmGUtiw7uwugWQcsiGcUk/00ef2bcad9d4a74e17f1e52c46801ffb/Oslo-0036.jpg?" class="stockImgAddTrack">
+                </div>
+                <div id="JSaddStockThree" class="stockImg"><img src="https://images.contentful.com/59mi8sr8zemv/5u6CWGgkmcwiIUEIsiQMGE/8eee432604d7e9695507b9f9907175d4/Chicago-0021__1_.jpg" class="stockImgAddTrack"></div><br>
 
 
-                    Anything else to add? (links, videos for preparation, other tracks, co-host, equipment etc)<br>
-                    <input id="JSeditElse" type="text" value="">
-                    <div class="buttonseditTrack">
-                        <div tabindex="0" role="button" id="previewTrackBtn" type="submit" value="Add track">Preview</div>
-                        <div tabindex="0" role="button" id="editTrackBtn" type="submit" value="Add track">Submit</div>
-                    </div>
+                Anything else to add? (links, videos for preparation, other tracks, co-host, equipment etc)<br>
+                <textarea id="JSeditElse" type="text" value=""></textarea>
+                <div class="buttonsAddTrack">
+                    <a>
+                        <div tabindex="0" role="button" id="editTrackBtn" class="trackBtn" type="submit" value="Add track">Publish</div>
+                    </a>
                 </div>
             </div>
 
         </main>
-        <!--<script src="node_modules/contentful/browser-dist/contentful.min.js"></script>-->
-        <!--  <script src="scripts/date.js"></script>-->
-        <script src="../scripts/dist/scripts/main-editTrack.bundle.js"></script>
+
+        <script src="..scripts/dist/scripts/main-editTrack.bundle.js"></script>
         <script>
             //  initDates(function(){})
         </script>
