@@ -117,11 +117,11 @@ function editTrack(eventId){
             /*-------------- SET SIZE --------------*/
             var thisSize = entry.fields.size['en-US'];
             if(thisSize == 'Large'){
-                document.getElementById("JSaddHourOne").classList.add('selectedTime');
+                document.getElementById("JSaddHourThree").classList.add('selectedTime');
             }else if(thisSize == 'Medium'){
                 document.getElementById("JSaddHourTwo").classList.add('selectedTime');
             }else if(thisSize == 'Small'){
-                document.getElementById("JSaddHourThree").classList.add('selectedTime');
+                document.getElementById("JSaddHourOne").classList.add('selectedTime');
             }
             /*-------------- END SET SIZE --------------*/
         })//end entry
