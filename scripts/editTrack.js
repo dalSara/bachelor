@@ -85,7 +85,6 @@ function editTrack(eventId){
 
             console.log(entry.fields.time);
 
-
             //document.getElementById('pandaEdit').setAttribute('value', JSON.stringify(entry.fields.title));
             document.getElementById('JSeditTitle').setAttribute('value', (entry.fields.title['en-US']));
 
@@ -103,6 +102,28 @@ function editTrack(eventId){
             document.getElementById('JSeditElse').setAttribute('value', (entry.fields.anythingElse['en-US']));
             //document.getElementById('JSeditStatus').setAttribute('value', JSON.stringify(entry.fields.JSeditStatus));
 
+            /*-------------- SET TIME --------------*/
+            var thisTime = entry.fields.time['en-US'];
+            var thisStartTime = thisTime.substring(thisTime.length - 5);
+            if(thisStartTime == '13:00'){
+                document.getElementById("JSaddStartOne").classList.add('selectedTime');
+            }else if(thisStartTime == '14:00'){
+                document.getElementById("JSaddStartOne").classList.add('selectedTime');
+            }else if(thisStartTime == '15:00'){
+                document.getElementById("JSaddStartOne").classList.add('selectedTime');
+            }
+            /*-------------- END SET TIME --------------*/
+
+            /*-------------- SET SIZE --------------*/
+            var thisSize = entry.fields.size['en-US'];
+            if(thisSize == 'Large'){
+                document.getElementById("JSaddStartOne").classList.add('selectedTime');
+            }else if(thisSize == 'Medium'){
+                document.getElementById("JSaddStartOne").classList.add('selectedTime');
+            }else if(thisSize == 'Small'){
+                document.getElementById("JSaddStartOne").classList.add('selectedTime');
+            }
+            /*-------------- END SET SIZE --------------*/
         })//end entry
     })//end getSpace
 
