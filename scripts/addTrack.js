@@ -5,7 +5,7 @@ function addTrack (){
 
     var client = contentfulManagement.createClient({
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-        accessToken: 'b60f393ec836a43747cb5a238cdc49e379361c7d7a0a96012191fb3745e2532b',
+        accessToken: '',
         resolveLinks: true
         //space: '59mi8sr8zemv'
 
@@ -20,7 +20,8 @@ function addTrack (){
 
     var eventEndTime = null;
     // var thisShowDoEvents = null;
-    var startOne;
+    var oneDate;
+
 
     //-------- temporary img var -----//
     var imageOne = {sys: {
@@ -72,16 +73,13 @@ function addTrack (){
     JSaddStockThree.onclick = chooseImageThree;
     addTrackBtn.onclick = createNewEvent;
 
-    //--------- Call for functions ----------//
-    //Unlimited if no value on nrOfPart
-    //   chooseDates();
     time();
 
 
 
     //---------- function to choose time----------//
-    //  function chooseDates(){
 
+    //--- gets todays date, and change so next date for Show & Do is in front//
     function getSelectedDate(specifiedDate) {
         selectedDate = new Date();
         if(specifiedDate) selectedDate = specifiedDate;
@@ -94,13 +92,16 @@ function addTrack (){
         /*-------------- END TODAYS DATE --------------*/
 
         return selectedDate;
+
     }
+
 
     var globalTargetDateIndex = null;
     var globalAllDatesArray = null;
     var selectedDate = null;
     var allDates = null;
     var thisShowDoEvents;
+    var dateId;
 
 
     client.getSpace('59mi8sr8zemv')
@@ -109,22 +110,21 @@ function addTrack (){
         content_type: 'datesForShowDo',
         order: 'fields.date', //Sort by date in datesForShowDo
         locale: 'en-US'
-    }).then(function(entries){
-        //console.log('bajs', entries.items)
+    })).then(function(entries, dateId){
+        console.log('bajs', entries.items)
         allDates = entries.items;
 
         //console.log('BajsBajs:', allDates); //all dates
         //console.log('BajsBajsSkit:', entries.sys); //all dates
 
         selectedDate = getSelectedDate();
-
         //loop through dates in datesForShowDo
         for(var i = 0; i < allDates.length; i++){
             if(allDates[i].fields.date["en-US"] <= selectedDate && allDates[i+1].fields.date["en-US"] >= selectedDate){
                 globalTargetDateIndex = i + 1;
 
                 var oneDate = allDates[globalTargetDateIndex].fields.date["en-US"];
-                //console.log('Later than selectedDate', oneDate);
+                console.log('Later than selectedDate', oneDate);
 
                 thisShowDoEvents = allDates[i + 1].fields.link["en-US"]; //EVENTS TO DISPLAY .
                 console.log('thisShowDoEvents', thisShowDoEvents);
@@ -133,8 +133,6 @@ function addTrack (){
         }
 
         globalAllDatesArray = entries.items;
-        //console.log('events (sorted):', selectedDate); //all dates
-        //console.log('Natalies liste:', thisShowDoEvents); //all dates
 
         var today = new Date();
         var year = today.getFullYear();
@@ -148,10 +146,12 @@ function addTrack (){
 
             if(globalAllDatesArray[i].fields.date["en-US"] <= today && globalAllDatesArray[i+1].fields.date["en-US"] >= today){
                 globalTargetDateIndex = i+1;
+                dateId = allDates[globalTargetDateIndex].sys.id;
                 break;
             }
-        }
 
+        }
+        console.log('dateId', dateId);
         updateDateLabels();
 
         arrowPrevious.onclick = goPrevious;
@@ -168,7 +168,7 @@ function addTrack (){
             if(globalTargetDateIndex > 0){
                 globalTargetDateIndex --;
                 updateDateLabels();
-                //callbackAction();
+
             }
         }
 
@@ -207,11 +207,10 @@ function addTrack (){
             JSdatePick2.innerHTML = getDateIndex(globalTargetDateIndex);
         }
 
-        console.log('føre hej', thisShowDoEvents)
+    });
 
-    }
-           )
-             )
+
+    console.log('dateId', dateId);
 
     // };//end chooseDates
 
@@ -268,7 +267,6 @@ function addTrack (){
         JSaddHourTwo.style.display ='none'
         JSaddHourThree.style.display ='none'
     }
-
 
 
     function smallTrack (){
@@ -358,17 +356,9 @@ function addTrack (){
     }
 
 
-    /*-------------- SET END TIME --------------*/
-    /*function setEndTime(){
 
-        //var choosenTime = "2017-06-02T13:00";
-        //var choosenTrack = "Small";
+    //var dateId = '2Bxpz2RgA4AQImQOssey8w';
 
-    }
-    /*-------------- END SET END TIME --------------*/
-
-
-    var dateId = '2Bxpz2RgA4AQImQOssey8w';
 
     function time (thisShowDoEvents){
         client.getSpace('59mi8sr8zemv')
@@ -389,11 +379,11 @@ function addTrack (){
                     eventIdArry.push(eventForDate);
 
                 }
-                console.log('array', eventIdArry)
+                // console.log('array', eventIdArry)
 
                 space.getEntries('events')
                     .then((entries) =>{
-                    var foo = [];
+
                     var nrOfSmall; //fields.size['en-US']
                     var nrOfMedium; //fields.size['en-US']
                     var nrOfLarge; //fields.size['en-US']
@@ -405,13 +395,7 @@ function addTrack (){
 
                     for(var i = 0; i < eventDateId.length; i++){
                         var allEventForDate = eventDateId[i].sys.id;
-                        foo.push(allEventForDate);
                     }
-
-
-                    console.log('hubba', eventDateId)
-                    console.log('hubbaBubba', eventDateId[2].sys.id)
-                    console.log('hubbaDubba', foo)
 
                     var n = 5
                     var matrix = new Array(3);
@@ -506,22 +490,10 @@ function addTrack (){
                             JSaddStartThree.style.display = 'none'
 
                     }
-
-
-                    /*
-    JSaddStartOne
-    JSaddStartTwo
-    JSaddStartThree
-    JSaddHourOne
-    JSaddHourTwo
-    JSaddHourThree
-    */
-
                 })
 
-                //  var foo = fields.link;
                 console.log('time1', eventForDate)
-                console.log('time2', allInDate)
+                console.log('time2', globalTargetDateIndex)
                 //console.log('Natalies liste', thisShowDoEvents)
             })
         })
@@ -552,7 +524,7 @@ function addTrack (){
 
         ///---------Function for selected time----------////
         if(JSaddStartOne.classList.contains('selectedTime') == true){
-            choosenTime = '2017-06-02T13:00';
+            choosenTime = selectedDate + '13:00';
         }else if(JSaddStartTwo.classList.contains('selectedTime') == true) {
             choosenTime = '2017-06-02T14:00';
         }else if(JSaddStartThree.classList.contains('selectedTime') == true){
@@ -595,7 +567,7 @@ function addTrack (){
 
 
 
-        var dateId = '2Bxpz2RgA4AQImQOssey8w';
+        // var dateId = '2Bxpz2RgA4AQImQOssey8w';
 
         //----- JSON that gets sent to Contentful
 
