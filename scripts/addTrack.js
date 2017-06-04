@@ -1,5 +1,7 @@
 //var contentful = require('contentful');
 var contentfulManagement = require('contentful-management');
+var jqueryFunctions = require('./jqueryFunctions');
+
 
 function addTrack (){
 
@@ -75,6 +77,16 @@ function addTrack (){
     JSaddStockThree.onclick = chooseImageThree;
     addTrackBtn.onclick = createNewEvent;
 
+<<<<<<< HEAD
+=======
+    //--------- Call for functions ----------//
+    //Unlimited if no value on nrOfPart
+    chooseDates();
+    time();
+    jqueryFunctions.smoothScrollDown();
+
+
+>>>>>>> origin/master
     //---------- function to choose time----------//
 
     //--- gets todays date, and change so next date for Show & Do is in front//
@@ -645,5 +657,4 @@ function addTrack (){
 }//end add track
 
 exports.addTrack = addTrack;
-
 
