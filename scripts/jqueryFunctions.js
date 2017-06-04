@@ -61,17 +61,18 @@ function smoothScrollDown(){
 
 /*-------------- GOING BTN --------------*/
 function goingBtn(){
-    $(function(){
-        $('.JSgoing').click(function() {
-            $(this).addClass('JSgoing-clicked');
-            $(this).next('.JSgoingDropdownContent').stop().slideToggle(500);
+    $('.JSgoing').click(function() {
+        $(this).next('.JSgoingDropdownContent').stop().slideToggle(500);
 
-            $('.JSregisterBtn').click(function() {
+        $('.JSregisterBtn').click(function() {
+            //If name is added in input field:
+            if($(this).siblings('.JSnameInput').val() == true || $(this).siblings('.JSnameInput').val() != ''){
                 $('.JSgoingDropdownContent').stop().slideUp(500);
                 $(this).parent().siblings('.JSgoing').addClass('JSgoing-registered');
-            })
+                $(this).parent().siblings('.JSgoing').text("You're going!"); //Feedback to user
+            }
         })
-    });
+    })
 }
 /*-------------- END GOING BTN --------------*/
 /*-------------- SCROLL TO TOP --------------*/
