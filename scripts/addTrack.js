@@ -73,7 +73,7 @@ function addTrack (){
     JSaddStockThree.onclick = chooseImageThree;
     addTrackBtn.onclick = createNewEvent;
 
-    time();
+    //time();
 
 
 
@@ -96,10 +96,10 @@ function addTrack (){
     }
 
 
-    var globalTargetDateIndex = null;
-    var globalAllDatesArray = null;
-    var selectedDate = null;
-    var allDates = null;
+    var globalTargetDateIndex;
+    var globalAllDatesArray;
+    var selectedDate;
+    var allDates;
     var thisShowDoEvents;
     var dateId;
 
@@ -110,7 +110,8 @@ function addTrack (){
         content_type: 'datesForShowDo',
         order: 'fields.date', //Sort by date in datesForShowDo
         locale: 'en-US'
-    })).then(function(entries, dateId){
+    })
+             ).then(function(entries){
         console.log('bajs', entries.items)
         allDates = entries.items;
 
@@ -146,12 +147,12 @@ function addTrack (){
 
             if(globalAllDatesArray[i].fields.date["en-US"] <= today && globalAllDatesArray[i+1].fields.date["en-US"] >= today){
                 globalTargetDateIndex = i+1;
-                dateId = allDates[globalTargetDateIndex].sys.id;
                 break;
             }
 
         }
-        console.log('dateId', dateId);
+
+        dateId = allDates[globalTargetDateIndex].sys.id;
         updateDateLabels();
 
         arrowPrevious.onclick = goPrevious;
@@ -160,18 +161,22 @@ function addTrack (){
         function goNext(){
             if(globalTargetDateIndex < globalAllDatesArray.length - 1){
                 globalTargetDateIndex ++;
+                dateId = allDates[globalTargetDateIndex].sys.id;
                 updateDateLabels();
+                time(dateId);
             }
         }
 
         function goPrevious(){
             if(globalTargetDateIndex > 0){
                 globalTargetDateIndex --;
+                dateId = allDates[globalTargetDateIndex].sys.id;
                 updateDateLabels();
-
+                time(dateId);
             }
         }
 
+        console.log('dateId', dateId);
         /*-------------- GET INDEX OF THE DATE --------------*/
         // totaly stolen from Natalie =)
         function getDateIndex(index){
@@ -207,12 +212,10 @@ function addTrack (){
             JSdatePick2.innerHTML = getDateIndex(globalTargetDateIndex);
         }
 
-    });
+    }).then(function(){time()});
 
 
-    console.log('dateId', dateId);
-
-    // };//end chooseDates
+    console.log('dateId after', dateId);
 
 
     function addListenerToSizeBtn (){
@@ -327,7 +330,7 @@ function addTrack (){
     function hasThreeElementsByColumn(matrix, row){
         var n = matrix[row].length
         for(var i=0; i < n; i++){
-            if(matrix[row][i] == null && matrix[row+1][i] == null && matrix[row+1][i] == null){
+            if(matrix[row][i] == null && matrix[row+1][i] == null && matrix[row+2][i] == null){
                 return true
             }
         }
@@ -390,7 +393,7 @@ function addTrack (){
                     var nrOfOne;    //fields.time['en-US']
                     var nrOfTwo;     //fields.time['en-US']
                     var nrOfThree;   //fields.time['en-US']
-                    //var allEventForDate = entries.items
+
                     var eventDateId = entries.items
 
                     for(var i = 0; i < eventDateId.length; i++){
@@ -425,18 +428,18 @@ function addTrack (){
 
                                 } else if(size === "Medium"){
                                     for(var i=0; i < n; i++){
-                                        if(matrix[row][i] == null && matrix[row][i+1] == null){
+                                        if(matrix[row][i] == null && matrix[row+1][i] == null){
                                             matrix[row][i] = true
-                                            matrix[row][i +1] == true
+                                            matrix[row+1][i] = true
                                             break
                                         }
                                     }
                                 } else if(size === "Large"){
                                     for(var i=0; i < n; i++){
-                                        if(matrix[row][i] == null && matrix[row][i+1] == null && matrix[row][i+2] == null){
+                                        if(matrix[row][i] == null && matrix[row+1][i] == null && matrix[row+2][i] == null){
                                             matrix[row][i] = true
-                                            matrix[row][i +1] == true
-                                            matrix[row][i +2] == true
+                                            matrix[row+1][i] = true
+                                            matrix[row+2][i] = true
                                             break
                                         }
                                     }
@@ -524,11 +527,11 @@ function addTrack (){
 
         ///---------Function for selected time----------////
         if(JSaddStartOne.classList.contains('selectedTime') == true){
-            choosenTime = selectedDate + '13:00';
+            choosenTime = selectedDate + 'T13:00';
         }else if(JSaddStartTwo.classList.contains('selectedTime') == true) {
-            choosenTime = '2017-06-02T14:00';
+            choosenTime = selectedDate + 'T14:00';
         }else if(JSaddStartThree.classList.contains('selectedTime') == true){
-            choosenTime = '2017-06-02T15:00';
+            choosenTime = selectedDate + 'T15:00';
         }
 
         //----------- Function for selected size ---------///
