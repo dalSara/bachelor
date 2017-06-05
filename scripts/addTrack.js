@@ -16,6 +16,7 @@ function addTrack (){
     var arrowPrevious = document.getElementById("arrowPrevious");
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     var arrowNext = document.getElementById("arrowNext");
+    var JSdatePick1 = document.getElementById("JSdatePick1");
 
     var choosenTrack;
     var choosenImage;
@@ -77,16 +78,15 @@ function addTrack (){
     JSaddStockThree.onclick = chooseImageThree;
     addTrackBtn.onclick = createNewEvent;
 
-<<<<<<< HEAD
-=======
     //--------- Call for functions ----------//
+    //___NATALIE_____ ska de här vara här? =)
     //Unlimited if no value on nrOfPart
-    chooseDates();
-    time();
-    jqueryFunctions.smoothScrollDown();
+    //chooseDates();
+    //time();
+    //jqueryFunctions.smoothScrollDown();
 
 
->>>>>>> origin/master
+
     //---------- function to choose time----------//
 
     //--- gets todays date, and change so next date for Show & Do is in front//
@@ -154,6 +154,8 @@ function addTrack (){
         updateDateLabels();
 
         arrowPrevious.onclick = goPrevious;
+        JSdatePick1.onclick = goPrevious;
+        JSdatePick3.onclick = goNext;
         arrowNext.onclick = goNext;
 
         function goNext(){

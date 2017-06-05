@@ -648,15 +648,10 @@ index
   width: 250px;
   margin-bottom: 20px; }
 
-<<<<<<< HEAD
-=======
-.JSgoingBtn:after {
-  width: 250px;
-  content: "Going?"; }
-
->>>>>>> origin/master
 .JSgoing-clicked {
-  background-color: #06f;
+  background-color: #06f; }
+
+.JSgoing-clicked {
   color: #fff; }
 
 .JShidden {
@@ -669,32 +664,18 @@ index
 
 .JSregisterBtn {
   display: inline-block;
-<<<<<<< HEAD
   background-color: #0066FF;
   border: 4px solid #0066FF;
   font-family: Volte-Semibold;
-=======
-  background-color: #06f;
-  border: 4px solid #06f;
-  font-family: 'Volte Semibold', sans-serif;
->>>>>>> origin/master
   font-size: 1rem;
   color: #FFFFFF;
   text-align: center;
   padding: 0.5rem;
   cursor: pointer; }
 
-<<<<<<< HEAD
 .JSgoing-registered {
   background-color: #0066FF;
   color: white; }
-=======
-.JSgoing-registered:after {
-  background-color: #06f;
-  transition: .2s;
-  color: white;
-  content: "You're going!"; }
->>>>>>> origin/master
 
 /*---------END GOING-BTN-------*/
 /*---------LIST RESPONSIVE -------*/

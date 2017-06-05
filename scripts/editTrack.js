@@ -18,11 +18,23 @@ function editTrack(eventId){
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     var arrowNext = document.getElementById("arrowNext");
 
+    var imageOne = {sys: {
+        id: '4KahBhVQTCykgOYsKS66Ws',
+        linkType: "Asset",
+        type:"Link"
+    }}
+
     var imageTwo = {sys: {
         id: '2dmGUtiw7uwugWQcsiGcUk',
         linkType: "Asset",
         type:"Link"
     }}
+    var imageThree = {sys: {
+        id: '5u6CWGgkmcwiIUEIsiQMGE',
+        linkType: "Asset",
+        type:"Link"
+    }}
+
 
     //var init = function (){
 
@@ -68,6 +80,22 @@ function editTrack(eventId){
     //the function that creates a new event, and post it to contentful
     //function addEditTrack(){
 
+    function getSelectedDate(specifiedDate) {
+        selectedDate = new Date();
+        if(specifiedDate) return specifiedDate//selectedDate = specifiedDate;
+        //-------------- TODAYS DATE --------------//
+        //ISO8601 formatted YYYY-MM-DD (to match Contentful):
+        var year = selectedDate.getFullYear();
+        var month = ('0' + (selectedDate.getMonth() +1)).slice(-2);
+        var day = ('0' + selectedDate.getDate()).slice(-2);
+        var selectedDate = year + '-' + month + '-' + day;
+        //-------------- END TODAYS DATE --------------//
+
+        return selectedDate;
+
+    }
+
+
     // This API call will request a space with the specified ID
     client.getSpace('59mi8sr8zemv')
         .then((space) => {
@@ -82,6 +110,7 @@ function editTrack(eventId){
             .then((entry) => {
 
             console.log(entry.fields.time);
+
 
             //document.getElementById('pandaEdit').setAttribute('value', JSON.stringify(entry.fields.title));
             document.getElementById('JSeditTitle').setAttribute('value', (entry.fields.title['en-US']));
@@ -124,26 +153,18 @@ function editTrack(eventId){
                 document.getElementById("addedHour").innerHTML = hourTxt + " 1 hour";
             }
             /*-------------- END SET SIZE --------------*/
+
+            //var theTime = entry.fields.time['en-US']
+            //doSelectDate(space, theTime)
+
         })//end entry
     })//end getSpace
 
     //---------- function to choose time----------//
 
     //--- gets todays date, and change so next date for Show & Do is in front//
-    function getSelectedDate(specifiedDate) {
-        selectedDate = new Date();
-        if(specifiedDate) selectedDate = specifiedDate;
-        /*-------------- TODAYS DATE --------------*/
-        //ISO8601 formatted YYYY-MM-DD (to match Contentful):
-        var year = selectedDate.getFullYear();
-        var month = ('0' + (selectedDate.getMonth() +1)).slice(-2);
-        var day = ('0' + selectedDate.getDate()).slice(-2);
-        var selectedDate = year + '-' + month + '-' + day;
-        /*-------------- END TODAYS DATE --------------*/
 
-        return selectedDate;
 
-    }
 
     client.getSpace('59mi8sr8zemv')
         .then((space) =>
@@ -153,9 +174,20 @@ function editTrack(eventId){
         locale: 'en-US'
     })
              ).then(function(entries){
+
+    /*
+    function doSelectDate(space, chosenDate){
+
+        space.getEntries({
+            content_type: 'datesForShowDo',
+            order: 'fields.date', //Sort by date in datesForShowDo
+            locale: 'en-US'
+        }).then(function(entries){
+      */
         console.log('bajs', entries.items)
         allDates = entries.items;
 
+        //selectedDate = getSelectedDate(chosenDate);
         selectedDate = getSelectedDate();
         //loop through dates in datesForShowDo
         for(var i = 0; i < allDates.length; i++){
@@ -669,12 +701,12 @@ function editTrack(eventId){
                     .then((entry) => {
 
                     //Gets the ID from the newly created event
-                    /*
+
                     var newId = {sys: {
                         id: eventID,
                         linkType: "Entry",
                         type:"Link"
-                    }}*/
+                    }}
 
                     //Creates a reference field in dates for show & do
                     entry.fields.link["en-US"].push(eventId)
