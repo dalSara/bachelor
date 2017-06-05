@@ -490,7 +490,7 @@ function addTrack (){
             choosenTime = selectedDate + 'T14:00';
         }else if(JSaddStartThree.classList.contains('selectedTime') == true){
             choosenTime = selectedDate + 'T15:00';
-        }
+        }else choosenTime  = "";
 
         //----------- Function for selected size ---------///
         if(JSaddHourOne.classList.contains('selectedTime') == true){
@@ -499,7 +499,7 @@ function addTrack (){
             choosenTrack = 'Medium';
         }else if(JSaddHourThree.classList.contains('selectedTime') == true){
             choosenTrack = 'Large';
-        }
+        }else choosenTrack = "";
 
         //------ function fol selcting image
         if(JSaddStockOne.classList.contains('selectedTime') == true){
@@ -508,7 +508,7 @@ function addTrack (){
             choosenImage = imageTwo;
         }else if(JSaddStockThree.classList.contains('selectedTime') == true){
             choosenImage = imageThree;
-        }
+        }else choosenImage = "";
 
 
         var startTime = choosenTime.substring(choosenTime.length - 5);
@@ -545,7 +545,7 @@ function addTrack (){
         function modalFunction() {
 
             /*if one input is empty show error feedback modal */
-            if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "") {
+            if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "" || choosenTime == "" || choosenTrack == "" || choosenImage == "") {
                 errorModal.style.display = 'block';
                 errorModal.style.opacity = '1';
                 errorModal.style.pointerEvents = 'auto';
@@ -646,19 +646,38 @@ function addTrack (){
                     return entry.update()
                 })
                 //publish event
-                space.getEntry(eventID)
-                    .then ((entry) => entry.publish())
-                space.getEntry(dateId)
-                    .then ((entry) => entry.publish())
+                if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "" || choosenTime == "" || choosenTrack == "" || choosenImage == ""){
+                    errorModal.style.display = 'block';
+                    errorModal.style.opacity = '1';
+                    errorModal.style.pointerEvents = 'auto';
+                    errorModal.style.zIndex = '99999';
+
+                    closeModal.onclick = function() {
+                        errorModal.style.display = 'none';
+                        errorModal.style.opacity = '0';
+                        errorModal.style.pointerEvents = 'none';
+                        errorModal.style.zIndex = '-1';
+                    };
+
+                }else{
+                    space.getEntry(eventID, dateId)
+                        .then ((entry) => entry.publish())
+                    publishModal.style.display = 'block';
+                    publishModal.style.opacity = '1';
+                    publishModal.style.pointerEvents = 'auto';
+                    publishModal.style.zIndex = '99999';
+                }
+                //space.getEntry(dateId)
+                //  .then ((entry) => entry.publish())
                 //}).then(function(){modalFunction()})
 
-
+            })
             })//end getspace
 
-        })//end create new event
+        }//end create new event
 
-    }//end add track
-}
+                  }//end add track
 
-exports.addTrack = addTrack;
+
+                  exports.addTrack = addTrack;
 
