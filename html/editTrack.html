@@ -86,6 +86,29 @@
                         <div tabindex="0" role="button" id="editTrackBtn" class="trackBtn" type="submit" value="Add track">Publish</div>
                     </a>
                 </div>
+
+                <!--MODAL-->
+                <div id="publish" class="modaloverlay">
+                    <div class="modal">
+                        <div>
+                            <h2>Success!</h2>
+                            <p></p>
+                            <p>Your track has been published and will be available for everyone in a few minutes.</p>
+                            <p><a href="../index.html" class="close">OK</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="error" class="modaloverlay">
+                    <div class="modal">
+                        <div>
+                            <h2>Ops! Something went wrong.</h2>
+                            <p></p>
+                            <p>Please fill out all input fields marked with <span class="obligatoryField">*</span></p>
+                            <p><a id="closeError" class="close">OK</a></p>
+                        </div>
+                    </div>
+                </div>
+                <!--END MODAL-->
             </div>
 
         </main>

@@ -44,31 +44,25 @@ function editTrack(eventId){
 
     //var init = function (){
 
-    var JSeditTitle = document.getElementById("JSeditTitle");
-    var JSeditHosts = document.getElementById("JSeditHosts");
-    var JSeditPrereq = document.getElementById("JSeditPrereq");
-    var JSaddStartOne = document.getElementById("JSaddStartOne");
-    var JSaddStartTwo = document.getElementById("JSaddStartTwo");
-    var JSaddStartthree = document.getElementById("JSaddStartthree");
-    var JSaddHourOne = document.getElementById("JSaddHourOne");
-    var JSaddHourthree = document.getElementById("JSaddHourthree");
-    var JSeditNrOfPart = document.getElementById("JSeditNrOfPart");
-    var JSeditExpect = document.getElementById("JSeditExpect");
-    var JSeditJoin = document.getElementById("JSeditJoin");
-    //      JSeditImage = document.getElementById("JSeditImage");
-    //        JSeditStockOne = document.getElementById("JSeditStockOne");
-    //      JSeditStockTwo = document.getElementById("JSeditStockTwo");
-    //    JSeditStockThree = document.getElementById("JSeditStockThree");
-    var JSeditElse = document.getElementById("JSeditElse");
-    //  JSeditStatus = document.getElementById("JSeditStatus");
-    // JSeditTitle = document.getElementById("JSeditTitle");
-    var editTrackBtn = document.getElementById("editTrackBtn");
+        var JSeditTitle = document.getElementById("JSeditTitle");
+        var JSeditHosts = document.getElementById("JSeditHosts");
+        var JSeditPrereq = document.getElementById("JSeditPrereq");
+        var JSaddStartOne = document.getElementById("JSaddStartOne");
+        var JSaddStartTwo = document.getElementById("JSaddStartTwo");
+        var JSaddStartthree = document.getElementById("JSaddStartthree");
+        var JSaddHourOne = document.getElementById("JSaddHourOne");
+        var JSaddHourthree = document.getElementById("JSaddHourthree");
+        var JSeditNrOfPart = document.getElementById("JSeditNrOfPart");
+        var JSeditExpect = document.getElementById("JSeditExpect");
+        var JSeditJoin = document.getElementById("JSeditJoin");
+        var JSeditElse = document.getElementById("JSeditElse");
+        var editTrackBtn = document.getElementById("editTrackBtn");
 
-    //------------ click funkctions --------//
-    JSaddStockOne.onclick = chooseImageOne;
-    JSaddStockTwo.onclick = chooseImageTwo;
-    JSaddStockThree.onclick = chooseImageThree;
-    editTrackBtn.onclick = createNewEvent;
+        //------------ click funkctions --------//
+        JSaddStockOne.onclick = chooseImageOne;
+        JSaddStockTwo.onclick = chooseImageTwo;
+        JSaddStockThree.onclick = chooseImageThree;
+        editTrackBtn.onclick = createNewEvent;
 
     //}(); /*--end init--*/
 
@@ -83,9 +77,6 @@ function editTrack(eventId){
         }
         return(false);
     }
-
-    //the function that creates a new event, and post it to contentful
-    //function addEditTrack(){
 
     function getSelectedDate(specifiedDate) {
         selectedDate = new Date();
@@ -106,8 +97,6 @@ function editTrack(eventId){
     // This API call will request a space with the specified ID
     client.getSpace('59mi8sr8zemv')
         .then((space) => {
-
-        //var eventId = '3IYJydLps48CSGwyS4QKSw';
 
         eventId = getQueryVariable("id"); //Id from URL
 
@@ -164,8 +153,6 @@ function editTrack(eventId){
 
     //--- gets todays date, and change so next date for Show & Do is in front//
 
-
-
     client.getSpace('59mi8sr8zemv')
         .then((space) =>
               space.getEntries({
@@ -175,7 +162,7 @@ function editTrack(eventId){
     })
              ).then(function(entries){
 
-    /*
+        /*
     function doSelectDate(space, chosenDate){
 
         space.getEntries({
@@ -219,7 +206,6 @@ function editTrack(eventId){
                 globalTargetDateIndex = i+1;
                 break;
             }
-
         }
 
         dateId = allDates[globalTargetDateIndex].sys.id;
@@ -540,6 +526,9 @@ function editTrack(eventId){
 
     function createNewEvent (dateId){
 
+        var thisDateId = time(dateId);
+        console.log(thisDateId);
+
         //---Geting the value of the input fields in the html
         var choosenTime;
         var JSaddNewTitle = JSeditTitle.value;
@@ -557,7 +546,7 @@ function editTrack(eventId){
             choosenTime = selectedDate + 'T14:00';
         }else if(JSaddStartThree.classList.contains('selectedTime') == true){
             choosenTime = selectedDate + 'T15:00';
-        //If new time is´not chosen, send in existing time.
+            //If new time is´not chosen, send in existing time.
         }else if(thisStartTime == '13:00'){
             choosenTime = selectedDate + 'T13:00';
         }else if(thisStartTime == '14:00'){
@@ -573,7 +562,7 @@ function editTrack(eventId){
             choosenTrack = 'Medium';
         }else if(JSaddHourThree.classList.contains('selectedTime') == true){
             choosenTrack = 'Large';
-        //If new size is´not chosen, send in existing size.
+            //If new size is´not chosen, send in existing size.
         }else if(thisSize == 'Small'){
             choosenTrack = 'Small';
         }else if(thisSize == 'Medium'){
@@ -621,14 +610,14 @@ function editTrack(eventId){
         //-----modal
 
 
-        /*var errorModal = document.getElementById('error');
+        var errorModal = document.getElementById('error');
         var publishModal = document.getElementById('publish');
         var closeModal = document.getElementById('closeError');
 
         function modalFunction() {
 
             /*if one input is empty show error feedback modal */
-            /*if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "") {
+            if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "") {
                 errorModal.style.display = 'block';
                 errorModal.style.opacity = '1';
                 errorModal.style.pointerEvents = 'auto';
@@ -647,8 +636,7 @@ function editTrack(eventId){
                 publishModal.style.pointerEvents = 'auto';
                 publishModal.style.zIndex = '99999';
             }
-
-        }*/
+        }
 
         //--- end modal
 
@@ -742,17 +730,9 @@ function editTrack(eventId){
                     .then ((entry) => entry.publish())
                 /*space.getEntry(dateId)
                     .then ((entry) => entry.publish())*/
-            })//.then(function(){modalFunction()})
-
-
+            }).then(function(){modalFunction()})
         })//end getspace
-
     }//end create new event
-
-
-    //}//end addEditTrack
-
-    //getLink();
 };//end EditTrack
 
 exports.editTrack = editTrack;
