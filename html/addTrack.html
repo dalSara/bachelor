@@ -60,7 +60,7 @@
                 <span class="obligatoryField">*</span> Host(s) (who’s going to hold the track? Fill in your name and co-hosts names)<br>
                 <input id="JSaddHosts" type="text" value=""><br><br>
                 <span class="obligatoryField">*</span> Prerequisites (is there anything the attendees need to know beforehand?)<br>
-                <input id="JSaddPrereq" type="text" value=""><br><br>
+                <textarea id="JSaddPrereq" type="text" value=""></textarea><br><br>
                 <span class="obligatoryField">*</span> Preferred starttime (click to select)
                 <br>
                 <div class="selectTime" id="JSaddStartOne" >13.00</div>
@@ -89,13 +89,13 @@
                 <div id="JSaddStockThree" class="stockImg"><img src="https://images.contentful.com/59mi8sr8zemv/5u6CWGgkmcwiIUEIsiQMGE/8eee432604d7e9695507b9f9907175d4/Chicago-0021__1_.jpg" class="stockImgAddTrack"></div><br>
 
                 Anything else to add? (links, videos for preparation, other tracks, co-host, equipment etc)<br>
-                <textarea id="JSaddElse" type="text" value=""></textarea>
-                <div class="buttonsAddTrack">
+                <textarea id="JSaddElse" class="textarea" type="text" value=""></textarea>
+             <!---   <div class="buttonsAddTrack">-->
 
                     <a>
                         <div tabindex="0" role="button" id="addTrackBtn" class="trackBtn" type="submit" value="Add track">Publish</div>
                     </a>
-                </div>
+              <!---  </div> -->
                 <div id="publish" class="modaloverlay">
                   <div class="modal">
                     <div>
@@ -119,81 +119,7 @@
             </div>
         </main>
         <script src="../scripts/dist/scripts/main-addTrack.bundle.js"></script>
-        <!--<script src="../node_modules/contentful/browser-dist/contentful.min.js"></script>-->
-<<<<<<< HEAD
-    <!---    <script>
-        document.getElementById('addTrackBtn').onclick = function() {modalFunction()};
-            var errorModal = document.getElementById('error');
-            var publishModal = document.getElementById('publish');
-            var closeModal = document.getElementById('closeError');
 
-        function modalFunction() {
-            var JSaddNewTitle = JSaddTitle.value;
-            var JSaddNewHosts = JSaddHosts.value;
-            var JSaddNewPrereq = JSaddPrereq.value;
-            var JSaddNewExpect = JSaddExpect.value;
-            var JSaddNewJoin = JSaddJoin.value;
-
-            /*if one input is empty show error feedback modal */
-            if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "") {
-                errorModal.style.display = 'block';
-                errorModal.style.opacity = '1';
-                errorModal.style.pointerEvents = 'auto';
-                errorModal.style.zIndex = '99999';
-
-                closeModal.onclick = function() {
-                    errorModal.style.display = 'none';
-                    errorModal.style.opacity = '0';
-                    errorModal.style.pointerEvents = 'none';
-                    errorModal.style.zIndex = '-1';
-                };
-
-            } else {
-                publishModal.style.display = 'block';
-                publishModal.style.opacity = '1';
-                publishModal.style.pointerEvents = 'auto';
-                publishModal.style.zIndex = '99999';
-            }
-=======
-        <script>
-            document.getElementById('addTrackBtn').onclick = function() {modalFunction()};
-
-                var errorModal = document.getElementById('error');
-                var publishModal = document.getElementById('publish');
-                var closeModal = document.getElementById('closeError');
-
-            function modalFunction() {
-                var JSaddNewTitle = JSaddTitle.value;
-                var JSaddNewHosts = JSaddHosts.value;
-                var JSaddNewPrereq = JSaddPrereq.value;
-                var JSaddNewExpect = JSaddExpect.value;
-                var JSaddNewJoin = JSaddJoin.value;
-
-                /*if one input is empty show error feedback modal */
-                if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "") {
-                    errorModal.style.display = 'block';
-                    errorModal.style.opacity = '1';
-                    errorModal.style.pointerEvents = 'auto';
-                    errorModal.style.zIndex = '99999';
-
-                    closeModal.onclick = function() {
-                        errorModal.style.display = 'none';
-                        errorModal.style.opacity = '0';
-                        errorModal.style.pointerEvents = 'none';
-                        errorModal.style.zIndex = '-1';
-                    };
-
-                } else {
-                    publishModal.style.display = 'block';
-                    publishModal.style.opacity = '1';
-                    publishModal.style.pointerEvents = 'auto';
-                    publishModal.style.zIndex = '99999';
-                }
->>>>>>> origin/master
-
-            }
-
-    </script> --->
     </body>
 
 </html>

@@ -111,23 +111,15 @@ function editTrack(eventId){
 
             console.log(entry.fields.time);
 
+            document.getElementById('JSeditTitle').value = entry.entry.fields.title['en-US'];
 
-            //document.getElementById('pandaEdit').setAttribute('value', JSON.stringify(entry.fields.title));
-            document.getElementById('JSeditTitle').setAttribute('value', (entry.fields.title['en-US']));
+            document.getElementById('JSeditHosts').value = entry.entry.fields.host['en-US'];
+            document.getElementById('JSeditPrereq').value = entry.entry.fields.prerequisites['en-US'];
 
-            document.getElementById('JSeditHosts').setAttribute('value', (entry.fields.host['en-US']));
-            document.getElementById('JSeditPrereq').setAttribute('value', (entry.fields.prerequisites['en-US']));
-            //  document.getElementById('JSeditStartOne').setAttribute('value', (entry.fields.time['en-US']))
-            //document.getElementById('JSeditStartTwo').setAttribute('value', (entry.fields.time['en-US']))
-            //document.getElementById('JSeditStartthree').setAttribute('value', JSON.stringify(entry.fields.time['en-US']))
-            //   document.getElementById('JSeditHourOne').setAttribute('value', JSON.stringify(entry.fields.size['en-US']))
-            //document.getElementById('JSeditHourTwo').setAttribute('value', JSON.stringify(entry.fields.size))
-            //document.getElementById('JSeditHourthree').setAttribute('value', JSON.stringify(entry.fields.size))
-            document.getElementById('JSeditNrOfPart').setAttribute('value', (entry.fields.numberOfParticipants['en-US']));
-            document.getElementById('JSeditExpect').setAttribute('value', (entry.fields.whatToExpect['en-US']));
-            document.getElementById('JSeditJoin').setAttribute('value', (entry.fields.whoShouldJoin['en-US']));
-            document.getElementById('JSeditElse').setAttribute('value', (entry.fields.anythingElse['en-US']));
-            //document.getElementById('JSeditStatus').setAttribute('value', JSON.stringify(entry.fields.JSeditStatus));
+            document.getElementById('JSeditNrOfPart').value = entry.entry.fields.numberOfParticipants['en-US'];
+            document.getElementById('JSeditExpect').value = entry.fields.whatToExpect['en-US'];
+            document.getElementById('JSeditJoin').value = entry.fields.whoShouldJoin['en-US'];
+            document.getElementById('JSeditElse').value = entry.entry.fields.anythingElse['en-US'];
 
             /*-------------- SET TIME --------------*/
             var thisTime = entry.fields.time['en-US'];

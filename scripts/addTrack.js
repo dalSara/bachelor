@@ -31,7 +31,6 @@ function addTrack (){
     var thisShowDoEvents;
     var dateId;
 
-    //-------- temporary img var -----//
     var imageOne = {sys: {
         id: '4KahBhVQTCykgOYsKS66Ws',
         linkType: "Asset",
@@ -48,6 +47,7 @@ function addTrack (){
         linkType: "Asset",
         type:"Link"
     }}
+
 
     //----- HTML - Objects for the form -----------------//
     var JSdatePick1 = document.getElementById("JSdatePick1");
@@ -79,11 +79,8 @@ function addTrack (){
     addTrackBtn.onclick = createNewEvent;
 
     //--------- Call for functions ----------//
-    //___NATALIE_____ ska de här vara här? =)
-    //Unlimited if no value on nrOfPart
-    //chooseDates();
-    //time();
-    //jqueryFunctions.smoothScrollDown();
+
+    // jqueryFunctions.smoothScrollDown();
 
 
 
@@ -176,7 +173,7 @@ function addTrack (){
             }
         }
 
-        console.log('dateId', dateId);
+
         /*-------------- GET INDEX OF THE DATE --------------*/
         // totaly stolen from Natalie =)
         function getDateIndex(index){
@@ -467,10 +464,10 @@ function addTrack (){
             })
         })
     }// end Time
-
+    console.log('bajs',dateId)
 
     //the function that creates a new event, and post it to contentful
-    function createNewEvent (dateId){
+    function createNewEvent (){
 
         //---Geting the value of the input fields in the html
         var choosenTime;
@@ -482,6 +479,10 @@ function addTrack (){
         var JSaddNewJoin = JSaddJoin.value;
         var JSaddNewElse = JSaddElse.value;
 
+        //-------- temporary img var -----//
+
+
+        console.log('dateId', dateId);
         ///---------Function for selected time----------////
         if(JSaddStartOne.classList.contains('selectedTime') == true){
             choosenTime = selectedDate + 'T13:00';
@@ -502,11 +503,11 @@ function addTrack (){
 
         //------ function fol selcting image
         if(JSaddStockOne.classList.contains('selectedTime') == true){
-            choosenTrack = imageOne;
+            choosenImage = imageOne;
         }else if(JSaddStockTwo.classList.contains('selectedTime') == true) {
-            choosenTrack = imageTwo;
+            choosenImage = imageTwo;
         }else if(JSaddStockThree.classList.contains('selectedTime') == true){
-            choosenTrack = imageThree;
+            choosenImage = imageThree;
         }
 
 
@@ -537,9 +538,9 @@ function addTrack (){
         //-----modal
 
 
-            var errorModal = document.getElementById('error');
-            var publishModal = document.getElementById('publish');
-            var closeModal = document.getElementById('closeError');
+        var errorModal = document.getElementById('error');
+        var publishModal = document.getElementById('publish');
+        var closeModal = document.getElementById('closeError');
 
         function modalFunction() {
 
@@ -608,7 +609,7 @@ function addTrack (){
 
                 },
                 image: {
-                    'en-US': imageTwo
+                    'en-US': choosenImage
                 },
                 anythingElse: {
                     'en-US': JSaddNewElse
@@ -649,14 +650,15 @@ function addTrack (){
                     .then ((entry) => entry.publish())
                 space.getEntry(dateId)
                     .then ((entry) => entry.publish())
-            }).then(function(){modalFunction()})
+                //}).then(function(){modalFunction()})
 
 
-        })//end getspace
+            })//end getspace
 
-    }//end create new event
+        })//end create new event
 
-}//end add track
+    }//end add track
+}
 
 exports.addTrack = addTrack;
 
