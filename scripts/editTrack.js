@@ -18,6 +18,12 @@ function editTrack(eventId){
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     var arrowNext = document.getElementById("arrowNext");
 
+    var thisStartTime;
+    var thisSize;
+    var eventEndTime;
+    var eventId;
+    var dateId;
+
     var imageOne = {sys: {
         id: '4KahBhVQTCykgOYsKS66Ws',
         linkType: "Asset",
@@ -56,6 +62,7 @@ function editTrack(eventId){
     var JSeditElse = document.getElementById("JSeditElse");
     //  JSeditStatus = document.getElementById("JSeditStatus");
     // JSeditTitle = document.getElementById("JSeditTitle");
+    var editTrackBtn = document.getElementById("editTrackBtn");
 
     //------------ click funkctions --------//
     JSaddStockOne.onclick = chooseImageOne;
@@ -102,7 +109,7 @@ function editTrack(eventId){
 
         //var eventId = '3IYJydLps48CSGwyS4QKSw';
 
-        var eventId = getQueryVariable("id"); //Id from URL
+        eventId = getQueryVariable("id"); //Id from URL
 
         //  Now that we have a space, we can get entries from that space
         space.getEntry(eventId)
@@ -111,19 +118,19 @@ function editTrack(eventId){
 
             console.log(entry.fields.time);
 
-            document.getElementById('JSeditTitle').value = entry.entry.fields.title['en-US'];
+            document.getElementById('JSeditTitle').value = entry.fields.title['en-US'];
 
-            document.getElementById('JSeditHosts').value = entry.entry.fields.host['en-US'];
-            document.getElementById('JSeditPrereq').value = entry.entry.fields.prerequisites['en-US'];
+            document.getElementById('JSeditHosts').value = entry.fields.host['en-US'];
+            document.getElementById('JSeditPrereq').value = entry.fields.prerequisites['en-US'];
 
-            document.getElementById('JSeditNrOfPart').value = entry.entry.fields.numberOfParticipants['en-US'];
+            document.getElementById('JSeditNrOfPart').value = entry.fields.numberOfParticipants['en-US'];
             document.getElementById('JSeditExpect').value = entry.fields.whatToExpect['en-US'];
             document.getElementById('JSeditJoin').value = entry.fields.whoShouldJoin['en-US'];
-            document.getElementById('JSeditElse').value = entry.entry.fields.anythingElse['en-US'];
+            document.getElementById('JSeditElse').value = entry.fields.anythingElse['en-US'];
 
             /*-------------- SET TIME --------------*/
             var thisTime = entry.fields.time['en-US'];
-            var thisStartTime = thisTime.substring(thisTime.length - 5);
+            thisStartTime = thisTime.substring(thisTime.length - 5);
             var starttimeTxt = "The starttime you choosed was:";
             if(thisStartTime == '13:00'){
                 document.getElementById("addedStart").innerHTML = starttimeTxt + " 13:00";
@@ -135,7 +142,7 @@ function editTrack(eventId){
             /*-------------- END SET TIME --------------*/
 
             /*-------------- SET SIZE --------------*/
-            var thisSize = entry.fields.size['en-US'];
+            thisSize = entry.fields.size['en-US'];
             var hourTxt = "The lenght you choosed was:";
             if(thisSize == 'Large'){
                 document.getElementById("addedHour").innerHTML = hourTxt + " 3 hours";
@@ -146,6 +153,7 @@ function editTrack(eventId){
             }
             /*-------------- END SET SIZE --------------*/
 
+            eventEndTime = entry.fields.endTime['en-US']; //Get the endTime in Contentful.
             //var theTime = entry.fields.time['en-US']
             //doSelectDate(space, theTime)
 
@@ -549,6 +557,13 @@ function editTrack(eventId){
             choosenTime = selectedDate + 'T14:00';
         }else if(JSaddStartThree.classList.contains('selectedTime') == true){
             choosenTime = selectedDate + 'T15:00';
+        //If new time is´not chosen, send in existing time.
+        }else if(thisStartTime == '13:00'){
+            choosenTime = selectedDate + 'T13:00';
+        }else if(thisStartTime == '14:00'){
+            choosenTime = selectedDate + 'T14:00';
+        }else if(thisStartTime == '15:00'){
+            choosenTime = selectedDate + 'T15:00';
         }
 
         //----------- Function for selected size ---------///
@@ -557,6 +572,13 @@ function editTrack(eventId){
         }else if(JSaddHourTwo.classList.contains('selectedTime') == true) {
             choosenTrack = 'Medium';
         }else if(JSaddHourThree.classList.contains('selectedTime') == true){
+            choosenTrack = 'Large';
+        //If new size is´not chosen, send in existing size.
+        }else if(thisSize == 'Small'){
+            choosenTrack = 'Small';
+        }else if(thisSize == 'Medium'){
+            choosenTrack = 'Medium';
+        }else if(thisSize == 'Large'){
             choosenTrack = 'Large';
         }
 
@@ -594,17 +616,19 @@ function editTrack(eventId){
             eventEndTime = '15:45';
         }
 
+
+        console.log(dateId);
         //-----modal
 
 
-        var errorModal = document.getElementById('error');
+        /*var errorModal = document.getElementById('error');
         var publishModal = document.getElementById('publish');
         var closeModal = document.getElementById('closeError');
 
         function modalFunction() {
 
             /*if one input is empty show error feedback modal */
-            if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "") {
+            /*if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "") {
                 errorModal.style.display = 'block';
                 errorModal.style.opacity = '1';
                 errorModal.style.pointerEvents = 'auto';
@@ -624,11 +648,13 @@ function editTrack(eventId){
                 publishModal.style.zIndex = '99999';
             }
 
-        }
+        }*/
 
         //--- end modal
 
         //----- JSON that gets sent to Contentful
+
+        console.log(eventEndTime);
 
         var newTrack = {
             fields: {
@@ -675,7 +701,7 @@ function editTrack(eventId){
                 },
                 peopleAttending: {
                     'en-US': [""]
-                },
+                }
 
             }//end field
         }//en newTrack
@@ -683,10 +709,16 @@ function editTrack(eventId){
         //-- Creates the new track in events, with ref to korrekt date
         client.getSpace('59mi8sr8zemv')
             .then((space) => {
+
+            console.log(dateId);
+
+            eventId = getQueryVariable("id");
+            console.log(eventId);
+
             space.getEntry(eventId, newTrack)
                 .then( event => {
 
-                var eventID = event.sys.id
+                var eventSysId = event.sys.id;
 
                 //This function is gets the entry of choosen date
                 space.getEntry(dateId)
@@ -695,22 +727,22 @@ function editTrack(eventId){
                     //Gets the ID from the newly created event
 
                     var newId = {sys: {
-                        id: eventID,
+                        id: eventSysId,
                         linkType: "Entry",
                         type:"Link"
                     }}
 
                     //Creates a reference field in dates for show & do
-                    entry.fields.link["en-US"].push(eventId)
+                    entry.fields.link["en-US"].push(eventId);
                     //update the event
-                    return entry.update()
+                    return entry.update();
                 })
                 //publish event
-                space.getEntry(eventID)
+                space.getEntry(eventSysId, dateId)
                     .then ((entry) => entry.publish())
-                space.getEntry(dateId)
-                    .then ((entry) => entry.publish())
-            }).then(function(){modalFunction()})
+                /*space.getEntry(dateId)
+                    .then ((entry) => entry.publish())*/
+            })//.then(function(){modalFunction()})
 
 
         })//end getspace
