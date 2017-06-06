@@ -9,7 +9,8 @@ function editTrack(eventId){
     const client = contentfulManagement.createClient({
         accessToken: '',
         //  Space: '59mi8sr8zemv',
-        resolveLinks: true
+        resolveLinks: true,
+        content_type: 'application/vnd.contentful.management.v1+json'
     })
 
     //Html-objekter
@@ -44,25 +45,25 @@ function editTrack(eventId){
 
     //var init = function (){
 
-        var JSeditTitle = document.getElementById("JSeditTitle");
-        var JSeditHosts = document.getElementById("JSeditHosts");
-        var JSeditPrereq = document.getElementById("JSeditPrereq");
-        var JSaddStartOne = document.getElementById("JSaddStartOne");
-        var JSaddStartTwo = document.getElementById("JSaddStartTwo");
-        var JSaddStartthree = document.getElementById("JSaddStartthree");
-        var JSaddHourOne = document.getElementById("JSaddHourOne");
-        var JSaddHourthree = document.getElementById("JSaddHourthree");
-        var JSeditNrOfPart = document.getElementById("JSeditNrOfPart");
-        var JSeditExpect = document.getElementById("JSeditExpect");
-        var JSeditJoin = document.getElementById("JSeditJoin");
-        var JSeditElse = document.getElementById("JSeditElse");
-        var editTrackBtn = document.getElementById("editTrackBtn");
+    var JSeditTitle = document.getElementById("JSeditTitle");
+    var JSeditHosts = document.getElementById("JSeditHosts");
+    var JSeditPrereq = document.getElementById("JSeditPrereq");
+    var JSaddStartOne = document.getElementById("JSaddStartOne");
+    var JSaddStartTwo = document.getElementById("JSaddStartTwo");
+    var JSaddStartthree = document.getElementById("JSaddStartthree");
+    var JSaddHourOne = document.getElementById("JSaddHourOne");
+    var JSaddHourthree = document.getElementById("JSaddHourthree");
+    var JSeditNrOfPart = document.getElementById("JSeditNrOfPart");
+    var JSeditExpect = document.getElementById("JSeditExpect");
+    var JSeditJoin = document.getElementById("JSeditJoin");
+    var JSeditElse = document.getElementById("JSeditElse");
+    var editTrackBtn = document.getElementById("editTrackBtn");
 
-        //------------ click funkctions --------//
-        JSaddStockOne.onclick = chooseImageOne;
-        JSaddStockTwo.onclick = chooseImageTwo;
-        JSaddStockThree.onclick = chooseImageThree;
-        editTrackBtn.onclick = createNewEvent;
+    //------------ click funkctions --------//
+    JSaddStockOne.onclick = chooseImageOne;
+    JSaddStockTwo.onclick = chooseImageTwo;
+    JSaddStockThree.onclick = chooseImageThree;
+    editTrackBtn.onclick = createNewEvent;
 
     //}(); /*--end init--*/
 
@@ -153,14 +154,14 @@ function editTrack(eventId){
 
     //--- gets todays date, and change so next date for Show & Do is in front//
 
+
     client.getSpace('59mi8sr8zemv')
         .then((space) =>
               space.getEntries({
         content_type: 'datesForShowDo',
         order: 'fields.date', //Sort by date in datesForShowDo
         locale: 'en-US'
-    })
-             ).then(function(entries){
+    })).then(function(entries){
 
         /*
     function doSelectDate(space, chosenDate){
@@ -524,11 +525,7 @@ function editTrack(eventId){
         })
     }// end Time
 
-    function createNewEvent (dateId){
-
-        var thisDateId = time(dateId);
-        console.log(thisDateId);
-
+    function createNewEvent (){
         //---Geting the value of the input fields in the html
         var choosenTime;
         var JSaddNewTitle = JSeditTitle.value;
@@ -698,13 +695,14 @@ function editTrack(eventId){
         client.getSpace('59mi8sr8zemv')
             .then((space) => {
 
+            dateId;
             console.log(dateId);
 
             eventId = getQueryVariable("id");
             console.log(eventId);
 
-            space.getEntry(eventId, newTrack)
-                .then( event => {
+            space.createEntry('events', newTrack)
+                .then((event) => {
 
                 var eventSysId = event.sys.id;
 
@@ -717,19 +715,20 @@ function editTrack(eventId){
                     var newId = {sys: {
                         id: eventSysId,
                         linkType: "Entry",
-                        type:"Link"
+                        type: "Link"
                     }}
 
                     //Creates a reference field in dates for show & do
-                    entry.fields.link["en-US"].push(eventId);
+                    entry.fields.link["en-US"].push(newId);
                     //update the event
                     return entry.update();
                 })
                 //publish event
-                space.getEntry(eventSysId, dateId)
+                space.getEntry(eventSysId)
                     .then ((entry) => entry.publish())
-                /*space.getEntry(dateId)
-                    .then ((entry) => entry.publish())*/
+                    .catch(console.error)
+                //space.getEntry(dateId)
+                    //.then ((entry) => entry.publish())
             }).then(function(){modalFunction()})
         })//end getspace
     }//end create new event
