@@ -630,9 +630,16 @@ function addTrack (){
                     'en-US': [""]
                 },
 
-            }//end field
+            },//end field
         }//en newTrack
 
+        var newReference = {
+            sys: {
+                linkType: "Entry",
+                type:"Link"
+
+            }
+        }
 
         //-------- temporary img var -----//
         if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "" || choosenTime == null || choosenTrack == null || choosenImage == null){
@@ -653,46 +660,55 @@ function addTrack (){
 
         }
 
-
-
         function publishTrack(){
             //-- Creates the new track in events, with ref to korrekt date
             client.getSpace('59mi8sr8zemv')
                 .then((space) => {
                 space.createEntry('events', newTrack)
-                    .then( event => {
+             //   space.createEntry('dateId',newReference)
+                .then ((event) => event.update())
+                .then ((event) => event.publish())
+                .then( event => {
 
                     eventID = event.sys.id;
 
-                   (eventID) => entry.publish()
+                   // (event) => entry.publish()
                     //This function is gets the entry of choosen date
                     space.getEntry(dateId)
                         .then((entry) => {
 
                         //Gets the ID from the newly created event
                         var newId = {sys: {
-                            id: eventID,
+                            id: 'eventID',
                             linkType: "Entry",
                             type:"Link"
                         }}
+                        var publishedVersion = entry.sys.publishedVersion;
+                        var bar = entry.fields.link["en-US"];
+                        var foo = publishedVersion + 1;
+
+                        console.log('versjons nr', publishedVersion)
+                        console.log('versjons nr +2', foo)
+                        console.log('bajs test', bar.sys)
 
                         //Creates a reference field in dates for show & do
                         entry.fields.link["en-US"].push(newId)
-
+                        //entry.sys.version.push(foo)
 
                         //update the event
-                      //  return entry.update(eventID)
-                       // .then ((eventID) => entry.publish())
-                    //    .then ((dateId) => entry.publish())
-                        return entry.update(eventID)
-                            .then((entry) => entry.publish(eventID))
+                        entry.update();
+                        return entry.publish()
+                        space.getEntry(eventID)
+                            .then ((eventID) => entry.publish())
+                        //    .then ((dateId) => entry.publish())
+                        //   return entry.update(eventID)
+                        //     .then((entry) => entry.publish(eventID))
 
                     })
+                    space.getEntry(dateId)
+                        .then ((entry) => entry.publish());
 
                 })
-                  //   space.getEntry(dateId)
-                    //    .then ((entry) => entry.publish());
-
 
 
                 //publish event
