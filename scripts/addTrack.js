@@ -704,8 +704,6 @@ function addTrack (){
                 publishModal.style.zIndex = '99999';
 
 
-
-
                 /*
                            space.getEntry(eventID)
                     .then ((entry) => entry.publish())
@@ -715,10 +713,6 @@ function addTrack (){
                 */
 
             })
-
-
-
-
 
             //space.getEntry(dateId)
             //  .then ((entry) => entry.publish())
