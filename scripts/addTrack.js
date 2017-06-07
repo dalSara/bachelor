@@ -665,9 +665,7 @@ function addTrack (){
             client.getSpace('59mi8sr8zemv')
                 .then((space) => {
                 space.createEntry('events', newTrack)
-             //   space.createEntry('dateId',newReference)
-                .then ((event) => event.update())
-                .then ((event) => event.publish())
+
                 .then( event => {
 
                     eventID = event.sys.id;
@@ -679,17 +677,17 @@ function addTrack (){
 
                         //Gets the ID from the newly created event
                         var newId = {sys: {
-                            id: 'eventID',
+                            id: eventID,
                             linkType: "Entry",
                             type:"Link"
                         }}
                         var publishedVersion = entry.sys.publishedVersion;
                         var bar = entry.fields.link["en-US"];
-                        var foo = publishedVersion + 1;
+                        //var foo = publishedVersion + 1;
 
                         console.log('versjons nr', publishedVersion)
-                        console.log('versjons nr +2', foo)
-                        console.log('bajs test', bar.sys)
+                        //console.log('versjons nr +2', foo)
+                        //console.log('bajs test', bar.sys)
 
                         //Creates a reference field in dates for show & do
                         entry.fields.link["en-US"].push(newId)
@@ -697,22 +695,22 @@ function addTrack (){
 
                         //update the event
                         entry.update();
-                        return entry.publish()
-                        space.getEntry(eventID)
-                            .then ((eventID) => entry.publish())
-                        //    .then ((dateId) => entry.publish())
-                        //   return entry.update(eventID)
-                        //     .then((entry) => entry.publish(eventID))
+
+
+                        //entry.publish()
+                        event.publish()
+
+
+
+                        entry.publish()
+
 
                     })
-                    space.getEntry(dateId)
-                        .then ((entry) => entry.publish());
 
                 })
 
 
                 //publish event
-                //  })
 
                 publishModal.style.display = 'block';
                 publishModal.style.opacity = '1';
@@ -720,20 +718,9 @@ function addTrack (){
                 publishModal.style.zIndex = '99999';
 
 
-                /*
-                           space.getEntry(eventID)
-                    .then ((entry) => entry.publish())
-                space.getEntry(dateId)
-                    .then ((entry) => entry.publish())
-
-                */
-
             })
 
-            //space.getEntry(dateId)
-            //  .then ((entry) => entry.publish())
-            //}).then(function(){modalFunction()})
-            //end getspace
+
         }//end publish track
 
     }//end create new event
