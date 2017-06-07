@@ -66,7 +66,7 @@ function goingBtn(){
 
         $('.JSregisterBtn').click(function() {
             //If name is added in input field:
-            if($(this).siblings('.JSnameInput').val() == true || $(this).siblings('.JSnameInput').val() != ''){
+            if($(this).siblings('.JSnameInput').val() == true || $(this).siblings('.JSnameInput').val().trim() != ''){
                 $('.JSgoingDropdownContent').stop().slideUp(500);
                 $(this).parent().siblings('.JSgoing').addClass('JSgoing-registered');
                 $(this).parent().siblings('.JSgoing').text("You're going!"); //Feedback to user

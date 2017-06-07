@@ -539,6 +539,10 @@ index
   background-color: white;
   margin-bottom: 40px;
   float: left; }
+  .JSeventList a {
+    text-decoration: underline; }
+    .JSeventList a:hover {
+      text-decoration: none; }
 
 .JSeventInfoList {
   padding: 40px; }

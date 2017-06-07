@@ -1,8 +1,6 @@
-//var contentful = require('contentful');
 var contentful = require('contentful-management');
 var dataDelivery = require('./dataDelivery');
 
-//module.exports = function(){
 function addAttendees(){
     //contentful management id the module that have contact with contentful.
     //this is the conection to the module
@@ -21,7 +19,7 @@ function addAttendees(){
             var input = document.getElementById(id+'Input'); //Get id on input fields
             const name = input.value; //Get name in input fields
 
-            if(name == true || name != ''){ //If input field is
+            if(name == true || name.trim() != ''){ //If input field is true and have content.
                 newAttendees(id, name);
             }
         });

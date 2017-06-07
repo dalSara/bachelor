@@ -176,37 +176,37 @@ nav {
 }
 
 #previous, #prevDate{
-     display: block;
- }
- #arrowPrevious{
-     -webkit-transform: rotate(90deg);
-     -moz-transform: rotate(90deg);
-     -o-transform: rotate(90deg);
-     -ms-transform: rotate(90deg);
-     transform: rotate(90deg);
-     height: 15px;
-     width: 15px;
- }
- #thisWeekBtn{
-     text-decoration: none;
-     margin-bottom: 40px;
-     /*text-align: center;*/
- }
- #next{
-     float: right;
- }
- #next, #nextDate{
-     display: block;
- }
- #arrowNext{
-     -webkit-transform: rotate(-90deg);
-     -moz-transform: rotate(-90deg);
-     -o-transform: rotate(-90deg);
-     -ms-transform: rotate(-90deg);
-     transform: rotate(-90deg);
-     height: 15px;
-     width: 15px;
- }
+    display: block;
+}
+#arrowPrevious{
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    height: 15px;
+    width: 15px;
+}
+#thisWeekBtn{
+    text-decoration: none;
+    margin-bottom: 40px;
+    /*text-align: center;*/
+}
+#next{
+    float: right;
+}
+#next, #nextDate{
+    display: block;
+}
+#arrowNext{
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    height: 15px;
+    width: 15px;
+}
 
 /********************************************
 inputs and style for add track
@@ -700,6 +700,12 @@ index
     background-color: white;
     margin-bottom: 40px;
     float: left;
+    a {
+        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
+        }
+    }
 }
 
 .JSeventInfoList {
@@ -833,9 +839,9 @@ index
 .JSgoing-clicked{
     background-color: #06f;
 
-//.JSgoingBtn:after{
-//    width: 250px;
-//    content: "Going?";
+    //.JSgoingBtn:after{
+    //    width: 250px;
+    //    content: "Going?";
 }
 .JSgoing-clicked{
     //background-color: $eventcolor;
@@ -867,11 +873,11 @@ index
 .JSgoing-registered{
     background-color: #0066FF;
     color: white;
-//.JSgoing-registered:after{
-//    background-color: $eventcolor;
-//    transition: .2s;
-//    color: white;
-//    content: "You're going!";
+    //.JSgoing-registered:after{
+    //    background-color: $eventcolor;
+    //    transition: .2s;
+    //    color: white;
+    //    content: "You're going!";
 
 }
 /*---------END GOING-BTN-------*/

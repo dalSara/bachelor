@@ -368,58 +368,17 @@ function dataDelivery(){
             numberOfParticipants = numberOfParticipants;
         }
 
-
-        //If peopleGoing is missing.
-        /*if(peopleGoing == null || peopleGoing == 'undefined'){
-            var names = '';
-            var countPeopleGoing = peopleGoing.length; //List = 0
-
-        //If peopleGoing is TRUE
-        }else if(peopleGoing != null || peopleGoing != 'undefined'){
-            console.log(peopleGoing.length);
-
-            for(var i = 0; i < peopleGoing.length; i++){
-                var oneName = peopleGoing[i];
-                names = oneName;
-                console.log('Full name', oneName);
-
-
-            }
-        }*/
-
-
-                /*peopleGoing = peopleGoing[oneName];
-                console.log('..', oneName);
-                //countPeopleGoing = peopleGoing.length;
-
-            }else if(oneName != ""){
-                oneName = oneName;
-                console.log('2', oneName);
-                peopleGoing = peopleGoing[oneName]; //.join('<br>');
-                //countPeopleGoing = peopleGoing.length;
-            }
-        }
-
-        var oneName = countPeopleGoing[i];
-
-                if(oneName == ''){
-                    countPeopleGoing = peopleGoing.length;
-                    peopleGoing = '..';
-                }else{
-                    countPeopleGoing = peopleGoing.length;
-                    peopleGoing = peopleGoing.join(' <br>');
-                }
-                //console.log(oneName);*/
-            //}
-
         var peopleGoing = event.fields.peopleAttending;
         if(peopleGoing == null || peopleGoing == 'undefined'){
             peopleGoing = ''; //If peopleGoing is missing.
             var countPeopleGoing = peopleGoing.length; //List = 0
-        }else if(peopleGoing != null || peopleGoing.trim() != ''){
+        }else if(peopleGoing != null || peopleGoing != ''){
             for(var i = 0; i < peopleGoing.length; i++){
                 //console.log('ONE name', peopleGoing[i]);
                 //var names = peopleGoing[i];
+                /*if(peopleGoing[i].trim() == ''){
+                    countPeopleGoing = peopleGoing.length - 1;
+                }*/
             }
             countPeopleGoing = peopleGoing.length; //Count peopleGoing
             //peopleGoing = name;
@@ -466,7 +425,6 @@ function dataDelivery(){
             '<h4>' + countPeopleGoing + ' PEOPLE GOING</h4><p>' + peopleGoing + '</p>' +
             '</div>' +
             '</div>';
-
     }
     /*-------------- END GET DATA FROM ONE EVENT: LIST --------------*/
 
@@ -474,9 +432,6 @@ function dataDelivery(){
     function renderImage(image){
         if(image && image.fields.file){
             return '<img src="' + image.fields.file.url + '"/>';
-            /*}else if(image.fields.file == null || image.fields != true || image.fields.file == 'undefined'){
-            return '<p>Image is missing</p>';*/
-            //NEEDS ERROR MESSAGE?
         }
     }
     /*-------------- END GET IMAGE: LIST --------------*/
