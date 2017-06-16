@@ -542,22 +542,107 @@ function addTrack (){
 
 
 
-        //return no limit on nr of participants
-        //   if (JSaddNewNrOfPart == null){
-        //     JSaddNewNrOfPart = "Unlimited"
+       // return no limit on nr of participants
+        if (JSaddNewNrOfPart == null){
+            JSaddNewNrOfPart = "Unlimited"
+        }
+
+            //-----modal
 
 
-        //-----modal
+            var errorModal = document.getElementById('error');
+            var publishModal = document.getElementById('publish');
+            var closeModal = document.getElementById('closeError');
 
-        /*
-        var errorModal = document.getElementById('error');
-        var publishModal = document.getElementById('publish');
-        var closeModal = document.getElementById('closeError');
+            function modalFunction() {
 
-          function modalFunction() {
+                //if one input is empty show error feedback modal
+                if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "" || choosenTime == "" || choosenTrack == "" || choosenImage == "") {
+                    errorModal.style.display = 'block';
+                    errorModal.style.opacity = '1';
+                    errorModal.style.pointerEvents = 'auto';
+                    errorModal.style.zIndex = '99999';
 
-            //if one input is empty show error feedback modal
-            if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "" || choosenTime == "" || choosenTrack == "" || choosenImage == "") {
+                    closeModal.onclick = function() {
+                        errorModal.style.display = 'none';
+                        errorModal.style.opacity = '0';
+                        errorModal.style.pointerEvents = 'none';
+                        errorModal.style.zIndex = '-1';
+                    };
+
+                } else {
+                    publishModal.style.display = 'block';
+                    publishModal.style.opacity = '1';
+                    publishModal.style.pointerEvents = 'auto';
+                    publishModal.style.zIndex = '99999';
+                }
+
+            }
+
+            //--- end modal
+
+            //----- JSON that gets sent to Contentful
+
+            var newTrack = {
+                fields: {
+                    title: {
+                        'en-US': JSaddNewTitle
+                    },
+                    host: {
+                        'en-US': JSaddNewHosts
+                    },
+                    prerequisites: {
+                        'en-US': JSaddNewPrereq
+
+                    },
+                    time: {
+                        'en-US': choosenTime
+                    },
+                    size: {
+                        'en-US': choosenTrack
+                    },
+
+                    endTime: {
+                        'en-US': eventEndTime
+                    },
+
+                    numberOfParticipants: {
+                        'en-US': JSaddNewNrOfPart
+                    },
+                    location: {
+                        'en-US': "TBA"
+                    },
+                    whatToExpect: {
+                        'en-US': JSaddNewExpect
+
+                    },
+                    whoShouldJoin: {
+                        'en-US': JSaddNewJoin
+
+                    },
+                    image: {
+                        'en-US': choosenImage
+                    },
+                    anythingElse: {
+                        'en-US': JSaddNewElse
+                    },
+                    peopleAttending: {
+                        'en-US': [""]
+                    },
+
+                },//end field
+            }//en newTrack
+
+            var newReference = {
+                sys: {
+                    linkType: "Entry",
+                    type:"Link"
+
+                }
+            }
+
+            //-------- temporary img var -----//
+            if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "" || choosenTime == null || choosenTrack == null || choosenImage == null){
                 errorModal.style.display = 'block';
                 errorModal.style.opacity = '1';
                 errorModal.style.pointerEvents = 'auto';
@@ -570,163 +655,67 @@ function addTrack (){
                     errorModal.style.zIndex = '-1';
                 };
 
-            } else {
-                publishModal.style.display = 'block';
-                publishModal.style.opacity = '1';
-                publishModal.style.pointerEvents = 'auto';
-                publishModal.style.zIndex = '99999';
-            }
-
-        }
-        */
-        //--- end modal
-
-        //----- JSON that gets sent to Contentful
-
-        var newTrack = {
-            fields: {
-                title: {
-                    'en-US': JSaddNewTitle
-                },
-                host: {
-                    'en-US': JSaddNewHosts
-                },
-                prerequisites: {
-                    'en-US': JSaddNewPrereq
-
-                },
-                time: {
-                    'en-US': choosenTime
-                },
-                size: {
-                    'en-US': choosenTrack
-                },
-
-                endTime: {
-                    'en-US': eventEndTime
-                },
-
-                numberOfParticipants: {
-                    'en-US': JSaddNewNrOfPart
-                },
-                location: {
-                    'en-US': "TBA"
-                },
-                whatToExpect: {
-                    'en-US': JSaddNewExpect
-
-                },
-                whoShouldJoin: {
-                    'en-US': JSaddNewJoin
-
-                },
-                image: {
-                    'en-US': choosenImage
-                },
-                anythingElse: {
-                    'en-US': JSaddNewElse
-                },
-                peopleAttending: {
-                    'en-US': [""]
-                },
-
-            },//end field
-        }//en newTrack
-
-        var newReference = {
-            sys: {
-                linkType: "Entry",
-                type:"Link"
+            }else{
+                publishTrack();
 
             }
-        }
 
-        //-------- temporary img var -----//
-        if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "" || choosenTime == null || choosenTrack == null || choosenImage == null){
-            errorModal.style.display = 'block';
-            errorModal.style.opacity = '1';
-            errorModal.style.pointerEvents = 'auto';
-            errorModal.style.zIndex = '99999';
+            function publishTrack(){
+                //-- Creates the new track in events, with ref to korrekt date
+                client.getSpace('59mi8sr8zemv')
+                    .then((space) => {
+                    space.createEntry('events', newTrack)
 
-            closeModal.onclick = function() {
-                errorModal.style.display = 'none';
-                errorModal.style.opacity = '0';
-                errorModal.style.pointerEvents = 'none';
-                errorModal.style.zIndex = '-1';
-            };
+                        .then( event => {
 
-        }else{
-            publishTrack();
+                        eventID = event.sys.id;
 
-        }
+                        //This function is gets the entry of choosen date
+                        space.getEntry(dateId)
+                            .then((entry) => {
 
-        function publishTrack(){
-            //-- Creates the new track in events, with ref to korrekt date
-            client.getSpace('59mi8sr8zemv')
-                .then((space) => {
-                space.createEntry('events', newTrack)
+                            //Gets the ID from the newly created event
+                            var newId = {sys: {
+                                id: eventID,
+                                linkType: "Entry",
+                                type:"Link"
+                            }}
+                            var publishedVersion = entry.sys.publishedVersion;
+                            var bar = entry.fields.link["en-US"];
 
-                .then( event => {
+                            console.log('versjons nr', publishedVersion)
 
-                    eventID = event.sys.id;
+                            //Creates a reference field in dates for show & do
+                            entry.fields.link["en-US"].push(newId)
+                            //entry.sys.version.push(foo)
 
-                   // (event) => entry.publish()
-                    //This function is gets the entry of choosen date
-                    space.getEntry(dateId)
-                        .then((entry) => {
-
-                        //Gets the ID from the newly created event
-                        var newId = {sys: {
-                            id: eventID,
-                            linkType: "Entry",
-                            type:"Link"
-                        }}
-                        var publishedVersion = entry.sys.publishedVersion;
-                        var bar = entry.fields.link["en-US"];
-                        //var foo = publishedVersion + 1;
-
-                        console.log('versjons nr', publishedVersion)
-                        //console.log('versjons nr +2', foo)
-                        //console.log('bajs test', bar.sys)
-
-                        //Creates a reference field in dates for show & do
-                        entry.fields.link["en-US"].push(newId)
-                        //entry.sys.version.push(foo)
-
-                        //update the event
-                        entry.update();
+                            //update the event
+                            entry.update();
 
 
-                        //entry.publish()
-                        event.publish()
+                            //entry.publish()
+                            event.publish()
 
+                            entry.publish()
 
-
-                        entry.publish()
-
+                        })
 
                     })
 
+                    //publish event
+
+                    publishModal.style.display = 'block';
+                    publishModal.style.opacity = '1';
+                    publishModal.style.pointerEvents = 'auto';
+                    publishModal.style.zIndex = '99999';
+
                 })
 
+            }//end publish track
 
-                //publish event
+        }//end create new event
 
-                publishModal.style.display = 'block';
-                publishModal.style.opacity = '1';
-                publishModal.style.pointerEvents = 'auto';
-                publishModal.style.zIndex = '99999';
+    }//end add track
 
-
-            })
-
-
-        }//end publish track
-
-    }//end create new event
-
-}//end add track
-
-
-exports.addTrack = addTrack;
+    exports.addTrack = addTrack;
 

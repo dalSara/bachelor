@@ -48,35 +48,6 @@ gulp.task('browserify', function(){
     return es.merge.apply(null, tasks);
 });
 
-gulp.task('default', ['serve' ,'browserify'], function(){ //['serve', 'data' 'watch' , ],
-
-});
-//https://semaphoreci.com/community/tutorials/setting-up-an-end-to-end-testing-workflow-with-gulp-mocha-and-webdriverio
-
-const http = require('http');
-const connect = require('connect');
-const serveStatic = require('serve-static');
-const Launcher = require('webdriverio/build/lib/launcher');
-const path = require('path');
-const wdio = new Launcher(path.join(__dirname, 'wdio.conf.js'));
-
-var httpServer;
-
-
-gulp.task('http', function (done) {
-    const app = connect().use(serveStatic('.'));
-    httpServer = http.createServer(app).listen(9000, done);
+gulp.task('default', ['serve' ,'browserify'], function(){
 });
 
-gulp.task('e2e', ['http'], function () {
-    return wdio.run(function (code) {
-        process.exit(code);
-    }, function (error) {
-        console.error('Launcher failed to start the test', error.stacktrace);
-        process.exit(1);
-    });
-});
-
-gulp.task('test', ['e2e'], function() {
-    httpServer.close();
-});

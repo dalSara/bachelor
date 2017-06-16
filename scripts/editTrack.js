@@ -43,8 +43,6 @@ function editTrack(eventId){
     }}
 
 
-    //var init = function (){
-
     var JSeditTitle = document.getElementById("JSeditTitle");
     var JSeditHosts = document.getElementById("JSeditHosts");
     var JSeditPrereq = document.getElementById("JSeditPrereq");
@@ -65,8 +63,6 @@ function editTrack(eventId){
     JSaddStockThree.onclick = chooseImageThree;
     editTrackBtn.onclick = createNewEvent;
 
-    //}(); /*--end init--*/
-
     function getQueryVariable(id){ //Get eventId fro URL
         var query = window.location.search.substring(1);
         var vars = query.split("&");
@@ -82,6 +78,7 @@ function editTrack(eventId){
     function getSelectedDate(specifiedDate) {
         selectedDate = new Date();
         if(specifiedDate) return specifiedDate//selectedDate = specifiedDate;
+
         //-------------- TODAYS DATE --------------//
         //ISO8601 formatted YYYY-MM-DD (to match Contentful):
         var year = selectedDate.getFullYear();
@@ -144,8 +141,6 @@ function editTrack(eventId){
             /*-------------- END SET SIZE --------------*/
 
             eventEndTime = entry.fields.endTime['en-US']; //Get the endTime in Contentful.
-            //var theTime = entry.fields.time['en-US']
-            //doSelectDate(space, theTime)
 
         })//end entry
     })//end getSpace
@@ -163,15 +158,6 @@ function editTrack(eventId){
         locale: 'en-US'
     })).then(function(entries){
 
-        /*
-    function doSelectDate(space, chosenDate){
-
-        space.getEntries({
-            content_type: 'datesForShowDo',
-            order: 'fields.date', //Sort by date in datesForShowDo
-            locale: 'en-US'
-        }).then(function(entries){
-      */
         console.log('bajs', entries.items)
         allDates = entries.items;
 
@@ -235,7 +221,6 @@ function editTrack(eventId){
 
         console.log('dateId', dateId);
         /*-------------- GET INDEX OF THE DATE --------------*/
-        // totaly stolen from Natalie =)
         function getDateIndex(index){
             var dateIndex = allDates[index]; //[index+1]
             var date = dateIndex.fields.date["en-US"];
@@ -382,7 +367,6 @@ function editTrack(eventId){
         }
         return false
     }
-
 
     function hasElementOnRow(matrix, row){
         var n = matrix[row].length

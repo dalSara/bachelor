@@ -19,18 +19,12 @@
   "homepage": "https://github.com/dalSara/ShowAndDoContentful#readme",
   "devDependencies": {
     "browser-sync": "^2.18.8",
-    "connect": "^3.6.1",
     "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
     "gulp-cli": "^1.2.2",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
-    "serve-static": "^1.12.2",
-    "vinyl-source-stream": "^1.1.0",
-    "wdio-mocha-framework": "^0.5.10",
-    "wdio-phantomjs-service": "^0.2.2",
-    "wdio-selenium-standalone-service": "0.0.8",
-    "webdriverio": "^4.8.0"
+    "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
     "browserify": "^14.3.0",

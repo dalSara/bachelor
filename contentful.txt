@@ -1,25 +1,12 @@
-en txt fil vi kan lägga nycklar och liknande i 
+Keys that are used from Contentful:
 
+Content Delivery API - access token
+Content Management API - access token
+space id
 
-førsta nyckeln 10 mars:
+The Keys can be find in Making Waves contentful Api here (you have to be logged in):
+https://app.contentful.com/spaces/w82bwcfhqvdz/api/keys/
 
-space id: 59mi8sr8zemv
-Content Delivery API - access token: 
-3f3d80d1c57594b635592e67231ad92c8bdebffca1a647ae5bca719251fbf059
-
-husk installere:
-
-npm i
-
-((----dette trengs ikke, hämtas fra package.json
-npm install contentful-data --save
-
-npm install contentful --save
-
-npm install gulp-cli gulp-sass --save-dev
- 
-npm install browser-sync gulp --save-dev
--------))
 
 dokumentasjon på kodestruktur:
 http://learn.jquery.com/code-organization/concepts/
@@ -51,11 +38,3 @@ https://github.com/contentful/contentful-management.js
 
 <!-- START OG END PÅ FUNKSJONER I HTML -->
 
-//rydd opp og ta bort ting/funksjoner som ikke blir brukt. OK å kommentere ut mens du rydder, men rydd opp når det ikke blir brukt lengre.
-
-//hver person har sin egen "søppel-fil". trash-sigrun.html, trash-natalie.html & trash-sara.html
-
-
-
-Huske lista:
-- ta bort dependencys vi ikke bruker
