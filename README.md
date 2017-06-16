@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/dalSara/ShowAndDoContentful.svg?branch=master)](https://travis-ci.org/dalSara/ShowAndDoContentful)
+
 
 # Show & Do Booking System Prototype
 
