@@ -28,3 +28,4 @@ After download run:
 in terminal
 
 
+For description of use contet types and content in contentful, se description fields in Contentful API.
