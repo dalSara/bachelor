@@ -28,7 +28,15 @@ in bash
 
 For description of use contet types and content in contentful, se description fields in Make ing Waves Contentful API.
 
+
+
+
+
+
 ## It is not recomended to add track from Contentful, becouse several fields is fild with set values from the code. Setting the values incorrectly from Contentful API might break the sorting funktions!!
+(If you do it against our recomendation, you will have to fill _ALL_ fields with a value. Including People attending!)
+
+
 
 
 
@@ -39,3 +47,5 @@ All events in each date in the "Dates for Show & Do" have to be publish (no draf
 If your useing Content Management key, it is not possible to change the information in contentful from the website, if the owner of the key is in an editing mode in the Contentful API.
 
 If time and size is not correctly filled the sorting functions will not work. 
+
+
