@@ -7,9 +7,9 @@ function addTrack (){
 
     var client = contentfulManagement.createClient({
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-        accessToken: '',
+        accessToken: //add 'Content Management API' here,,
         resolveLinks: true
-        //space: '59mi8sr8zemv'
+
 
     });
     //--------------Navigation btn ------------------------//
@@ -18,6 +18,7 @@ function addTrack (){
     var arrowNext = document.getElementById("arrowNext");
     var JSdatePick1 = document.getElementById("JSdatePick1");
 
+    //--- global variabels ---//
     var choosenTrack;
     var choosenImage;
 
@@ -32,18 +33,18 @@ function addTrack (){
     var dateId;
 
     var imageOne = {sys: {
-        id: '4KahBhVQTCykgOYsKS66Ws',
+        id: '6P1ntk0JMcOaau8mgai0Ei',
         linkType: "Asset",
         type:"Link"
     }}
 
     var imageTwo = {sys: {
-        id: '2dmGUtiw7uwugWQcsiGcUk',
+        id: '52c42Vor5e4O648YoE4oQU',
         linkType: "Asset",
         type:"Link"
     }}
     var imageThree = {sys: {
-        id: '5u6CWGgkmcwiIUEIsiQMGE',
+        id: '3JRkAH4vcQiI4m0CyMyC0e',
         linkType: "Asset",
         type:"Link"
     }}
@@ -80,7 +81,7 @@ function addTrack (){
 
     //--------- Call for functions ----------//
 
-    // jqueryFunctions.smoothScrollDown();
+    jqueryFunctions.smoothScrollDown();
 
 
 
@@ -102,7 +103,7 @@ function addTrack (){
 
     }
 
-    client.getSpace('59mi8sr8zemv')
+    client.getSpace('w82bwcfhqvdz')
         .then((space) =>
               space.getEntries({
         content_type: 'datesForShowDo',
@@ -110,7 +111,6 @@ function addTrack (){
         locale: 'en-US'
     })
              ).then(function(entries){
-        console.log('bajs', entries.items)
         allDates = entries.items;
 
         selectedDate = getSelectedDate();
@@ -120,10 +120,8 @@ function addTrack (){
                 globalTargetDateIndex = i + 1;
 
                 var oneDate = allDates[globalTargetDateIndex].fields.date["en-US"];
-                console.log('Later than selectedDate', oneDate);
 
-                thisShowDoEvents = allDates[i + 1].fields.link["en-US"]; //EVENTS TO DISPLAY .
-                console.log('thisShowDoEvents', thisShowDoEvents);
+                thisShowDoEvents = allDates[i + 1].fields.link["en-US"]; //EVENTS TO DISPLAY
                 break;
             }
         }
@@ -149,6 +147,8 @@ function addTrack (){
 
         dateId = allDates[globalTargetDateIndex].sys.id;
         updateDateLabels();
+
+        //--- both arrows and divs with dates can be used to change date
 
         arrowPrevious.onclick = goPrevious;
         JSdatePick1.onclick = goPrevious;
@@ -190,7 +190,7 @@ function addTrack (){
             return dateFormat;
         }
 
-        /*-------------- END GET INDEX OF THE  DATE --------------*/
+        //-------------- END GET INDEX OF THE  DATE --------------//
 
         function updateDateLabels(){
 
@@ -211,6 +211,7 @@ function addTrack (){
 
     }).then(function(){time()});
 
+    // The click to choose funktions, time, size and image
 
     function addListenerToSizeBtn (){
         JSaddHourOne.onclick = smallTrack;
@@ -344,8 +345,9 @@ function addTrack (){
         return false
     }
 
+    // -- seting the matrix to keep track of available time.
     function time (thisShowDoEvents){
-        client.getSpace('59mi8sr8zemv')
+        client.getSpace('w82bwcfhqvdz')
             .then((space) => {
             space.getEntry(dateId,{
                 resolveLinks: true,
@@ -464,7 +466,6 @@ function addTrack (){
             })
         })
     }// end Time
-    console.log('bajs',dateId)
 
     //the function that creates a new event, and post it to contentful
     function createNewEvent (){
@@ -484,10 +485,6 @@ function addTrack (){
         var publishModal = document.getElementById('publish');
         var closeModal = document.getElementById('closeError');
 
-
-
-
-        console.log('dateId', dateId);
         ///---------Function for selected time----------////
         if(JSaddStartOne.classList.contains('selectedTime') == true){
             choosenTime = selectedDate + 'T13:00';
@@ -506,7 +503,7 @@ function addTrack (){
             choosenTrack = 'Large';
         }else choosenTrack = null;
 
-        //------ function fol selcting image
+        //------ function for selcting image
         if(JSaddStockOne.classList.contains('selectedTime') == true){
             choosenImage = imageOne;
         }else if(JSaddStockTwo.classList.contains('selectedTime') == true) {
@@ -517,9 +514,8 @@ function addTrack (){
 
 
         var startTime = choosenTime.substring(choosenTime.length - 5);
-        console.log('StartTime', startTime);
-        console.log('ChoosenTrack', choosenTrack);
-        //var eventEndTime;
+
+        //------ function that sets end time based on start time and size.
 
         /*If choosenTime is 13:00*/
         if(startTime == '13:00' && choosenTrack == 'Large'){
@@ -540,182 +536,140 @@ function addTrack (){
             eventEndTime = '15:45';
         }
 
-
-
-       // return no limit on nr of participants
+        // return no limit on nr of participants
         if (JSaddNewNrOfPart == null){
             JSaddNewNrOfPart = "Unlimited"
-        }
+        }else
 
             //-----modal
 
-
-            var errorModal = document.getElementById('error');
-            var publishModal = document.getElementById('publish');
-            var closeModal = document.getElementById('closeError');
-
-            function modalFunction() {
-
-                //if one input is empty show error feedback modal
-                if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "" || choosenTime == "" || choosenTrack == "" || choosenImage == "") {
-                    errorModal.style.display = 'block';
-                    errorModal.style.opacity = '1';
-                    errorModal.style.pointerEvents = 'auto';
-                    errorModal.style.zIndex = '99999';
-
-                    closeModal.onclick = function() {
-                        errorModal.style.display = 'none';
-                        errorModal.style.opacity = '0';
-                        errorModal.style.pointerEvents = 'none';
-                        errorModal.style.zIndex = '-1';
-                    };
-
-                } else {
-                    publishModal.style.display = 'block';
-                    publishModal.style.opacity = '1';
-                    publishModal.style.pointerEvents = 'auto';
-                    publishModal.style.zIndex = '99999';
-                }
-
-            }
-
-            //--- end modal
-
-            //----- JSON that gets sent to Contentful
-
-            var newTrack = {
-                fields: {
-                    title: {
-                        'en-US': JSaddNewTitle
-                    },
-                    host: {
-                        'en-US': JSaddNewHosts
-                    },
-                    prerequisites: {
-                        'en-US': JSaddNewPrereq
-
-                    },
-                    time: {
-                        'en-US': choosenTime
-                    },
-                    size: {
-                        'en-US': choosenTrack
-                    },
-
-                    endTime: {
-                        'en-US': eventEndTime
-                    },
-
-                    numberOfParticipants: {
-                        'en-US': JSaddNewNrOfPart
-                    },
-                    location: {
-                        'en-US': "TBA"
-                    },
-                    whatToExpect: {
-                        'en-US': JSaddNewExpect
-
-                    },
-                    whoShouldJoin: {
-                        'en-US': JSaddNewJoin
-
-                    },
-                    image: {
-                        'en-US': choosenImage
-                    },
-                    anythingElse: {
-                        'en-US': JSaddNewElse
-                    },
-                    peopleAttending: {
-                        'en-US': [""]
-                    },
-
-                },//end field
-            }//en newTrack
-
-            var newReference = {
-                sys: {
-                    linkType: "Entry",
-                    type:"Link"
-
-                }
-            }
-
-            //-------- temporary img var -----//
-            if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "" || choosenTime == null || choosenTrack == null || choosenImage == null){
-                errorModal.style.display = 'block';
-                errorModal.style.opacity = '1';
-                errorModal.style.pointerEvents = 'auto';
-                errorModal.style.zIndex = '99999';
-
-                closeModal.onclick = function() {
-                    errorModal.style.display = 'none';
-                    errorModal.style.opacity = '0';
-                    errorModal.style.pointerEvents = 'none';
-                    errorModal.style.zIndex = '-1';
-                };
-
-            }else{
-                publishTrack();
-
-            }
-
-            function publishTrack(){
-                //-- Creates the new track in events, with ref to korrekt date
-                client.getSpace('59mi8sr8zemv')
-                    .then((space) => {
-                    space.createEntry('events', newTrack)
-
-                        .then( event => {
-
-                        eventID = event.sys.id;
-
-                        //This function is gets the entry of choosen date
-                        space.getEntry(dateId)
-                            .then((entry) => {
-
-                            //Gets the ID from the newly created event
-                            var newId = {sys: {
-                                id: eventID,
-                                linkType: "Entry",
-                                type:"Link"
-                            }}
-                            var publishedVersion = entry.sys.publishedVersion;
-                            var bar = entry.fields.link["en-US"];
-
-                            console.log('versjons nr', publishedVersion)
-
-                            //Creates a reference field in dates for show & do
-                            entry.fields.link["en-US"].push(newId)
-                            //entry.sys.version.push(foo)
-
-                            //update the event
-                            entry.update();
+        var errorModal = document.getElementById('error');
+        var publishModal = document.getElementById('publish');
+        var closeModal = document.getElementById('closeError');
 
 
-                            //entry.publish()
-                            event.publish()
 
-                            entry.publish()
+        //----- JSON that gets sent to Contentful
 
-                        })
+        var newTrack = {
+            fields: {
+                title: {
+                    'en-US': JSaddNewTitle
+                },
+                host: {
+                    'en-US': JSaddNewHosts
+                },
+                prerequisites: {
+                    'en-US': JSaddNewPrereq
+
+                },
+                time: {
+                    'en-US': choosenTime
+                },
+                size: {
+                    'en-US': choosenTrack
+                },
+
+                endTime: {
+                    'en-US': eventEndTime
+                },
+
+                numberOfParticipants: {
+                    'en-US': JSaddNewNrOfPart
+                },
+                location: {
+                    'en-US': "TBA"
+                },
+                whatToExpect: {
+                    'en-US': JSaddNewExpect
+
+                },
+                whoShouldJoin: {
+                    'en-US': JSaddNewJoin
+
+                },
+                image: {
+                    'en-US': choosenImage
+                },
+                anythingElse: {
+                    'en-US': JSaddNewElse
+                },
+                peopleAttending: {
+                    'en-US': [""]
+                },
+
+            },//end field
+        }//en newTrack
+
+        //--------  Check that all required fields are filled before publishing, if not sets the modal -----//
+        if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "" || choosenTime == null || choosenTrack == null || choosenImage == null){
+            errorModal.style.display = 'block';
+            errorModal.style.opacity = '1';
+            errorModal.style.pointerEvents = 'auto';
+            errorModal.style.zIndex = '99999';
+
+            closeModal.onclick = function() {
+                errorModal.style.display = 'none';
+                errorModal.style.opacity = '0';
+                errorModal.style.pointerEvents = 'none';
+                errorModal.style.zIndex = '-1';
+            };
+
+        }else{
+            publishTrack();
+
+        }
+
+        function publishTrack(){
+            //-- Creates the new track in events, with ref to correkt date
+            client.getSpace('w82bwcfhqvdz')
+                .then((space) => {
+                space.createEntry('events', newTrack)
+
+                    .then( event => {
+
+                    eventID = event.sys.id;
+
+                    //This function is gets the entry of choosen date
+                    space.getEntry(dateId)
+                        .then((entry) => {
+
+                        //Gets the ID from the newly created event
+                        var newId = {sys: {
+                            id: eventID,
+                            linkType: "Entry",
+                            type:"Link"
+                        }}
+
+                        //Creates a reference field in dates for show & do
+                        entry.fields.link["en-US"].push(newId)
+
+                        //update the event
+                        entry.update();
+
+                        //entry.publish()
+                        event.publish()
+
+                        entry.publish()
 
                     })
 
-                    //publish event
-
-                    publishModal.style.display = 'block';
-                    publishModal.style.opacity = '1';
-                    publishModal.style.pointerEvents = 'auto';
-                    publishModal.style.zIndex = '99999';
-
                 })
 
-            }//end publish track
+                //publish event
 
-        }//end create new event
+                publishModal.style.display = 'block';
+                publishModal.style.opacity = '1';
+                publishModal.style.pointerEvents = 'auto';
+                publishModal.style.zIndex = '99999';
 
-    }//end add track
+            });
 
-    exports.addTrack = addTrack;
+        };//end publish track
+
+    };//end create new event
+
+};//end add track
+
+exports.addTrack = addTrack;
 

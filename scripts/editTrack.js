@@ -4,17 +4,14 @@ var contentfulManagement = require('contentful-management');
 
 function editTrack(eventId){
 
-    // contentful-management.js v3.x.x
-
     const client = contentfulManagement.createClient({
-        accessToken: '',
+        accessToken: //add 'Content Management API' here,
         //  Space: '59mi8sr8zemv',
-        resolveLinks: true,
-        content_type: 'application/vnd.contentful.management.v1+json'
+        resolveLinks: true
+      //  content_type: 'application/vnd.contentful.management.v1+json'
     })
 
     //Html-objekter
-
     var arrowPrevious = document.getElementById("arrowPrevious");
     var thisWeekBtn = document.getElementById("thisWeekBtn");
     var arrowNext = document.getElementById("arrowNext");
@@ -26,22 +23,21 @@ function editTrack(eventId){
     var dateId;
 
     var imageOne = {sys: {
-        id: '4KahBhVQTCykgOYsKS66Ws',
+        id: '6P1ntk0JMcOaau8mgai0Ei',
         linkType: "Asset",
         type:"Link"
     }}
 
     var imageTwo = {sys: {
-        id: '2dmGUtiw7uwugWQcsiGcUk',
+        id: '52c42Vor5e4O648YoE4oQU',
         linkType: "Asset",
         type:"Link"
     }}
     var imageThree = {sys: {
-        id: '5u6CWGgkmcwiIUEIsiQMGE',
+        id: '3JRkAH4vcQiI4m0CyMyC0e',
         linkType: "Asset",
         type:"Link"
     }}
-
 
     var JSeditTitle = document.getElementById("JSeditTitle");
     var JSeditHosts = document.getElementById("JSeditHosts");
@@ -88,28 +84,21 @@ function editTrack(eventId){
         //-------------- END TODAYS DATE --------------//
 
         return selectedDate;
-
     }
 
-
     // This API call will request a space with the specified ID
-    client.getSpace('59mi8sr8zemv')
+    client.getSpace('w82bwcfhqvdz')
         .then((space) => {
 
         eventId = getQueryVariable("id"); //Id from URL
 
-        //  Now that we have a space, we can get entries from that space
         space.getEntry(eventId)
 
             .then((entry) => {
 
-            console.log(entry.fields.time);
-
             document.getElementById('JSeditTitle').value = entry.fields.title['en-US'];
-
             document.getElementById('JSeditHosts').value = entry.fields.host['en-US'];
             document.getElementById('JSeditPrereq').value = entry.fields.prerequisites['en-US'];
-
             document.getElementById('JSeditNrOfPart').value = entry.fields.numberOfParticipants['en-US'];
             document.getElementById('JSeditExpect').value = entry.fields.whatToExpect['en-US'];
             document.getElementById('JSeditJoin').value = entry.fields.whoShouldJoin['en-US'];
@@ -150,7 +139,7 @@ function editTrack(eventId){
     //--- gets todays date, and change so next date for Show & Do is in front//
 
 
-    client.getSpace('59mi8sr8zemv')
+    client.getSpace('w82bwcfhqvdz')
         .then((space) =>
               space.getEntries({
         content_type: 'datesForShowDo',
@@ -158,10 +147,8 @@ function editTrack(eventId){
         locale: 'en-US'
     })).then(function(entries){
 
-        console.log('bajs', entries.items)
         allDates = entries.items;
 
-        //selectedDate = getSelectedDate(chosenDate);
         selectedDate = getSelectedDate();
         //loop through dates in datesForShowDo
         for(var i = 0; i < allDates.length; i++){
@@ -169,10 +156,8 @@ function editTrack(eventId){
                 globalTargetDateIndex = i + 1;
 
                 var oneDate = allDates[globalTargetDateIndex].fields.date["en-US"];
-                console.log('Later than selectedDate', oneDate);
 
                 thisShowDoEvents = allDates[i + 1].fields.link["en-US"]; //EVENTS TO DISPLAY .
-                console.log('thisShowDoEvents', thisShowDoEvents);
                 break;
             }
         }
@@ -198,8 +183,13 @@ function editTrack(eventId){
         dateId = allDates[globalTargetDateIndex].sys.id;
         updateDateLabels();
 
+        //--- both arrows and divs with dates can be used to change date
+
         arrowPrevious.onclick = goPrevious;
+        JSdatePick1.onclick = goPrevious;
+        JSdatePick3.onclick = goNext;
         arrowNext.onclick = goNext;
+
 
         function goNext(){
             if(globalTargetDateIndex < globalAllDatesArray.length - 1){
@@ -219,7 +209,6 @@ function editTrack(eventId){
             }
         }
 
-        console.log('dateId', dateId);
         /*-------------- GET INDEX OF THE DATE --------------*/
         function getDateIndex(index){
             var dateIndex = allDates[index]; //[index+1]
@@ -255,7 +244,6 @@ function editTrack(eventId){
         }
 
     }).then(function(){time()});
-
 
     function addListenerToSizeBtn (){
         JSaddHourOne.onclick = smallTrack;
@@ -389,7 +377,7 @@ function editTrack(eventId){
     }
 
     function time (thisShowDoEvents){
-        client.getSpace('59mi8sr8zemv')
+        client.getSpace('w82bwcfhqvdz')
             .then((space) => {
             space.getEntry(dateId,{
                 resolveLinks: true,
@@ -552,7 +540,7 @@ function editTrack(eventId){
             choosenTrack = 'Large';
         }
 
-        //------ function fol selcting image
+        //------ function for selcting image
         if(JSaddStockOne.classList.contains('selectedTime') == true){
             choosenImage = imageOne;
         }else if(JSaddStockTwo.classList.contains('selectedTime') == true) {
@@ -561,11 +549,7 @@ function editTrack(eventId){
             choosenImage = imageThree;
         }
 
-
         var startTime = choosenTime.substring(choosenTime.length - 5);
-        console.log('StartTime', startTime);
-        console.log('ChoosenTrack', choosenTrack);
-        //var eventEndTime;
 
         /*If choosenTime is 13:00*/
         if(startTime == '13:00' && choosenTrack == 'Large'){
@@ -586,44 +570,12 @@ function editTrack(eventId){
             eventEndTime = '15:45';
         }
 
-
-        console.log(dateId);
-        //-----modal
-
-
         var errorModal = document.getElementById('error');
         var publishModal = document.getElementById('publish');
         var closeModal = document.getElementById('closeError');
 
-        function modalFunction() {
-
-            /*if one input is empty show error feedback modal */
-            if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "") {
-                errorModal.style.display = 'block';
-                errorModal.style.opacity = '1';
-                errorModal.style.pointerEvents = 'auto';
-                errorModal.style.zIndex = '99999';
-
-                closeModal.onclick = function() {
-                    errorModal.style.display = 'none';
-                    errorModal.style.opacity = '0';
-                    errorModal.style.pointerEvents = 'none';
-                    errorModal.style.zIndex = '-1';
-                };
-
-            } else {
-                publishModal.style.display = 'block';
-                publishModal.style.opacity = '1';
-                publishModal.style.pointerEvents = 'auto';
-                publishModal.style.zIndex = '99999';
-            }
-        }
-
-        //--- end modal
-
         //----- JSON that gets sent to Contentful
 
-        console.log(eventEndTime);
 
         var newTrack = {
             fields: {
@@ -675,47 +627,82 @@ function editTrack(eventId){
             }//end field
         }//en newTrack
 
-        //-- Creates the new track in events, with ref to korrekt date
-        client.getSpace('59mi8sr8zemv')
-            .then((space) => {
 
-            dateId;
-            console.log(dateId);
+        //--------  Check that all required fields are filled before publishing, if not sets the modal -----//
+        if (JSaddNewTitle == "" || JSaddNewPrereq == "" || JSaddNewPrereq == "" || JSaddNewExpect == "" || JSaddNewJoin == "" || choosenTime == null || choosenTrack == null || choosenImage == null){
+            errorModal.style.display = 'block';
+            errorModal.style.opacity = '1';
+            errorModal.style.pointerEvents = 'auto';
+            errorModal.style.zIndex = '99999';
 
-            eventId = getQueryVariable("id");
-            console.log(eventId);
+            closeModal.onclick = function() {
+                errorModal.style.display = 'none';
+                errorModal.style.opacity = '0';
+                errorModal.style.pointerEvents = 'none';
+                errorModal.style.zIndex = '-1';
+            };
 
-            space.createEntry('events', newTrack)
-                .then((event) => {
+        }else{
+            publishTrack();
 
-                var eventSysId = event.sys.id;
+        }
 
-                //This function is gets the entry of choosen date
-                space.getEntry(dateId)
-                    .then((entry) => {
+        function publishTrack(){
 
-                    //Gets the ID from the newly created event
+            //-- Creates the new track in events, with ref to korrekt date
+            client.getSpace('w82bwcfhqvdz')
+                .then((space) => {
 
-                    var newId = {sys: {
-                        id: eventSysId,
-                        linkType: "Entry",
-                        type: "Link"
-                    }}
+                dateId;
 
-                    //Creates a reference field in dates for show & do
-                    entry.fields.link["en-US"].push(newId);
-                    //update the event
-                    return entry.update();
+                eventId = getQueryVariable("id");
+
+                space.getEntry('events', newTrack)
+                    .then((event) => {
+
+                    eventId.update();
+                    var eventSysId = event.sys.id;
+
+                    //This function is gets the entry of choosen date
+                    space.getEntry(dateId)
+                        .then((entry) => {
+
+                        //Gets the ID from the newly created event
+
+                        var newId = {sys: {
+                            id: eventSysId,
+                            linkType: "Entry",
+                            type: "Link"
+                        }}
+                        //Creates a reference field in dates for show & do
+                        entry.fields.link["en-US"].push(newId)
+
+                        //update the event
+                        entry.update();
+
+                        //entry.publish()
+                        event.publish()
+
+                        entry.publish()
+
+                    })
+
                 })
+
                 //publish event
-                space.getEntry(eventSysId)
-                    .then ((entry) => entry.publish())
-                    .catch(console.error)
-                //space.getEntry(dateId)
-                    //.then ((entry) => entry.publish())
-            }).then(function(){modalFunction()})
-        })//end getspace
-    }//end create new event
+
+                publishModal.style.display = 'block';
+                publishModal.style.opacity = '1';
+                publishModal.style.pointerEvents = 'auto';
+                publishModal.style.zIndex = '99999';
+
+            });
+
+        };//end publish track
+
+
+    };//end getspace
+//end create new event
 };//end EditTrack
 
 exports.editTrack = editTrack;
