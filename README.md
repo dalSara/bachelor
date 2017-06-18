@@ -2,7 +2,7 @@
 
 # Show & Do Booking System Prototype
 
-This is a prototype of a booking system for Show & Do Competence Sessions. This project is built on the CMS Contentful. 
+This is a prototype of a booking system for Show & Do Competence Sessions. This project is built on the CMS Contentful. Using Javascript.
 
 
 ## Requirements 
@@ -22,10 +22,20 @@ This is a prototype of a booking system for Show & Do Competence Sessions. This 
 ## Install
 
 After download run:
-
-"npm i"
-
-in terminal
+"npm install" 
+in bash
 
 
 For description of use contet types and content in contentful, se description fields in Make ing Waves Contentful API.
+
+## It is not recomended to add track from Contentful, becouse several fields is fild with set values from the code. Setting the values incorrectly from Contentful API might break the sorting funktions!!
+
+
+
+## Small issues and tips about Contentful:
+
+All events in each date in the "Dates for Show & Do" have to be publish (no drafts) or the website will not work properly.
+
+If your useing Content Management key, it is not possible to change the information in contentful from the website, if the owner of the key is in an editing mode in the Contentful API.
+
+If time and size is not correctly filled the sorting functions will not work. 

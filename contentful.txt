@@ -8,9 +8,6 @@ The Keys can be find in Making Waves contentful Api here (you have to be logged 
 https://app.contentful.com/spaces/w82bwcfhqvdz/api/keys/
 
 
-dokumentasjon på kodestruktur:
-http://learn.jquery.com/code-organization/concepts/
-
 dokumentasjonen på browserify
 https://github.com/substack/browserify-handbook
 https://github.com/substack/node-browserify#usage
@@ -18,23 +15,12 @@ https://github.com/substack/node-browserify#usage
 Contentful managment module
 https://github.com/contentful/contentful-management.js
 
------------- kode standard
+It is not recomended to add track from Contentful, becouse several fields is fild with set values from the code. Setting the values incorrectly from Contentful API might break the sorting funktions!
 
+Small issues and tips about Contentful:
 
-//javascript-klasse og id skrives slik: 
+All events in each date in the "Dates for Show & Do" have to be publish (no drafts) or the website will not work properly.
 
-.JS for klass
-#JS for id 
+If your useing Content Management key, it is not possible to change the information in contentful from the website, if the owner of the key is in an editing mode in the Contentful API.
 
-//andre klasser og id-er skal skrives slik:
-
-.addTrackBtn 
-#addTrackBtn
-
-//kommentarer på funksjoner skal svare på hva det er og hvorfor gjør den det
-//sett heller inn en kommentar for mye
-
-/*-------------- START-TAGGER OG END PÅ FUNKSJONER I CSS/JAVASCRIPT -------------*/
-
-<!-- START OG END PÅ FUNKSJONER I HTML -->
-
+If time and size is not correctly filled the sorting functions will not work. 
