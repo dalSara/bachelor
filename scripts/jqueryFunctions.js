@@ -76,7 +76,6 @@ function goingBtn(){
 }
 /*-------------- END GOING BTN --------------*/
 /*-------------- SCROLL TO TOP --------------*/
-//Click event to scroll to top
 function scrollToTop(){
     $('#arrowScrollToTop').click(function() {
         $("html, body").animate({
@@ -84,7 +83,7 @@ function scrollToTop(){
         return false;
     })
 }
-/*-------------- end SCROLL TO TOP --------------*/
+/*-------------- END SCROLL TO TOP --------------*/
 /*-------------- END JQUERY FUNCTIONS --------------*/
 
 exports.smoothScrollDown = smoothScrollDown;

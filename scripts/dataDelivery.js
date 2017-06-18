@@ -7,9 +7,9 @@ function dataDelivery(){
     /*-------------- CLIENT --------------*/
     var client = contentful.createClient({
         // This is the space ID. A space is like a project folder in Contentful terms
-        space: '59mi8sr8zemv',
+        space: 'w82bwcfhqvdz',
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-        accessToken: '3f3d80d1c57594b635592e67231ad92c8bdebffca1a647ae5bca719251fbf059'
+        accessToken: '88644a72be7ec2324d56aa3db0f3c7e31dd79de67c4a2ece0ded6db95f648fdd'
     })
     /*-------------- END CLIENT --------------*/
 
@@ -373,16 +373,14 @@ function dataDelivery(){
             peopleGoing = ''; //If peopleGoing is missing.
             var countPeopleGoing = peopleGoing.length; //List = 0
         }else if(peopleGoing != null || peopleGoing != ''){
-            for(var i = 0; i < peopleGoing.length; i++){
-                //console.log('ONE name', peopleGoing[i]);
-                //var names = peopleGoing[i];
-                /*if(peopleGoing[i].trim() == ''){
-                    countPeopleGoing = peopleGoing.length - 1;
-                }*/
-            }
             countPeopleGoing = peopleGoing.length; //Count peopleGoing
-            //peopleGoing = name;
-            peopleGoing = peopleGoing.join(' <br>');//Display peopleGoing in list.
+
+            for(var i = 0; i < peopleGoing.length; i++){
+                if(peopleGoing[i] == "" || peopleGoing[i] == 'undefined' || peopleGoing[i] == null){
+                    countPeopleGoing = peopleGoing.length - 1; //If string is empty remove 1.
+                }
+            }
+            peopleGoing = peopleGoing.filter(Boolean).join('<br>'); //Filter empty string from array and display peopleGoing.
         }
 
         var anythingElse = event.fields.anythingElse;
