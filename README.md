@@ -36,16 +36,12 @@ For description of use contet types and content in contentful, se description fi
 
 
 
-## It is not recomended to add track from Contentful, becouse several fields is fild with set values from the code. Setting the values incorrectly from Contentful API might break the sorting funktions!!
+## _It is not recomended to add track from Contentful, becouse several fields is fild with set values from the code. Setting the values incorrectly from Contentful API might break the sorting funktions!!_
 (If you do it against our recomendation, you will have to fill _ALL_ fields with a value. Including People attending!)
 
-|
-|
-|
-|
-|
-|
-|
+
+@
+
 
 ## Small issues and tips about Contentful:
 
